@@ -1,15 +1,15 @@
-# 精准类型
+# Accurate Type
 
-**简体中文** | [English](./readme-en.md)
+[简体中文](./readme-zh.md) | **English**
 
-本项目只有类型声明，可让你的 TS 项目的类型更加准确。
+The *Accurate Type* is a collection of TypeScript type declare, which can make your programming more accurate and easir.
 
-本项目不仅包含简单的各种类型，还包含了各种泛型递归类型如计数器等。
+This project has not only various simple types but also many generic type expressions like counter. The wide type world is waiting for your exploration!
 
-## 所有模块
+## Modules
 
-- `snt` 数字操作
-  - `app` 基于数字操作的实用类型
-  - `xcr` 递增和递减器类型
-- `base` 一般实用类型
-- `sprec` 简单递归类型
+- `snt` Number operation
+  - `app` Useful types based on number operation
+  - `xcr` Counter types (Incrementer and decrementer)
+- `base` Usual types
+- `sprec` Simply recursive types
