@@ -1,0 +1,28 @@
+{
+  "name": "accurtype",
+  "version": "1.0.0",
+  "description": "Some TS type tool that make your programming easier.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sc-nodeserver",
+    "typescript",
+    "ts",
+    "type guard",
+    "utility"
+  ],
+  "type": "module",
+  "author": "E0SelmY4V",
+  "license": "GPL-3.0-or-later",
+  "types": "./index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/E0SelmY4V/accurtype.git"
+  },
+  "bugs": {
+    "url": "https://github.com/E0SelmY4V/accurtype/issues"
+  },
+  "homepage": "https://github.com/E0SelmY4V/accurtype#readme"
+}
