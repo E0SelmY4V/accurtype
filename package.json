@@ -1,6 +1,6 @@
 {
   "name": "accurtype",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Some TS type tool that make your programming easier.",
   "main": "index.js",
   "scripts": {
