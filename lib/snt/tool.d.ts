@@ -1,7 +1,6 @@
 import {
 	SigNumber,
 	Leading0less,
-	RevString,
 } from '../..'
 type SntR<T extends 0 | 9> = T extends 0 ? 9 : 0
 type SntSigT = SigNumber | 's'
