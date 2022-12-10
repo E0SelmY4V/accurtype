@@ -36,9 +36,9 @@ type TypeOf<N> =
 	N extends Function ? 'function' :
 	N extends never ? 'never' :
 	N extends number ? 'number' :
-	N extends Object ? 'object' :
 	N extends string ? 'string' :
 	N extends Symbol ? 'symbol' :
+	N extends Object ? 'object' :
 	N extends undefined ? 'undefined' :
 	N extends void ? 'void' :
 	never
