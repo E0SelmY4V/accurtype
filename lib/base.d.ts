@@ -45,5 +45,5 @@ type TypeOf<N> =
 type NameOfType<N> = TypeOf<N>
 
 type ArrayAccur = [any, ...any[]] | any[]
-type Tostrable = string | number | WideNum
+type Tostrable = string | boolean | WideNum | null | undefined
 type NumOfStr<N extends string, T extends Tostrable = WideNum> = N extends `${infer K extends T}` ? K : T
