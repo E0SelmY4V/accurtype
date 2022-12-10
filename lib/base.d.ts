@@ -5,19 +5,6 @@ type SigNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 type Not<N extends boolean> = N extends true ? false : true
 
-type WideNum = number | bigint
-type IsWideWideNum<N> = N extends WideNum ? number extends N ? true : bigint extends N ? true : false : false
-type IsLtdWideNum<N> = N extends WideNum ? Not<IsWideWideNum<N>> : false
-
-type IsWideBoolean<N> = TypeOf<N> extends 'boolean' ? boolean extends N ? true : false : false
-type IsLtdBoolean<N> = TypeOf<N> extends 'boolean' ? boolean extends N ? false : true : false
-
-type IsWideString<N> = N extends string ? string extends N ? true : N extends `${infer N0}${infer N1}` ? (
-	N0 extends `${infer H extends WideNum}` ? IsWideWideNum<H> extends true ? true : IsWideString<N1> :
-	string extends N0 ? true : IsWideString<N1>
-) : false : false
-type IsLtdString<N> = N extends string ? Not<IsWideString<N>> : false
-
 interface TypeMapJS {
 	bigint: bigint,
 	boolean: boolean,
@@ -29,10 +16,9 @@ interface TypeMapJS {
 	undefined: undefined,
 }
 type TypeNameJS = keyof TypeMapJS
-type IsTypeNameJS<N> = IsLtdString<N> extends true ? N extends keyof TypeMapJS ? true : false : boolean
-declare function isTypeNameJS<N, T extends string>(n: N | T): IsTypeNameJS<N>
 declare const TYPE_MAP: TypeMapJS
 declare function str2type<N extends TypeNameJS>(str: N): TypeMapJS[N]
+
 type TypeOfJS<N> =
 	N extends bigint ? 'bigint' :
 	N extends boolean ? 'boolean' :
@@ -49,8 +35,7 @@ interface TypeMap extends TypeMapJS {
 	void: void,
 }
 type TypeName = keyof TypeMap
-type IsTypeName<N> = IsLtdString<N> extends true ? N extends keyof TypeMap ? true : false : boolean
-declare function isTypeName<N, T extends string>(n: N | T): IsTypeName<N>
+
 type TypeOf<N> =
 	N extends never ? 'never' :
 	N extends undefined ? 'undefined' :
@@ -58,6 +43,25 @@ type TypeOf<N> =
 	N extends null ? 'null' :
 	TypeOfJS<N>
 type NameOfType<N> = TypeOf<N>
+
+type WideNum = number | bigint
+type WideNumType = TypeOf<WideNum>
+type IsWideWideNum<N> = N extends WideNum ? number extends N ? true : bigint extends N ? true : false : false
+type IsLtdWideNum<N> = N extends WideNum ? Not<IsWideWideNum<N>> : false
+
+type IsWideBoolean<N> = TypeOf<N> extends 'boolean' ? boolean extends N ? true : false : false
+type IsLtdBoolean<N> = TypeOf<N> extends 'boolean' ? boolean extends N ? false : true : false
+
+type IsWideString<N> = N extends string ? string extends N ? true : N extends `${infer N0}${infer N1}` ? (
+	N0 extends `${infer H extends WideNum}` ? IsWideWideNum<H> extends true ? true : IsWideString<N1> :
+	string extends N0 ? true : IsWideString<N1>
+) : false : false
+type IsLtdString<N> = N extends string ? Not<IsWideString<N>> : false
+
+type IsTypeNameJS<N> = IsLtdString<N> extends true ? N extends keyof TypeMapJS ? true : false : boolean
+declare function isTypeNameJS<N, T extends string>(n: N | T): IsTypeNameJS<N>
+type IsTypeName<N> = IsLtdString<N> extends true ? N extends keyof TypeMap ? true : false : boolean
+declare function isTypeName<N, T extends string>(n: N | T): IsTypeName<N>
 
 type ArrayAccur = [any, ...any[]] | any[]
 
@@ -72,5 +76,22 @@ type IsWideTostrable<N> = TypeOf<N> extends TostrableType ? (
 	IsWideString<N>
 ) : false
 type IsLtdTostrable<N> = TypeOf<N> extends TostrableType ? Not<IsWideTostrable<N>> : false
+declare function isTostrable(n: any): n is Tostrable
 
 type NumOfStr<N extends string, T extends Tostrable = WideNum> = N extends `${infer K extends T}` ? K : T
+declare function str2num<N extends string, T extends TostrableType = 'number'>(str: N, to?: T | TostrableType): NumOfStr<N, TypeMap[T]>
+
+type BoolOfNum<N extends WideNum> = IsWideWideNum<N> extends true ? boolean : N extends 0 | 0n ? false : true
+declare function num2bool<N extends WideNum>(n: N): BoolOfNum<N>
+
+type CnvedNum<N extends WideNum, T extends WideNum> = NumOfStr<`${N}`, T>
+declare function cnvNum<N extends WideNum, T extends WideNumType = 'number'>(num: N, to?: T | WideNumType): CnvedNum<N, TypeMap[T]>
+
+type NumOfBool<N extends boolean, T extends WideNum = number> = CnvedNum<N extends false ? 0 : 1, T>
+declare function bool2num<N extends boolean, T extends WideNumType = 'number'>(n: N, to?: T | WideNumType): NumOfBool<N, TypeMap[T]>
+
+type BoolOfTostrable<N extends Tostrable> =
+	N extends string ? IsWideString<N> extends true ? boolean : N extends '' ? false : true :
+	N extends WideNum ? IsWideWideNum<N> extends true ? boolean : N extends 0 | 0n ? false : true :
+	N extends boolean ? N : false
+declare function tostrable2bool<N extends Tostrable>(n: N): BoolOfTostrable<N>
