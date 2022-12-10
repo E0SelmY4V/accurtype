@@ -33,6 +33,7 @@ type TypeOfJS<N> =
 interface TypeMap extends TypeMapJS {
 	never: never,
 	void: void,
+	null: null,
 }
 type TypeName = keyof TypeMap
 
