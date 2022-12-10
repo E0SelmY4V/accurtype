@@ -63,7 +63,7 @@ declare function isTypeNameJS<N, T extends string>(n: N | T): IsTypeNameJS<N>
 type IsTypeName<N> = IsLtdString<N> extends true ? N extends keyof TypeMap ? true : false : boolean
 declare function isTypeName<N, T extends string>(n: N | T): IsTypeName<N>
 
-type ArrayAccur = [any, ...any[]] | any[]
+type ArrayAccur<T = any> = [T, ...T[]] | T[]
 
 type IsWideArray<N> = N extends (infer T)[] ? T[] extends N ? true : false : false
 type IsLongArray<N> = N extends any[] ? IsWideArray<N> extends true ? true : N extends [any, ...infer K] ? IsLongArray<K> : N extends [] ? false : true : false

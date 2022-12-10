@@ -1,4 +1,8 @@
-import { Tostrable, WideNum } from './base'
+import {
+	Tostrable,
+	IsWideTostrable,
+	ArrayAccur,
+} from '..'
 
 type Spaceless<N extends string> = Replaced<N, ' ', ''>;
 declare function removeSpace<N extends string>(str: N): Spaceless<N>
@@ -17,3 +21,9 @@ declare function postAlign<A extends string, B extends string, F extends Tostrab
 
 type PreAligned<A extends string, B extends string, F extends Tostrable = ' ', E extends string = ''> = string extends A | B ? string : B extends `${any}${infer BT}` ? A extends `${infer AH}${infer AT}` ? PreAligned<AT, BT, F, `${E}${AH}`> : `${PostAligned<'', B, F>}${E}` : `${E}${A}`
 declare function preAlign<A extends string, B extends string, F extends Tostrable = ''>(str: A, withStr: B, filler?: F): PreAligned<A, B, F>
+
+type Splited<N extends string, F extends Tostrable> = IsWideTostrable<F> extends true ? string[] : N extends `${infer N0}${F}${infer N1}` ? [N0, ...Splited<N1, F>] : string extends N ? string[] : [N]
+declare function split<N extends string, F extends Tostrable>(str: N, separator: F): Splited<N, F>
+
+type Joined<A extends string[], F extends Tostrable> = A extends [infer E0] ? `${E0}` : A extends [infer E0, ...infer A1] ? `${E0}${F}${Joined<A1, F>}` : string
+declare function join<A extends ArrayAccur<B>, B extends string, F extends Tostrable>(array: A, separator: F): Joined<A, F>
