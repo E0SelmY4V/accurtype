@@ -33,6 +33,16 @@ type IsTypeNameJS<N> = IsLtdString<N> extends true ? N extends keyof TypeMapJS ?
 declare function isTypeNameJS<N, T extends string>(n: N | T): IsTypeNameJS<N>
 declare const TYPE_MAP: TypeMapJS
 declare function str2type<N extends TypeNameJS>(str: N): TypeMapJS[N]
+type TypeOfJS<N> =
+	N extends bigint ? 'bigint' :
+	N extends boolean ? 'boolean' :
+	N extends Function ? 'function' :
+	N extends number ? 'number' :
+	N extends string ? 'string' :
+	N extends Symbol ? 'symbol' :
+	N extends Object | null ? 'object' :
+	N extends undefined ? 'undefined' :
+	never
 
 interface TypeMap extends TypeMapJS {
 	never: never,
@@ -41,19 +51,12 @@ interface TypeMap extends TypeMapJS {
 type TypeName = keyof TypeMap
 type IsTypeName<N> = IsLtdString<N> extends true ? N extends keyof TypeMap ? true : false : boolean
 declare function isTypeName<N, T extends string>(n: N | T): IsTypeName<N>
-
 type TypeOf<N> =
-	N extends bigint ? 'bigint' :
-	N extends boolean ? 'boolean' :
-	N extends Function ? 'function' :
 	N extends never ? 'never' :
-	N extends number ? 'number' :
-	N extends string ? 'string' :
-	N extends Symbol ? 'symbol' :
-	N extends Object ? 'object' :
 	N extends undefined ? 'undefined' :
 	N extends void ? 'void' :
-	never
+	N extends null ? 'null' :
+	TypeOfJS<N>
 type NameOfType<N> = TypeOf<N>
 
 type ArrayAccur = [any, ...any[]] | any[]
@@ -67,7 +70,7 @@ type IsWideTostrable<N> = TypeOf<N> extends TostrableType ? (
 	IsWideBoolean<N> extends true ? true :
 	IsWideWideNum<N> extends true ? true :
 	IsWideString<N>
-): false
+) : false
 type IsLtdTostrable<N> = TypeOf<N> extends TostrableType ? Not<IsWideTostrable<N>> : false
 
 type NumOfStr<N extends string, T extends Tostrable = WideNum> = N extends `${infer K extends T}` ? K : T
