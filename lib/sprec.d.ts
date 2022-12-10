@@ -29,5 +29,5 @@ type BothPostAligned<A extends string, B extends string, F extends Tostrable = '
 type Splited<N extends string, F extends Tostrable> = IsWideTostrable<F> extends true ? string[] : N extends `${infer N0}${F}${infer N1}` ? [N0, ...Splited<N1, F>] : string extends N ? string[] : [N]
 declare function split<N extends string, F extends Tostrable>(str: N, separator: F): Splited<N, F>
 
-type Joined<A extends string[], F extends Tostrable> = A extends [infer E0] ? `${E0}` : A extends [infer E0, ...infer A1] ? `${E0}${F}${Joined<A1, F>}` : string
+type Joined<A extends string[], F extends Tostrable> = A extends [infer E0 extends Tostrable] ? `${E0}` : A extends [infer E0 extends Tostrable, ...infer A1 extends string[]] ? `${E0}${F}${Joined<A1, F>}` : string
 declare function join<A extends ArrayAccur<B>, B extends string, F extends Tostrable>(array: A, separator: F): Joined<A, F>
