@@ -6,10 +6,27 @@ The *Accurate Type* is a collection of TypeScript type declare, which can make y
 
 This project has not only various simple types but also many generic type expressions like counter. The wide type world is waiting for your exploration!
 
-## Modules
+## All Utilities
 
-- `snt` Number operation
-  - `app` Useful types based on number operation
-  - `xcr` Counter types (Incrementer and decrementer)
-- `base` Usual types
-- `sprec` Simply recursive types
+### snt: 15
+
+`app`: 8
+
+1. type `LenOfStr`
+2. function `strlen`
+3. type `LenOfArr`
+4. function `arrlen`
+5. type `Repeated`
+6. function `repeat`
+7. type `Leading0Filled`
+8. function `fillLeading0`
+
+`xcr`: 7
+
+1. type `SntXcrUns`
+2. type `SntXcr`
+3. type `SntXcrNum`
+4. type `Increase`
+5. function `increase`
+6. type `Decrease`
+7. function `decrease`
