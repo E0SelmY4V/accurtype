@@ -2,7 +2,13 @@ import {
 	SigNumber,
 	StringReved,
 	BothPreAligned,
+	Or,
+	IsWideString,
+	WideNum,
 } from '..'
+import {
+	SntCmpNum,
+} from './cmp'
 
 // scr
 type SntR<T extends 0 | 9> = T extends 0 ? 9 : 0
@@ -20,3 +26,10 @@ type SntSigTrinfl<T extends 0 | 9, A extends SigNumber, B extends SigNumber, C e
 type SntOpnOri<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1 = 0> = `${A},${B}` extends `${infer KA extends SigNumber}${infer NA},${infer KB extends SigNumber}${infer NB}`
 	? SntSigTrinfl<T, KA, KB, J> extends infer S extends [1 | 0, SigNumber] ? `${S[1]}${SntOpnOri<T, NA, NB, S[0]>}` : '' : ''
 type SntOpnHdl<A extends string, B extends string> = { [P in 'A' | 'B']: `${StringReved<BothPreAligned<A, B, '0'>[P]>}0` }
+
+// cmp
+type SntSigCmp<A extends SntSigT, B extends SntSigT> = A extends B ? 0 : A extends 's' ? -1 : B extends 's' ? 1 : SntSigCmp<SntSigVary<0, A>, SntSigVary<0, B>>
+type SntLenCmp<A extends string, B extends string> = `${A},${B}` extends `${any}${infer A1},${any}${infer B1}` ? SntLenCmp<A1, B1> : A extends B ? 0 : B extends '' ? -1 : 1
+type SntCmpOri<A extends string, B extends string> = Or<IsWideString<A>, IsWideString<B>> extends true ? 1 | -1 | 0 :
+	`${A},${B}` extends `${infer A0 extends SigNumber}${infer A1},${infer B0 extends SigNumber}${infer B1}` ? SntSigCmp<A0, B0> extends infer K extends -1 | 1 ? K : SntCmpOri<A1, B1> : 0
+type SntCmpObj<L, E, G, A extends WideNum, B extends WideNum> = { '-1': L, '0': E, '1': G }[`${SntCmpNum<A, B>}`]
