@@ -1,7 +1,10 @@
 import {
 	SigNumber,
-	Leading0less,
-} from '../..'
+	StringReved,
+	BothPreAligned,
+} from '..'
+
+// scr
 type SntR<T extends 0 | 9> = T extends 0 ? 9 : 0
 type SntSigT = SigNumber | 's'
 type SntSigVary<T extends 0 | 9, N extends SntSigT> = T extends 0
@@ -10,3 +13,10 @@ type SntSigVary<T extends 0 | 9, N extends SntSigT> = T extends 0
 type SntXcrOri<T extends 0 | 9, N extends string> = N extends `${infer K extends SigNumber
 	}${infer S}` ? S extends '' ? `${SntSigVary<T, K>}` : SntXcrOri<T, S> extends infer E
 	extends string ? `${E extends `s${any}` ? SntSigVary<T, K> : K}${E}` : 'NaN' : 'NaN'
+
+// opn
+type SntSigInfl<T extends 0 | 9, A extends SntSigT, B extends SntSigT, E extends 1 | 0 = 0> = B extends 0 ? A extends 's' ? [1, T] : [E, A] : A extends SigNumber ? SntSigInfl<T, SntSigVary<T, A>, SntSigVary<9, B>, E> : SntSigInfl<T, T, B, 1>
+type SntSigTrinfl<T extends 0 | 9, A extends SigNumber, B extends SigNumber, C extends 0 | 1> = SntSigInfl<T, A, B> extends infer K extends [0 | 1, SigNumber] ? SntSigInfl<T, K[1], C, K[0]> : [0, 0]
+type SntOpnOri<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1 = 0> = `${A},${B}` extends `${infer KA extends SigNumber}${infer NA},${infer KB extends SigNumber}${infer NB}`
+	? SntSigTrinfl<T, KA, KB, J> extends infer S extends [1 | 0, SigNumber] ? `${S[1]}${SntOpnOri<T, NA, NB, S[0]>}` : '' : ''
+type SntOpnHdl<A extends string, B extends string> = { [P in 'A' | 'B']: `${StringReved<BothPreAligned<A, B, '0'>[P]>}0` }

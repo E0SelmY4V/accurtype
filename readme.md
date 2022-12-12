@@ -76,7 +76,7 @@ This project has not only various simple types but also many generic type expres
 12. type `IsTypeName`
 13. function `isTypeName`
 
-### snt: 15
+### snt: 16
 
 `app`: 8
 
@@ -98,6 +98,10 @@ This project has not only various simple types but also many generic type expres
 5. function `increase`
 6. type `Decrease`
 7. function `decrease`
+
+`opn`: 1
+
+1. type `SntOpnUns`
 
 ### sprec: 18
 
