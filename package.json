@@ -1,6 +1,6 @@
 {
   "name": "accurtype",
-  "version": "2.2.2",
+  "version": "2.3.107",
   "description": "Some TS type tool that make your programming easier.",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,11 @@
     "typescript",
     "ts",
     "type guard",
-    "utility"
+    "types",
+    "type",
+    "util",
+    "utility",
+    "utilities"
   ],
   "type": "commonjs",
   "author": "e0selmy4v",
