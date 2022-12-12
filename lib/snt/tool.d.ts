@@ -5,6 +5,7 @@ import {
 	Or,
 	IsWideString,
 	WideNum,
+	Leading0less,
 } from '..'
 import {
 	SntCmpNum,
@@ -23,9 +24,10 @@ type SntXcrOri<T extends 0 | 9, N extends string> = N extends `${infer K extends
 // opn
 type SntSigInfl<T extends 0 | 9, A extends SntSigT, B extends SntSigT, E extends 1 | 0 = 0> = B extends 0 ? A extends 's' ? [1, T] : [E, A] : A extends SigNumber ? SntSigInfl<T, SntSigVary<T, A>, SntSigVary<9, B>, E> : SntSigInfl<T, T, B, 1>
 type SntSigTrinfl<T extends 0 | 9, A extends SigNumber, B extends SigNumber, C extends 0 | 1> = SntSigInfl<T, A, B> extends infer K extends [0 | 1, SigNumber] ? SntSigInfl<T, K[1], C, K[0]> : [0, 0]
-type SntOpnOri<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1 = 0> = `${A},${B}` extends `${infer KA extends SigNumber}${infer NA},${infer KB extends SigNumber}${infer NB}`
-	? SntSigTrinfl<T, KA, KB, J> extends infer S extends [1 | 0, SigNumber] ? `${S[1]}${SntOpnOri<T, NA, NB, S[0]>}` : '' : ''
-type SntOpnHdl<A extends string, B extends string> = { [P in 'A' | 'B']: `${StringReved<BothPreAligned<A, B, '0'>[P]>}0` }
+type SntAosOri<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1 = 0> = `${A},${B}` extends `${infer KA extends SigNumber}${infer NA},${infer KB extends SigNumber}${infer NB}`
+	? SntSigTrinfl<T, KA, KB, J> extends infer S extends [1 | 0, SigNumber] ? `${S[1]}${SntAosOri<T, NA, NB, S[0]>}` : '' : ''
+type SntAosHdl<A extends string, B extends string> = { [P in 'A' | 'B']: `${StringReved<BothPreAligned<A, B, '0'>[P]>}0` }
+type SntAosHal<T extends 0 | 9, A extends string, B extends string> = Leading0less<StringReved<SntAosOri<T, SntAosHdl<A, B>['A'], SntAosHdl<A, B>['B']>>>
 
 // cmp
 type SntSigCmp<A extends SntSigT, B extends SntSigT> = A extends B ? 0 : A extends 's' ? -1 : B extends 's' ? 1 : SntSigCmp<SntSigVary<0, A>, SntSigVary<0, B>>
