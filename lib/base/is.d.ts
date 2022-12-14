@@ -3,26 +3,61 @@ import {
 	TypeOf,
 	TostrableType,
 	Not,
+	And,
+	TypeAnd,
+	WideNumType,
+	TypeName,
 } from '..'
 
-type IsWideWideNum<N> = N extends WideNum ? number extends N ? true : bigint extends N ? true : false : false
-type IsLtdWideNum<N> = N extends WideNum ? Not<IsWideWideNum<N>> : false
+type IsType<N, T extends TypeName, K = true> = TypeOf<N> extends T ? K : false
 
-type IsWideBoolean<N> = TypeOf<N> extends 'boolean' ? boolean extends N ? true : false : false
-type IsLtdBoolean<N> = TypeOf<N> extends 'boolean' ? boolean extends N ? false : true : false
+type IsWideNum<N, K = true> = IsType<N, WideNumType, K>
+type IsWideWideNum<N> = IsWideNum<N, number extends N ? true : bigint extends N ? true : false>
+type IsLtdWideNum<N> = IsWideNum<N, Not<IsWideWideNum<N>>>
 
-type IsWideString<N> = N extends string ? string extends N ? true : N extends `${infer N0}${infer N1}` ? (
+type IsBoolean<N, K = true> = IsType<N, 'boolean', K>
+type IsWideBoolean<N> = IsBoolean<N, boolean extends N ? true : false>
+type IsLtdBoolean<N> = IsBoolean<N, boolean extends N ? false : true>
+
+type IsString<N, K = true> = IsType<N, 'string', K>
+type IsWideString<N> = IsString<N, string extends N ? true : N extends `${infer N0}${infer N1}` ? (
 	N0 extends `${infer H extends WideNum}` ? IsWideWideNum<H> extends true ? true : IsWideString<N1> :
 	string extends N0 ? true : IsWideString<N1>
-) : false : false
-type IsLtdString<N> = N extends string ? Not<IsWideString<N>> : false
+) : false>
+type IsLtdString<N> = IsString<N, Not<IsWideString<N>>>
 
-type IsWideArray<N> = N extends (infer T)[] ? T[] extends N ? true : false : false
-type IsLongArray<N> = N extends any[] ? IsWideArray<N> extends true ? true : N extends [any, ...infer K] ? IsLongArray<K> : N extends [] ? false : true : false
+type IsArray<N, K extends boolean = true> = TypeAnd<N extends any[] ? K : false>
+type IsWideArray<N> = TypeAnd<N extends (infer T)[] ? T[] extends N ? true : false : false>
+type IsLongArray<N> = IsArray<N, IsWideArray<N> extends true ? true : N extends [any, ...infer K] ? IsLongArray<K> : N extends [] ? false : true>
 
-type IsWideTostrable<N> = TypeOf<N> extends TostrableType ? (
+type IsTostrable<N, K = true> = IsType<N, TostrableType, K>
+type IsWideTostrable<N> = IsTostrable<N,
 	IsWideBoolean<N> extends true ? true :
 	IsWideWideNum<N> extends true ? true :
-	IsWideString<N>
-) : false
-type IsLtdTostrable<N> = TypeOf<N> extends TostrableType ? Not<IsWideTostrable<N>> : false
+	IsWideString<N>>
+type IsLtdTostrable<N> = IsTostrable<N, Not<IsWideTostrable<N>>>
+
+type IsFunction<N, K = true> = IsType<N, 'function', K>
+type IsLtdFunction<N> = IsFunction<N, N extends (...args: infer P) => infer R ? And<IsArrayOfLtd<P>, IsLtd<R>> : false>
+type IsWideFunction<N> = IsFunction<N, Not<IsLtdFunction<N>>>
+
+type IsObject<N, K = true> = IsType<N, 'object', K>
+type IsLtdObject<N> = TypeOf<N> extends 'object' ? And<IsLtd<keyof N>, IsLtd<N[keyof N]>> : false
+type IsWideObject<N> = IsObject<N, Not<IsLtdObject<N>>>
+
+type IsArrayOfLtd<N> = IsLongArray<N> extends true ? N extends (infer K)[] ? IsLtd<K> : false : N extends [infer N0, ...infer N1 extends any[]] ? IsLtd<N0> extends true ? IsArrayOfLtd<N1> : false : true
+
+type IsLtd<N> = TypeAnd<{
+	never: true,
+	null: true,
+	undefined: true,
+	void: true,
+	unknown: false,
+	boolean: true,
+	symbol: IsLtdObject<N>,
+	string: IsLtdString<N>,
+	object: IsLtdObject<N>,
+	number: IsLtdWideNum<N>,
+	bigint: IsLtdWideNum<N>,
+	function: IsLtdFunction<N>,
+}[TypeOf<N>]>

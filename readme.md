@@ -8,73 +8,99 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 54
+### base: 80
 
-`base`: 17
+`base`: 21
 
 1. type `SigNumber`
-2. type `WideNum`
-3. type `WideNumType`
-4. type `ArrayAccur`
-5. type `Tostrable`
-6. type `TostrableType`
-7. function `isTostrable`
-8. type `NumOfStr`
-9. function `str2num`
-10. type `BoolOfNum`
-11. function `num2bool`
-12. type `CnvedNum`
-13. function `cnvNum`
-14. type `NumOfBool`
-15. function `bool2num`
-16. type `BoolOfTostrable`
-17. function `tostrable2bool`
+2. function `toTypeNameObj`
+3. type `WideNum`
+4. type `WideNumType`
+5. const `WIDE_NUM_TYPE`
+6. function `isWideNum`
+7. type `ArrayAccur`
+8. type `Tostrable`
+9. type `TostrableType`
+10. const `TOSTRABLE_TYPE`
+11. function `isTostrable`
+12. type `NumOfStr`
+13. function `str2num`
+14. type `BoolOfNum`
+15. function `num2bool`
+16. type `CnvedNum`
+17. function `cnvNum`
+18. type `NumOfBool`
+19. function `bool2num`
+20. type `BoolOfTostrable`
+21. function `tostrable2bool`
 
-`bool`: 14
+`bool`: 20
 
 1. type `Not`
 2. function `not`
 3. type `And`
-4. function `and`
-5. type `Or`
-6. function `or`
-7. type `Nand`
-8. function `nand`
-9. type `Nor`
-10. function `nor`
-11. type `Xor`
-12. function `xor`
-13. type `Xnor`
-14. function `xnor`
+4. type `TypeAnd`
+5. function `and`
+6. type `Or`
+7. type `TypeOr`
+8. function `or`
+9. type `Nand`
+10. type `TypeNand`
+11. function `nand`
+12. type `Nor`
+13. type `TypeNor`
+14. function `nor`
+15. type `Xor`
+16. type `TypeXor`
+17. function `xor`
+18. type `Xnor`
+19. type `TypeXnor`
+20. function `xnor`
 
-`is`: 10
+`is`: 24
 
-1. type `IsWideWideNum`
-2. type `IsLtdWideNum`
-3. type `IsWideBoolean`
-4. type `IsLtdBoolean`
-5. type `IsWideString`
-6. type `IsLtdString`
-7. type `IsWideArray`
-8. type `IsLongArray`
-9. type `IsWideTostrable`
-10. type `IsLtdTostrabl`
+1. type `IsType`
+2. type `IsWideNum`
+3. type `IsWideWideNum`
+4. type `IsLtdWideNum`
+5. type `IsBoolean`
+6. type `IsWideBoolean`
+7. type `IsLtdBoolean`
+8. type `IsString`
+9. type `IsWideString`
+10. type `IsLtdString`
+11. type `IsArray`
+12. type `IsWideArray`
+13. type `IsLongArray`
+14. type `IsTostrable`
+15. type `IsWideTostrable`
+16. type `IsLtdTostrable`
+17. type `IsFunction`
+18. type `IsLtdFunction`
+19. type `IsWideFunction`
+20. type `IsObject`
+21. type `IsLtdObject`
+22. type `IsWideObject`
+23. type `IsArrayOfLtd`
+24. type `IsLtd`
 
-`type-name`: 13
+`type-name`: 15
 
 1. interface `TypeMapJS`
 2. type `TypeNameJS`
 3. const `TYPE_MAP`
 4. function `str2type`
 5. type `TypeOfJS`
-6. interface `TypeMap`
-7. type `TypeName`
-8. type `TypeOf`
-9. type `NameOfType`
-10. type `IsTypeNameJS`
-11. function `isTypeNameJS`
-12. type `IsTypeName`
-13. function `isTypeName`
+6. type `TypeNameObjJS`
+7. type `IsTypeNameJS`
+8. function `isTypeNameJS`
+9. interface `TypeMap`
+10. type `TypeName`
+11. type `TypeOf`
+12. type `NameOfType`
+13. type `TypeNameObj`
+14. type `IsTypeName`
+15. function `isTypeName`
 
 ### snt: 35
 

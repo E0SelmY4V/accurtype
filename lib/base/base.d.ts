@@ -3,17 +3,23 @@ import {
 	IsWideWideNum,
 	IsWideString,
 	TypeMap,
+	TypeNameObj,
 } from '..'
 
 type SigNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
+declare function toTypeNameObj<A extends string[]>(...n: A): A extends (infer K extends string)[] ? { [I in K]: 1 } : {}
+
 type WideNum = number | bigint
 type WideNumType = TypeOf<WideNum>
+declare const WIDE_NUM_TYPE: TypeNameObj<WideNumType>
+declare function isWideNum(n: any): n is WideNum
 
 type ArrayAccur<T = any> = [T, ...T[]] | T[]
 
 type Tostrable = string | boolean | WideNum | null | undefined
 type TostrableType = TypeOf<Tostrable>
+declare const TOSTRABLE_TYPE: TypeNameObj<TostrableType>
 declare function isTostrable(n: any): n is Tostrable
 
 type NumOfStr<N extends string, T extends Tostrable = WideNum> = N extends `${infer K extends T}` ? K : T
