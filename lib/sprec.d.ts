@@ -2,6 +2,8 @@ import {
 	Tostrable,
 	IsWideTostrable,
 	ArrayAccur,
+	IsWideArray,
+	AllTypeJS,
 } from '..'
 
 type Spaceless<N extends string> = Replaced<N, ' ', ''>;
@@ -31,3 +33,6 @@ declare function split<N extends string, F extends Tostrable>(str: N, separator:
 
 type Joined<A extends string[], F extends Tostrable> = A extends [infer E0 extends Tostrable] ? `${E0}` : A extends [infer E0 extends Tostrable, ...infer A1 extends string[]] ? `${E0}${F}${Joined<A1, F>}` : string
 declare function join<A extends ArrayAccur<B>, B extends string, F extends Tostrable>(array: A, separator: F): Joined<A, F>
+
+type Concated<A extends any[][]> = A extends [infer K extends any[], ...infer L extends any[][]] ? [...K, ...Concated<L>] : A extends [...infer L extends any[][], infer K extends any[]] ? [...Concated<L>, ...K] : IsWideArray<A> extends true ? A extends (infer K)[][] ? [...K[]] : [] : []
+declare function concat<T extends AllTypeJS, S extends ArrayAccur<T>[]>(...arr: S): Concated<S>

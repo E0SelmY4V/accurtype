@@ -29,6 +29,7 @@ type IsLtdString<N> = IsString<N, Not<IsWideString<N>>>
 type IsArray<N, K extends boolean = true> = TypeAnd<N extends any[] ? K : false>
 type IsWideArray<N> = TypeAnd<N extends (infer T)[] ? T[] extends N ? true : false : false>
 type IsLongArray<N> = IsArray<N, IsWideArray<N> extends true ? true : N extends [any, ...infer K] ? IsLongArray<K> : N extends [] ? false : true>
+type ArrayLtdSplited<A extends any[], R extends [any[], any[]] = [[], []]> = A extends [infer K, ...infer L] ? ArrayLtdSplited<L, [[...R[0], K], R[1]]> : A extends [...infer L, infer K] ? ArrayLtdSplited<L, [R[0], [K, ...R[1]]]> : [R[0], A, R[1]]
 
 type IsTostrable<N, K = true> = IsType<N, TostrableType, K>
 type IsWideTostrable<N> = IsTostrable<N,

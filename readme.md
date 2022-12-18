@@ -8,9 +8,9 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 80
+### base: 82
 
-`base`: 21
+base: 21
 
 1. type `SigNumber`
 2. function `toTypeNameObj`
@@ -34,7 +34,7 @@ This project has not only various simple types but also many generic type expres
 20. type `BoolOfTostrable`
 21. function `tostrable2bool`
 
-`bool`: 20
+bool: 20
 
 1. type `Not`
 2. function `not`
@@ -57,7 +57,7 @@ This project has not only various simple types but also many generic type expres
 19. type `TypeXnor`
 20. function `xnor`
 
-`is`: 24
+is: 25
 
 1. type `IsType`
 2. type `IsWideNum`
@@ -72,50 +72,57 @@ This project has not only various simple types but also many generic type expres
 11. type `IsArray`
 12. type `IsWideArray`
 13. type `IsLongArray`
-14. type `IsTostrable`
-15. type `IsWideTostrable`
-16. type `IsLtdTostrable`
-17. type `IsFunction`
-18. type `IsLtdFunction`
-19. type `IsWideFunction`
-20. type `IsObject`
-21. type `IsLtdObject`
-22. type `IsWideObject`
-23. type `IsArrayOfLtd`
-24. type `IsLtd`
+14. type `ArrayLtdSplited`
+15. type `IsTostrable`
+16. type `IsWideTostrable`
+17. type `IsLtdTostrable`
+18. type `IsFunction`
+19. type `IsLtdFunction`
+20. type `IsWideFunction`
+21. type `IsObject`
+22. type `IsLtdObject`
+23. type `IsWideObject`
+24. type `IsArrayOfLtd`
+25. type `IsLtd`
 
-`type-name`: 15
+type-name: 16
 
 1. interface `TypeMapJS`
 2. type `TypeNameJS`
 3. const `TYPE_MAP`
 4. function `str2type`
-5. type `TypeOfJS`
-6. type `TypeNameObjJS`
-7. type `IsTypeNameJS`
-8. function `isTypeNameJS`
-9. interface `TypeMap`
-10. type `TypeName`
-11. type `TypeOf`
-12. type `NameOfType`
-13. type `TypeNameObj`
-14. type `IsTypeName`
-15. function `isTypeName`
+5. type `AllTypeJS`
+6. type `TypeOfJS`
+7. type `TypeNameObjJS`
+8. type `IsTypeNameJS`
+9. function `isTypeNameJS`
+10. interface `TypeMap`
+11. type `TypeName`
+12. type `TypeOf`
+13. type `NameOfType`
+14. type `TypeNameObj`
+15. type `IsTypeName`
+16. function `isTypeName`
 
-### snt: 35
+### snt: 41
 
-`app`: 8
+app: 13
 
 1. type `LenOfStr`
 2. function `strlen`
 3. type `LenOfArr`
 4. function `arrlen`
-5. type `Repeated`
-6. function `repeat`
-7. type `Leading0Filled`
-8. function `fillLeading0`
+5. type `LenOf`
+6. function `len`
+7. type `Repeated`
+8. function `repeat`
+9. type `Leading0Filled`
+10. function `fillLeading0`
+11. type `LtdIndexOf`
+12. type `IndexOf`
+13. function `indexOf`
 
-`xcr`: 7
+xcr: 7
 
 1. type `SntXcrUns`
 2. type `SntXcr`
@@ -125,7 +132,7 @@ This project has not only various simple types but also many generic type expres
 6. type `Decrease`
 7. function `decrease`
 
-`cmp`: 13
+cmp: 14
 
 1. type `SntCmpUns`
 2. type `SntCmp`
@@ -140,8 +147,9 @@ This project has not only various simple types but also many generic type expres
 11. function `isNotgreater`
 12. type `IsEqual`
 13. function `isEqual`
+14. type `IsAllLess`
 
-`opn`: 7
+opn: 7
 
 1. type `SntAosUns`
 2. type `SntAos`
@@ -151,7 +159,7 @@ This project has not only various simple types but also many generic type expres
 6. type `Subed`
 7. function `sub`
 
-### sprec: 18
+### sprec: 20
 
 1. type `Spaceless`
 2. function `removeSpace`
@@ -171,3 +179,5 @@ This project has not only various simple types but also many generic type expres
 16. function `split`
 17. type `Joined`
 18. function `join`
+19. type `Concated`
+20. function `concat`

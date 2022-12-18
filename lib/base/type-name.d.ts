@@ -17,6 +17,8 @@ type TypeNameJS = keyof TypeMapJS
 declare const TYPE_MAP: TypeMapJS
 declare function str2type<N extends TypeNameJS>(str: N): TypeMapJS[N]
 
+type AllTypeJS = TypeMapJS[keyof TypeMapJS]
+
 type TypeOfJS<N> =
 	N extends bigint ? 'bigint' :
 	N extends boolean ? 'boolean' :
