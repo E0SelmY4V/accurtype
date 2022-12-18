@@ -6,6 +6,9 @@ import {
 	ArrayAccur,
 	ArrayLtdSplited,
 	Accur,
+	IsGreater,
+	SntAosNum,
+	Shifted,
 } from '../..'
 
 type LenOfStr<N extends string, L extends number = 0> = N extends '' ? L : N extends `${any}${infer K}` ? LenOfStr<K, NumOfStr<SntXcrUns<0, `${L}`>, number>> : N extends string ? number : L
@@ -26,3 +29,8 @@ declare function fillLeading0<N extends Tostrable, B extends number | string>(nu
 type LtdIndexOf<W, A extends any[], C extends number = 0, E = -1> = A extends [infer A0, ...infer A1 extends any[]] ? A0 extends W ? W extends A0 ? C : C | LtdIndexOf<W, A1, SntXcrNum<0, C, number>, Exclude<W, A0> extends never ? never : E> : (W extends A0 ? C : never) | LtdIndexOf<W, A1, SntXcrNum<0, C, number>, E> : E
 type IndexOf<W, A extends any[]> = ArrayLtdSplited<A> extends [infer K extends any[], ...(infer S)[][]] ? LtdIndexOf<W, K> extends infer I ? -1 extends I ? W extends S ? number : I : I : number : number
 declare function indexOf<W, A extends any[]>(search: W, array: A): LtdIndexOf<W, A>
+
+type FilledWith<N, L extends number> = IsGreater<L, 0> extends true ? [N, ...FilledWith<N, SntXcrNum<9, L, number>>] : []
+
+type SplitedAt<I extends number, A extends any[], C extends number = 0, H extends any[] = [], L extends any[] = A, M extends number = LenOfArr<A>> = C extends M ? [[...A, ...FilledWith<never, SntAosNum<9, I, M, number>>], never, []] : C extends I ? [H, A[C], Shifted<L>] : SplitedAt<I, A, SntXcrNum<0, C, number>, [...H, A[C]], Shifted<L>, M>
+type SettedAt<N, I extends number, A extends any[]> = SplitedAt<I, A> extends [infer P extends any[], any, infer L extends any[]] ? [...P, N, ...L] : [N]

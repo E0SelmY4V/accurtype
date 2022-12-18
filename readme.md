@@ -8,9 +8,9 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 86
+### base: 90
 
-base: 25
+base: 29
 
 1. type `SigNumber`
 2. type `ObjectKey`
@@ -37,6 +37,10 @@ base: 25
 23. function `bool2num`
 24. type `BoolOfTostrable`
 25. function `tostrable2bool`
+26. type `Poped`
+27. type `Pushed`
+28. type `Shifted`
+29. type `Unshifted`
 
 bool: 20
 
@@ -108,9 +112,9 @@ type-name: 16
 15. type `IsTypeName`
 16. function `isTypeName`
 
-### snt: 41
+### snt: 44
 
-app: 13
+app: 16
 
 1. type `LenOfStr`
 2. function `strlen`
@@ -125,6 +129,10 @@ app: 13
 11. type `LtdIndexOf`
 12. type `IndexOf`
 13. function `indexOf`
+14. type `FilledWith`
+15. type `SplitedAt`
+16. type `SettedAt`
+
 
 xcr: 7
 

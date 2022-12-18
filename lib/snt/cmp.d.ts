@@ -23,14 +23,14 @@ type SntCmpNum<A extends WideNum, B extends WideNum> = SntCmp<`${A}`, `${B}`>
 type IsLess<A extends WideNum, B extends WideNum> = SntCmpObj<false, false, true, A, B>
 declare function isLess<A extends WideNum, B extends WideNum>(a: A, b: B): IsLess<A, B>
 
-type IsNotless<A extends WideNum, B extends WideNum> = SntCmpObj<false, true, true, A, B>
-declare function isNotless<A extends WideNum, B extends WideNum>(a: A, b: B): IsNotless<A, B>
+type IsNotgreater<A extends WideNum, B extends WideNum> = SntCmpObj<false, true, true, A, B>
+declare function isNotgreater<A extends WideNum, B extends WideNum>(a: A, b: B): IsNotgreater<A, B>
 
 type IsGreater<A extends WideNum, B extends WideNum> = SntCmpObj<true, false, false, A, B>
 declare function isGreater<A extends WideNum, B extends WideNum>(a: A, b: B): IsGreater<A, B>
 
-type IsNotgreater<A extends WideNum, B extends WideNum> = SntCmpObj<true, true, false, A, B>
-declare function isNotgreater<A extends WideNum, B extends WideNum>(a: A, b: B): IsNotgreater<A, B>
+type IsNotless<A extends WideNum, B extends WideNum> = SntCmpObj<true, true, false, A, B>
+declare function isNotless<A extends WideNum, B extends WideNum>(a: A, b: B): IsNotless<A, B>
 
 type IsEqual<A extends WideNum, B extends WideNum> = SntCmpObj<false, true, false, A, B>
 declare function isEqual<A extends WideNum, B extends WideNum>(a: A, b: B): IsEqual<A, B>

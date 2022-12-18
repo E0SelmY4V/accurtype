@@ -45,3 +45,8 @@ type BoolOfTostrable<N extends Tostrable> =
 	N extends WideNum ? IsWideWideNum<N> extends true ? boolean : N extends 0 | 0n ? false : true :
 	N extends boolean ? N : false
 declare function tostrable2bool<N extends Tostrable>(n: N): BoolOfTostrable<N>
+
+type Poped<A extends any[]> = A extends [...infer H, any] ? H : A
+type Pushed<N, A extends any[]> = [...A, N]
+type Shifted<A extends any[]> = A extends [any, ...infer H] ? H : A
+type Unshifted<N, A extends any[]> = [N, ...A]
