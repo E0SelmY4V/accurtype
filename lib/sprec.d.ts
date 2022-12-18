@@ -4,6 +4,7 @@ import {
 	ArrayAccur,
 	IsWideArray,
 	AllTypeJS,
+	Accur,
 } from '..'
 
 type Spaceless<N extends string> = Replaced<N, ' ', ''>;
@@ -35,4 +36,4 @@ type Joined<A extends string[], F extends Tostrable> = A extends [infer E0 exten
 declare function join<A extends ArrayAccur<B>, B extends string, F extends Tostrable>(array: A, separator: F): Joined<A, F>
 
 type Concated<A extends any[][]> = A extends [infer K extends any[], ...infer L extends any[][]] ? [...K, ...Concated<L>] : A extends [...infer L extends any[][], infer K extends any[]] ? [...Concated<L>, ...K] : IsWideArray<A> extends true ? A extends (infer K)[][] ? [...K[]] : [] : []
-declare function concat<T extends AllTypeJS, S extends ArrayAccur<T>[]>(...arr: S): Concated<S>
+declare function concat<T extends Accur<T>, S extends ArrayAccur<T>[]>(...arr: S): Concated<S>

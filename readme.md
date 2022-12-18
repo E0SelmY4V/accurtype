@@ -8,31 +8,35 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 82
+### base: 86
 
-base: 21
+base: 25
 
 1. type `SigNumber`
-2. function `toTypeNameObj`
-3. type `WideNum`
-4. type `WideNumType`
-5. const `WIDE_NUM_TYPE`
-6. function `isWideNum`
-7. type `ArrayAccur`
-8. type `Tostrable`
-9. type `TostrableType`
-10. const `TOSTRABLE_TYPE`
-11. function `isTostrable`
-12. type `NumOfStr`
-13. function `str2num`
-14. type `BoolOfNum`
-15. function `num2bool`
-16. type `CnvedNum`
-17. function `cnvNum`
-18. type `NumOfBool`
-19. function `bool2num`
-20. type `BoolOfTostrable`
-21. function `tostrable2bool`
+2. type `ObjectKey`
+3. function `toTypeNameObj`
+4. type `WideNum`
+5. type `WideNumType`
+6. const `WIDE_NUM_TYPE`
+7. function `isWideNum`
+8. type `ArrayAccur`
+9. type `ObjectAccur`
+10. type `FunctionAccur`
+11. type `Accur`
+12. type `Tostrable`
+13. type `TostrableType`
+14. const `TOSTRABLE_TYPE`
+15. function `isTostrable`
+16. type `NumOfStr`
+17. function `str2num`
+18. type `BoolOfNum`
+19. function `num2bool`
+20. type `CnvedNum`
+21. function `cnvNum`
+22. type `NumOfBool`
+23. function `bool2num`
+24. type `BoolOfTostrable`
+25. function `tostrable2bool`
 
 bool: 20
 

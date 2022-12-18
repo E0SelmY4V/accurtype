@@ -5,13 +5,14 @@ import {
 	Tostrable,
 	ArrayAccur,
 	ArrayLtdSplited,
+	Accur,
 } from '../..'
 
 type LenOfStr<N extends string, L extends number = 0> = N extends '' ? L : N extends `${any}${infer K}` ? LenOfStr<K, NumOfStr<SntXcrUns<0, `${L}`>, number>> : N extends string ? number : L
 declare function strlen<N extends string>(str: N): LenOfStr<N>
 
 type LenOfArr<N extends any[], L extends number = 0> = N extends [] ? L : N extends [any, ...infer S] ? LenOfArr<S, NumOfStr<SntXcrUns<0, `${L}`>, number>> : N extends any[] ? number : L
-declare function arrlen<N extends ArrayAccur>(arr: N): LenOfArr<N>
+declare function arrlen<T extends Accur<T>, N extends ArrayAccur<T>>(arr: N): LenOfArr<N>
 
 type LenOf<N> = N extends string ? LenOfStr<N> : N extends any[] ? LenOfArr<N> : -1
 declare function len<N, S extends string>(n: N | S): LenOf<N>
