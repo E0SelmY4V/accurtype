@@ -3,7 +3,6 @@ import {
 	IsWideTostrable,
 	ArrayAccur,
 	IsWideArray,
-	AllTypeJS,
 	Accur,
 } from '..'
 
@@ -37,3 +36,5 @@ declare function join<A extends ArrayAccur<B>, B extends string, F extends Tostr
 
 type Concated<A extends any[][]> = A extends [infer K extends any[], ...infer L extends any[][]] ? [...K, ...Concated<L>] : A extends [...infer L extends any[][], infer K extends any[]] ? [...Concated<L>, ...K] : IsWideArray<A> extends true ? A extends (infer K)[][] ? [...K[]] : [] : []
 declare function concat<T extends Accur<T>, S extends ArrayAccur<T>[]>(...arr: S): Concated<S>
+
+type PostVoidLess<A extends any[]> = A extends [...infer K, infer K] ? K extends undefined ? PostVoidLess<A> : A : A

@@ -112,7 +112,7 @@ type-name: 16
 15. type `IsTypeName`
 16. function `isTypeName`
 
-### snt: 44
+### snt: 45
 
 app: 16
 
@@ -133,7 +133,6 @@ app: 16
 15. type `SplitedAt`
 16. type `SettedAt`
 
-
 xcr: 7
 
 1. type `SntXcrUns`
@@ -144,7 +143,7 @@ xcr: 7
 6. type `Decrease`
 7. function `decrease`
 
-cmp: 14
+cmp: 15
 
 1. type `SntCmpUns`
 2. type `SntCmp`
@@ -160,6 +159,7 @@ cmp: 14
 12. type `IsEqual`
 13. function `isEqual`
 14. type `IsAllLess`
+15. type `LtdMaxIn`
 
 opn: 7
 
@@ -171,7 +171,7 @@ opn: 7
 6. type `Subed`
 7. function `sub`
 
-### sprec: 20
+### sprec: 21
 
 1. type `Spaceless`
 2. function `removeSpace`
@@ -193,3 +193,10 @@ opn: 7
 18. function `join`
 19. type `Concated`
 20. function `concat`
+21. type `PostVoidLess`
+
+### matrix: 1
+
+trsed: 1
+
+1. type `Transposed`
