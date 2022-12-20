@@ -112,7 +112,7 @@ type-name: 16
 15. type `IsTypeName`
 16. function `isTypeName`
 
-### snt: 45
+### snt: 47
 
 app: 16
 
@@ -143,7 +143,7 @@ xcr: 7
 6. type `Decrease`
 7. function `decrease`
 
-cmp: 15
+cmp: 17
 
 1. type `SntCmpUns`
 2. type `SntCmp`
@@ -160,6 +160,8 @@ cmp: 15
 13. function `isEqual`
 14. type `IsAllLess`
 15. type `LtdMaxIn`
+16. type `MayUpNum`
+17. type `UpNum`
 
 opn: 7
 

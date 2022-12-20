@@ -9,6 +9,8 @@ import {
 	TypeAnd,
 	IsNotless,
 	SplitedAt,
+	IsLongArray,
+	UpNum,
 } from '..'
 
 // trsed
@@ -24,7 +26,7 @@ type RGetted<I extends RInfo, O extends number, C extends number, R extends any[
 	[...R, ...FilledWith<undefined, SntAosNum<9, K, O, number>>] extends infer A extends any[] ? IsNotless<C, E> extends true ?
 	T | (M extends 0 ? undefined : Exclude<SuperedFrom<B, SntAosNum<9, C, E, number>, M>, B[0]> | B[0]) extends infer T ? Q extends 0 ? SettedAt<T, K, A> : SplitedAt<K, A> extends [infer AB extends any[], any, (infer Y extends any)[]] ? [...AB, ...T[]] : A : A : A : []> : R
 type TrsedRow<T extends any[], R extends any[][] = [], I extends RInfo = RInfoO, O extends number = 0, J extends 0 | 1 = 0> = ArrayLtdSplited<T> extends [infer T0 extends any[], infer T1 extends any[], infer T2 extends any[]] ?
-	RInfoC<TypeAnd<T1 | T2 extends [] ? true : false> extends true ? { m: LtdMaxIn<[LenOfArr<R>, I['m'], LenOfArr<T0>]> } : { m: LtdMaxIn<[LenOfArr<R>, I['m'], LenOfArr<[...T0, ...T2]>]>, l: [{ r: LenOfArr<T0>, c: O, t: T1 extends (infer S)[] ? S : any, a: J, m: LenOfArr<T2>, l: T2 }, ...I['l']] }, I> extends
+	RInfoC<TypeAnd<T1 | T2 extends [] ? true : false> extends true ? { m: UpNum<LtdMaxIn<[LenOfArr<R>, I['m'], LenOfArr<T0>]>> } : { m: UpNum<LtdMaxIn<[LenOfArr<R>, I['m'], LenOfArr<[...T0, ...T2]>]>>, l: [{ r: LenOfArr<T0>, c: O, t: T1 extends (infer S)[] ? S : any, a: J, m: LenOfArr<T2>, l: T2 }, ...I['l']] }, I> extends
 	infer I extends RInfo ? { R: LtdTrsedRow<T0, R, I, O>, I: I } : { R: any, I: any } : { R: R, I: I }
 type LtdTrsed<T extends any[][], R extends any[][] = [], I extends RInfo = RInfoO, O extends number = 0> = T extends [infer T0 extends any[], ...infer TL extends any[][]]
 	? TrsedRow<T0, R, I, O> extends { R: infer R extends any[][], I: infer I extends RInfo } ? LtdTrsed<TL, R, I, SntXcrNum<0, O, number>> : { R: R, I: I, O: O } : { R: R, I: I, O: O }

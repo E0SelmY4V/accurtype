@@ -6,6 +6,10 @@ import {
 	IsWideString,
 	WideNum,
 	Leading0less,
+	SntAosNum,
+	TypeOr,
+	IsLess,
+	IsNotless,
 } from '..'
 import {
 	SntCmpNum,
@@ -35,3 +39,6 @@ type SntLenCmp<A extends string, B extends string> = `${A},${B}` extends `${any}
 type SntCmpOri<A extends string, B extends string> = Or<IsWideString<A>, IsWideString<B>> extends true ? 1 | -1 | 0 :
 	`${A},${B}` extends `${infer A0 extends SigNumber}${infer A1},${infer B0 extends SigNumber}${infer B1}` ? SntSigCmp<A0, B0> extends infer K extends -1 | 1 ? K : SntCmpOri<A1, B1> : 0
 type SntCmpObj<L, E, G, A extends WideNum, B extends WideNum> = { '-1': L, '0': E, '1': G }[`${SntCmpNum<A, B>}`]
+type MayUpNumUp<T extends number, S extends number, C extends number> = TypeOr<IsLess<C, T>> extends true ? MayUpNumUp<T, S, SntAosNum<0, C, S, number>> : C
+type MayUpNumDn<T extends number, S extends number, C extends number> = IsNotless<C, T> extends true ? MayUpNumDn<T, S, SntAosNum<9, C, S, number>> : SntAosNum<0, C, S, number>
+type PowerList = [1, 10, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13, 1e14, 1e15]

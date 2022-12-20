@@ -9,6 +9,7 @@ import {
 	IsGreater,
 	SntAosNum,
 	Shifted,
+	UpNum,
 } from '../..'
 
 type LenOfStr<N extends string, L extends number = 0> = N extends '' ? L : N extends `${any}${infer K}` ? LenOfStr<K, NumOfStr<SntXcrUns<0, `${L}`>, number>> : N extends string ? number : L
@@ -34,3 +35,8 @@ type FilledWith<N, L extends number> = IsGreater<L, 0> extends true ? [N, ...Fil
 
 type SplitedAt<I extends number, A extends any[], C extends number = 0, H extends any[] = [], L extends any[] = A, M extends number = LenOfArr<A>> = C extends M ? [[...A, ...FilledWith<never, SntAosNum<9, I, M, number>>], never, []] : C extends I ? [H, A[C], Shifted<L>] : SplitedAt<I, A, SntXcrNum<0, C, number>, [...H, A[C]], Shifted<L>, M>
 type SettedAt<N, I extends number, A extends any[]> = SplitedAt<I, A> extends [infer P extends any[], any, infer L extends any[]] ? [...P, N, ...L] : [N]
+
+// type SpedUnionNumObj<K extends { F: any, U: any }, U0 extends any[] = K['U'], N extends number = K['F'], U extends number = UpNum<N>, S extends { F: any, U: any } = SpedUnionHal<N, U, number>> = {F: S['F'], U: [...U0, ...S['U']]}
+// type SpedUnionHal<N, U extends S, S> = N extends U | infer F extends Exclude<N, U> ? { F: F, U: [U] } : { F: never, U: [] }
+// declare const a: UpNum<1|2|3>
+// declare const b: SpedUnionNumObj<SpedUnionNumObj<SpedUnionNumObj<{F:1 | 2 | 3,U:[]}>>>['U']
