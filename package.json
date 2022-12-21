@@ -1,7 +1,7 @@
 {
   "name": "accurtype",
-  "version": "2.4.159",
-  "description": "Some TS type tool that make your programming easier.",
+  "version": "2.4.166",
+  "description": "Some TS type tool that can may make your programming easier.",
   "main": "index.js",
   "scripts": {
     "test-nd-js": "node test/testj.js",
