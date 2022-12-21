@@ -8,9 +8,9 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 90
+### base: 91
 
-base: 29
+base: 30
 
 1. type `SigNumber`
 2. type `ObjectKey`
@@ -41,6 +41,7 @@ base: 29
 27. type `Pushed`
 28. type `Shifted`
 29. type `Unshifted`
+30. type `IfredArr`
 
 bool: 20
 
