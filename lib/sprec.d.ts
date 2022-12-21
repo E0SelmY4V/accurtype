@@ -4,6 +4,7 @@ import {
 	ArrayAccur,
 	IsWideArray,
 	Accur,
+	ArrayLtdSplited,
 } from '..'
 
 type Spaceless<N extends string> = Replaced<N, ' ', ''>;
@@ -38,3 +39,7 @@ type Concated<A extends any[][]> = A extends [infer K extends any[], ...infer L 
 declare function concat<T extends Accur<T>, S extends ArrayAccur<T>[]>(...arr: S): Concated<S>
 
 type PostVoidLess<A extends any[]> = A extends [...infer K, infer K] ? K extends undefined ? PostVoidLess<A> : A : A
+
+type LtdArrayReved<A extends any[]> = A extends [infer S, ...infer AL] ? [...LtdArrayReved<AL>, S] : []
+type ArrayReved<T extends any[]> = ArrayLtdSplited<T> extends [infer T0 extends any[], infer T1 extends any[], infer T2 extends any[]] ? [...LtdArrayReved<T2>, ...T1, ...LtdArrayReved<T0>] : []
+declare function revArray<T extends Accur<T>, A extends T[]>(...ele: A): ArrayReved<A>

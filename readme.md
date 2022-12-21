@@ -174,7 +174,7 @@ opn: 7
 6. type `Subed`
 7. function `sub`
 
-### sprec: 21
+### sprec: 24
 
 1. type `Spaceless`
 2. function `removeSpace`
@@ -197,9 +197,18 @@ opn: 7
 19. type `Concated`
 20. function `concat`
 21. type `PostVoidLess`
+22. type `LtdArrayReved`
+23. type `ArrayReved`
+24. function `revArray`
 
-### matrix: 1
+### matrix: 4
 
 trsed: 1
 
 1. type `Transposed`
+
+flip: 3
+
+1. type `FlipedUD`
+2. type `LtdFlipedLR`
+3. type `FlipedLR`
