@@ -1,2 +1,4 @@
-"use strict";
-exports.__esModule = true;
+require('jexpt')(
+	module.exports,
+	require('./lib'),
+);
