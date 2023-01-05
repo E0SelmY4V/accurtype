@@ -1,6 +1,8 @@
 import {
 	IfredArr,
+	IfredObj,
 	Schema,
+	SemiUnpartial,
 } from '..'
 
 // sch
@@ -21,7 +23,8 @@ type SchBool<T extends Schema> = boolean
 type SchInt<T extends Schema> = number
 type SchNull<T extends Schema> = null
 type SchNum<T extends Schema> = number
-type SchObj<T extends Schema> = T['properties'] extends {} ? { [I in keyof T['properties']]: SchOf<T['properties'][I]> } : {}
+type SchOriObj<P extends { [property: string]: Schema }> = { [I in keyof P]: SchOf<P[I]> }
+type SchObj<T extends Schema> = SemiUnpartial<SchOriObj<IfredObj<T, {}>['properties']>, IfredArr<T['required'], never>>
 type SchStr<T extends Schema> = string
 type SchOf<T extends Schema> = T['enum'] extends (infer K)[] ? K :
 	T['type'] extends SchType ? (OfSchType<T['type']> extends infer K ?

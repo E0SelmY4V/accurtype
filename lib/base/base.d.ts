@@ -52,3 +52,10 @@ type Shifted<A extends any[]> = A extends [any, ...infer H] ? H : A
 type Unshifted<N, A extends any[]> = [N, ...A]
 
 type IfredArr<A, B = any> = A extends (infer K)[] ? K : B
+type IfredObj<A, B = any> = { [x: ObjectKey]: B } & { [I in keyof A]: A[I] extends null | void ? B : A[I] }
+
+type SemiRequired<T, K extends ObjectKey> = { [I in K & keyof T]-?: T[I] } & Omit<T, K>
+type SemiUnrequired<T, K extends ObjectKey> = SemiRequired<T, Exclude<keyof T, K>>
+type SemiPartial<T, K extends ObjectKey> = { [I in K & keyof T]?: T[I] } & Omit<T, K>
+type SemiUnpartial<T, K extends ObjectKey> = SemiPartial<T, Exclude<keyof T, K>>
+
