@@ -6,6 +6,8 @@ import {
 	SchemaObj,
 	IsDefedObject,
 	TypeOr,
+	SemiRequired,
+	EqualTo,
 } from '..'
 
 // sch
@@ -30,7 +32,8 @@ type SchTypeSep = {
 	object: `${`${SchTS0 | 'pattern'}P` | 'p'}ropert${'yNames' | 'ies'}` | 'required' | 'dependencies'
 	string: 'pattern' | 'format' | `content${'MediaType' | 'Encoding'}`
 }
-type SchOfType<T extends SchemaObj> = T['type'] extends (infer S)[] ? S : T['type'] extends string ? T['type'] : { [E in keyof SchTypeSep]: TypeOr<IsDefedObject<T>[SchTypeSep[E]]> extends true ? E : never }[keyof SchTypeSep]
+type SchOfType<T extends SchemaObj> = (true extends IsDefedObject<T>['type'] ? IfredObj<T, never>['type'] & {} extends (infer S)[] | infer S ? S : never : never)
+	| (false extends IsDefedObject<T>['type'] ? { [E in keyof SchTypeSep]: TypeOr<IsDefedObject<T>[SchTypeSep[E]]> extends true ? E : never }[keyof SchTypeSep] : never)
 type SchArr<T extends SchemaObj> = T['items'] extends Schema ? SchOf<T['items']>[] : unknown[]
 type SchBool<T extends SchemaObj> = boolean
 type SchInt<T extends SchemaObj> = number
@@ -43,4 +46,4 @@ type SchOf<T extends Schema> = T extends SchemaObj ? T['enum'] extends (infer K)
 	('array' extends K ? SchArr<T> : never) | ('boolean' extends K ? SchBool<T> : never) |
 	('integer' extends K ? SchInt<T> : never) | ('null' extends K ? SchNull<T> : never) |
 	('number' extends K ? SchNum<T> : never) | ('object' extends K ? SchObj<T> : never) |
-	('string' extends K ? SchStr<T> : never) : unknown : unknown
+	('string' extends K ? SchStr<T> : never) : unknown : any

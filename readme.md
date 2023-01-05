@@ -8,9 +8,9 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 98
+### base: 99
 
-base: 35
+base: 36
 
 1. type `SigNumber`
 2. type `ObjectKey`
@@ -47,6 +47,7 @@ base: 35
 33. type `SemiUnrequired`
 34. type `SemiPartial`
 35. type `SemiUnpartial`
+36. type `EqualTo`
 
 bool: 20
 
