@@ -4,6 +4,8 @@ import {
 	Schema,
 	SemiUnpartial,
 	SchemaObj,
+	IsDefedObject,
+	TypeOr,
 } from '..'
 
 // sch
@@ -18,8 +20,18 @@ type SchTypeList = [
 ]
 type SchTypeStr = IfredArr<SchTypeList>
 type SchType = SchTypeStr[] | SchTypeStr
-type OfSchType<T extends SchType> = T extends (infer S)[] ? S : T
-type SchArr<T extends SchemaObj> = T['items'] extends Schema ? SchOf<T['items']>[] : any[]
+type SchTS0 = 'max' | 'min' | 'additional'
+type SchTypeSep = {
+	array: 'items' | `${SchTS0 | 'unique'}${'Items' | 'Length'}` | 'contains'
+	boolean: never
+	integer: 'multipleOf'
+	null: never
+	number: `${`exclusive${'Max' | 'Min'}` | SchTS0}imum`
+	object: `${`${SchTS0 | 'pattern'}P` | 'p'}ropert${'yNames' | 'ies'}` | 'required' | 'dependencies'
+	string: 'pattern' | 'format' | `content${'MediaType' | 'Encoding'}`
+}
+type SchOfType<T extends SchemaObj> = T['type'] extends (infer S)[] ? S : T['type'] extends string ? T['type'] : { [E in keyof SchTypeSep]: TypeOr<IsDefedObject<T>[SchTypeSep[E]]> extends true ? E : never }[keyof SchTypeSep]
+type SchArr<T extends SchemaObj> = T['items'] extends Schema ? SchOf<T['items']>[] : unknown[]
 type SchBool<T extends SchemaObj> = boolean
 type SchInt<T extends SchemaObj> = number
 type SchNull<T extends SchemaObj> = null
@@ -27,10 +39,8 @@ type SchNum<T extends SchemaObj> = number
 type SchOriObj<P extends { [property: string]: Schema }> = { [I in keyof P]: SchOf<P[I]> }
 type SchObj<T extends SchemaObj> = SemiUnpartial<SchOriObj<IfredObj<T, {}>['properties']>, IfredArr<T['required'], never>>
 type SchStr<T extends SchemaObj> = string
-type SchOf<T extends Schema> = T extends SchemaObj ? T['enum'] extends (infer K)[] ? K :
-	T['type'] extends SchType ? (OfSchType<T['type']> extends infer K ?
-		('array' extends K ? SchArr<T> : never) | ('boolean' extends K ? SchBool<T> : never) |
-		('integer' extends K ? SchInt<T> : never) | ('null' extends K ? SchNull<T> : never) |
-		('number' extends K ? SchNum<T> : never) | ('object' extends K ? SchObj<T> : never) |
-		('string' extends K ? SchStr<T> : never) : any
-	) : any : any
+type SchOf<T extends Schema> = T extends SchemaObj ? T['enum'] extends (infer K)[] ? K : SchOfType<T> extends infer K ?
+	('array' extends K ? SchArr<T> : never) | ('boolean' extends K ? SchBool<T> : never) |
+	('integer' extends K ? SchInt<T> : never) | ('null' extends K ? SchNull<T> : never) |
+	('number' extends K ? SchNum<T> : never) | ('object' extends K ? SchObj<T> : never) |
+	('string' extends K ? SchStr<T> : never) : unknown : unknown

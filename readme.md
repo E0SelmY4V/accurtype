@@ -8,7 +8,7 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 97
+### base: 98
 
 base: 35
 
@@ -71,7 +71,7 @@ bool: 20
 19. type `TypeXnor`
 20. function `xnor`
 
-is: 26
+is: 27
 
 1. type `IsType`
 2. type `IsWideNum`
@@ -97,8 +97,9 @@ is: 26
 22. type `IsObject`
 23. type `IsLtdObject`
 24. type `IsWideObject`
-25. type `IsArrayOfLtd`
-26. type `IsLtd`
+25. type `IsDefedObject`
+26. type `IsArrayOfLtd`
+27. type `IsLtd`
 
 type-name: 16
 

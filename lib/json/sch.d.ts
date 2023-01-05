@@ -12,7 +12,7 @@ interface SchemaObj {
 	$comment?: string
 	title?: string
 	description?: string
-	default?: any,
+	default?: any
 	readOnly?: boolean
 	writeOnly?: boolean
 	examples?: any[]
@@ -39,7 +39,7 @@ interface SchemaObj {
 	patternProperties?: { [patternProperty: string]: Schema }
 	dependencies?: { [dependency: string]: Schema | string[] }
 	propertyNames?: Schema
-	const?: any,
+	const?: any
 	enum?: any[]
 	type?: SchType
 	format?: string
