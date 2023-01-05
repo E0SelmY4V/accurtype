@@ -3,6 +3,7 @@ import {
 	Schema,
 } from '..'
 
+// sch
 type SchTypeList = [
 	"array",
 	"boolean",
