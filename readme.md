@@ -114,7 +114,7 @@ type-name: 16
 15. type `IsTypeName`
 16. function `isTypeName`
 
-### json: 4
+### json: 5
 
 base: 3
 
@@ -122,9 +122,10 @@ base: 3
 2. type `LtdUniqueItems`
 3. type `UniqueItems`
 
-sch: 1
+sch: 2
 
 1. interface `Schema`
+2. type `OfSchema`
 
 ### snt: 47
 

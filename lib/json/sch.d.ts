@@ -1,9 +1,8 @@
 import {
-	IfredArr,
-	ObjectKey,
 } from '..'
 import {
 	SchType,
+	SchOf,
 } from './tool'
 
 interface Schema {
@@ -54,21 +53,4 @@ interface Schema {
 	oneOf?: Schema[]
 	not?: Schema
 }
-// type SchArr<T extends Schema> = T['items'] extends Schema ? OfSchema<T['items']>[] : any[]
-// type SchBool<T extends Schema> = boolean
-// type SchInt<T extends Schema> = number
-// type SchNull<T extends Schema> = null
-// type SchNum<T extends Schema> = number
-// type SchObj<T extends Schema> = {}
-// type SchStr<T extends Schema> = string
-// type OfSchema<T extends Schema> = T['type'] extends SchType ? OfSchType<T['type']> extends infer K ?
-// 	('array' extends K ? SchArr<T> : never) |
-// 	('boolean' extends K ? SchBool<T> : never) |
-// 	('integer' extends K ? SchInt<T> : never) |
-// 	('null' extends K ? SchNull<T> : never) |
-// 	('number' extends K ? SchNum<T> : never) |
-// 	('object' extends K ? SchObj<T> : never) |
-// 	('string' extends K ? SchStr<T> : never) : any : any
-// declare const a: Schema;
-// declare const b: OfSchema<typeof a>
-// declare const c: null | boolean
+type OfSchema<T> = T extends Schema ? SchOf<T> : any
