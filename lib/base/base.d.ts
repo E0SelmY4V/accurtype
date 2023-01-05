@@ -51,4 +51,4 @@ type Pushed<N, A extends any[]> = [...A, N]
 type Shifted<A extends any[]> = A extends [any, ...infer H] ? H : A
 type Unshifted<N, A extends any[]> = [N, ...A]
 
-type IfredArr<A extends any[], B = any> = A extends (infer K)[] ? K : B
+type IfredArr<A, B = any> = A extends (infer K)[] ? K : B
