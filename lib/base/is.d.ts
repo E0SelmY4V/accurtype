@@ -26,10 +26,10 @@ type IsWideString<N> = IsString<N, string extends N ? true : N extends `${infer 
 ) : false>
 type IsLtdString<N> = IsString<N, Not<IsWideString<N>>>
 
-type IsArray<N, K extends boolean = true> = TypeAnd<N extends any[] ? K : false>
-type IsWideArray<N> = TypeAnd<N extends (infer T)[] ? T[] extends N ? true : false : false>
-type IsLongArray<N> = IsArray<N, IsWideArray<N> extends true ? true : N extends [any, ...infer K] ? IsLongArray<K> : N extends [] ? false : true>
-type ArrayLtdSplited<A extends any[], R extends [any[], any[]] = [[], []]> = A extends [infer K, ...infer L] ? ArrayLtdSplited<L, [[...R[0], K], R[1]]> : A extends [...infer L, infer K] ? ArrayLtdSplited<L, [R[0], [K, ...R[1]]]> : [R[0], A, R[1]]
+type IsArray<N, K extends boolean = true> = TypeAnd<N extends readonly any[] ? K : false>
+type IsWideArray<N> = TypeAnd<N extends readonly (infer T)[] ? T[] extends N ? true : false : false>
+type IsLongArray<N> = IsArray<N, IsWideArray<N> extends true ? true : N extends readonly [any, ...infer K] ? IsLongArray<K> : N extends readonly [] ? false : true>
+type ArrayLtdSplited<A extends readonly any[], R extends [any[], any[]] = [[], []]> = A extends readonly [infer K, ...infer L] ? ArrayLtdSplited<L, [[...R[0], K], R[1]]> : A extends readonly [...infer L, infer K] ? ArrayLtdSplited<L, [R[0], [K, ...R[1]]]> : [R[0], [...A], R[1]]
 
 type IsTostrable<N, K = true> = IsType<N, TostrableType, K>
 type IsWideTostrable<N> = IsTostrable<N,
@@ -46,7 +46,7 @@ type IsObject<N, K = true> = IsType<N, 'object', K>
 type IsLtdObject<N> = TypeOf<N> extends 'object' ? And<IsLtd<keyof N>, IsLtd<N[keyof N]>> : false
 type IsWideObject<N> = IsObject<N, Not<IsLtdObject<N>>>
 
-type IsArrayOfLtd<N> = IsLongArray<N> extends true ? N extends (infer K)[] ? IsLtd<K> : false : N extends [infer N0, ...infer N1 extends any[]] ? IsLtd<N0> extends true ? IsArrayOfLtd<N1> : false : true
+type IsArrayOfLtd<N> = IsLongArray<N> extends true ? N extends readonly (infer K)[] ? IsLtd<K> : false : N extends readonly [infer N0, ...infer N1] ? IsLtd<N0> extends true ? IsArrayOfLtd<N1> : false : true
 
 type IsLtd<N> = TypeAnd<{
 	never: true,

@@ -46,9 +46,9 @@ type BoolOfTostrable<N extends Tostrable> =
 	N extends boolean ? N : false
 declare function tostrable2bool<N extends Tostrable>(n: N): BoolOfTostrable<N>
 
-type Poped<A extends any[]> = A extends [...infer H, any] ? H : A
-type Pushed<N, A extends any[]> = [...A, N]
-type Shifted<A extends any[]> = A extends [any, ...infer H] ? H : A
-type Unshifted<N, A extends any[]> = [N, ...A]
+type Poped<A extends readonly any[]> = A extends readonly [...infer H, any] ? H : A
+type Pushed<N, A extends readonly any[]> = [...A, N]
+type Shifted<A extends readonly any[]> = A extends readonly [any, ...infer H] ? H : A
+type Unshifted<N, A extends readonly any[]> = [N, ...A]
 
-type IfredArr<A extends any[], B = any> = A extends (infer K)[] ? K : B
+type IfredArr<A extends readonly any[], B = any> = A extends readonly (infer K)[] ? K : B
