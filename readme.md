@@ -8,9 +8,9 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 91
+### base: 99
 
-base: 30
+base: 36
 
 1. type `SigNumber`
 2. type `ObjectKey`
@@ -42,6 +42,12 @@ base: 30
 28. type `Shifted`
 29. type `Unshifted`
 30. type `IfredArr`
+31. type `IfredObj`
+32. type `SemiRequired`
+33. type `SemiUnrequired`
+34. type `SemiPartial`
+35. type `SemiUnpartial`
+36. type `EqualTo`
 
 bool: 20
 
@@ -66,7 +72,7 @@ bool: 20
 19. type `TypeXnor`
 20. function `xnor`
 
-is: 25
+is: 27
 
 1. type `IsType`
 2. type `IsWideNum`
@@ -82,17 +88,19 @@ is: 25
 12. type `IsWideArray`
 13. type `IsLongArray`
 14. type `ArrayLtdSplited`
-15. type `IsTostrable`
-16. type `IsWideTostrable`
-17. type `IsLtdTostrable`
-18. type `IsFunction`
-19. type `IsLtdFunction`
-20. type `IsWideFunction`
-21. type `IsObject`
-22. type `IsLtdObject`
-23. type `IsWideObject`
-24. type `IsArrayOfLtd`
-25. type `IsLtd`
+15. type `ArrayLtdCombed`
+16. type `IsTostrable`
+17. type `IsWideTostrable`
+18. type `IsLtdTostrable`
+19. type `IsFunction`
+20. type `IsLtdFunction`
+21. type `IsWideFunction`
+22. type `IsObject`
+23. type `IsLtdObject`
+24. type `IsWideObject`
+25. type `IsDefedObject`
+26. type `IsArrayOfLtd`
+27. type `IsLtd`
 
 type-name: 16
 
@@ -112,6 +120,20 @@ type-name: 16
 14. type `TypeNameObj`
 15. type `IsTypeName`
 16. function `isTypeName`
+
+### json: 6
+
+base: 3
+
+1. type `MinItems`
+2. type `LtdUniqueItems`
+3. type `UniqueItems`
+
+sch: 3
+
+1. interface `SchemaObj`
+2. type `Schema`
+3. type `OfSchema`
 
 ### snt: 47
 

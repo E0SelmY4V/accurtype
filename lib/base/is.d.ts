@@ -7,6 +7,7 @@ import {
 	TypeAnd,
 	WideNumType,
 	TypeName,
+	ObjectKey,
 } from '..'
 
 type IsType<N, T extends TypeName, K = true> = TypeOf<N> extends T ? K : false
@@ -30,6 +31,7 @@ type IsArray<N, K extends boolean = true> = TypeAnd<N extends readonly any[] ? K
 type IsWideArray<N> = TypeAnd<N extends readonly (infer T)[] ? T[] extends N ? true : false : false>
 type IsLongArray<N> = IsArray<N, IsWideArray<N> extends true ? true : N extends readonly [any, ...infer K] ? IsLongArray<K> : N extends readonly [] ? false : true>
 type ArrayLtdSplited<A extends readonly any[], R extends [any[], any[]] = [[], []]> = A extends readonly [infer K, ...infer L] ? ArrayLtdSplited<L, [[...R[0], K], R[1]]> : A extends readonly [...infer L, infer K] ? ArrayLtdSplited<L, [R[0], [K, ...R[1]]]> : [R[0], [...A], R[1]]
+type ArrayLtdCombed<A extends any[]> = ArrayLtdSplited<A> extends [infer A0 extends any[], infer A1, infer A2 extends any[]] ? [...A0, ...(A1 extends [] ? [] : [A1 extends (infer S)[] ? S : any]), ...A2] : []
 
 type IsTostrable<N, K = true> = IsType<N, TostrableType, K>
 type IsWideTostrable<N> = IsTostrable<N,
@@ -45,6 +47,7 @@ type IsWideFunction<N> = IsFunction<N, Not<IsLtdFunction<N>>>
 type IsObject<N, K = true> = IsType<N, 'object', K>
 type IsLtdObject<N> = TypeOf<N> extends 'object' ? And<IsLtd<keyof N>, IsLtd<N[keyof N]>> : false
 type IsWideObject<N> = IsObject<N, Not<IsLtdObject<N>>>
+type IsDefedObject<N, P = null | void> = { [x: ObjectKey]: false } & { [I in keyof N]-?: N extends { [X in I]-?: N[I] } ? N[I] extends P ? false : true : boolean }
 
 type IsArrayOfLtd<N> = IsLongArray<N> extends true ? N extends readonly (infer K)[] ? IsLtd<K> : false : N extends readonly [infer N0, ...infer N1] ? IsLtd<N0> extends true ? IsArrayOfLtd<N1> : false : true
 
