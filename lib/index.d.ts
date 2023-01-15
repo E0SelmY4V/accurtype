@@ -1,6 +1,6 @@
 /**
  * 幻想私社精准类型库
- * @version 2.4.166
+ * @version 2.5.180
  * @link https://github.com/E0SelmY4V/accurtype
  */
 declare module "."
