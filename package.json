@@ -2,7 +2,7 @@
   "name": "accurtype",
   "version": "2.4.166",
   "description": "Some TS type tool that can may make your programming easier.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test-nd-js": "node test/testj.js",
     "test-nd-ts": "tsc test/testt.ts & node test/testt.js",
@@ -21,7 +21,6 @@
   "type": "commonjs",
   "author": "e0selmy4v",
   "license": "GPL-3.0-or-later",
-  "types": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/E0SelmY4V/accurtype.git"
