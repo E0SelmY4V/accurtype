@@ -15,7 +15,7 @@ interface SchemaObj {
 	default?: any
 	readOnly?: boolean
 	writeOnly?: boolean
-	examples?: any[]
+	examples?: readonly any[]
 	multipleOf?: number
 	maximum?: number
 	exclusiveMaximum?: number
@@ -32,15 +32,15 @@ interface SchemaObj {
 	contains?: Schema
 	maxProperties?: number
 	minProperties?: number
-	required?: string[]
+	required?: readonly string[]
 	additionalProperties?: Schema
 	definitions?: { [definition: string]: Schema }
 	properties?: { [property: string]: Schema }
 	patternProperties?: { [patternProperty: string]: Schema }
-	dependencies?: { [dependency: string]: Schema | string[] }
+	dependencies?: { [dependency: string]: Schema | readonly string[] }
 	propertyNames?: Schema
 	const?: any
-	enum?: any[]
+	enum?: readonly any[]
 	type?: SchType
 	format?: string
 	contentMediaType?: string
@@ -48,9 +48,9 @@ interface SchemaObj {
 	if?: Schema
 	then?: Schema
 	else?: Schema
-	allOf?: Schema[]
-	anyOf?: Schema[]
-	oneOf?: Schema[]
+	allOf?: readonly Schema[]
+	anyOf?: readonly Schema[]
+	oneOf?: readonly Schema[]
 	not?: Schema
 }
 type Schema = SchemaObj | boolean

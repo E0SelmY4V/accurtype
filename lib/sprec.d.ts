@@ -32,14 +32,14 @@ type BothPostAligned<A extends string, B extends string, F extends Tostrable = '
 type Splited<N extends string, F extends Tostrable> = IsWideTostrable<F> extends true ? string[] : N extends `${infer N0}${F}${infer N1}` ? [N0, ...Splited<N1, F>] : string extends N ? string[] : [N]
 declare function split<N extends string, F extends Tostrable>(str: N, separator: F): Splited<N, F>
 
-type Joined<A extends string[], F extends Tostrable> = A extends [infer E0 extends Tostrable] ? `${E0}` : A extends [infer E0 extends Tostrable, ...infer A1 extends string[]] ? `${E0}${F}${Joined<A1, F>}` : string
-declare function join<A extends ArrayAccur<B>, B extends string, F extends Tostrable>(array: A, separator: F): Joined<A, F>
+type Joined<A extends readonly string[], F extends Tostrable> = A extends readonly [infer E0 extends Tostrable] ? `${E0}` : A extends readonly [infer E0 extends Tostrable, ...infer A1 extends readonly string[]] ? `${E0}${F}${Joined<A1, F>}` : string
+declare function join<A extends B[], B extends string, F extends Tostrable>(array: readonly [...A], separator: F): Joined<A, F>
 
-type Concated<A extends any[][]> = A extends [infer K extends any[], ...infer L extends any[][]] ? [...K, ...Concated<L>] : A extends [...infer L extends any[][], infer K extends any[]] ? [...Concated<L>, ...K] : IsWideArray<A> extends true ? A extends (infer K)[][] ? [...K[]] : [] : []
-declare function concat<T extends Accur<T>, S extends ArrayAccur<T>[]>(...arr: S): Concated<S>
+type Concated<A extends readonly (readonly any[])[]> = A extends readonly [infer K extends readonly any[], ...infer L extends readonly (readonly any[])[]] ? [...K, ...Concated<L>] : A extends readonly [...infer L extends readonly (readonly any[])[], infer K extends readonly any[]] ? [...Concated<L>, ...K] : IsWideArray<A> extends true ? A extends readonly (readonly (infer K)[])[] ? [...K[]] : [] : []
+declare function concat<T extends Accur<T>, S extends (readonly T[])[]>(...arr: readonly [...S]): Concated<S>
 
-type PostVoidLess<A extends any[]> = A extends [...infer K, infer K] ? K extends undefined ? PostVoidLess<A> : A : A
+type PostVoidLess<A extends readonly any[]> = A extends readonly [...infer K, infer K] ? K extends undefined ? PostVoidLess<A> : A : A
 
-type LtdArrayReved<A extends any[]> = A extends [infer S, ...infer AL] ? [...LtdArrayReved<AL>, S] : []
-type ArrayReved<T extends any[]> = ArrayLtdSplited<T> extends [infer T0 extends any[], infer T1 extends any[], infer T2 extends any[]] ? [...LtdArrayReved<T2>, ...T1, ...LtdArrayReved<T0>] : []
+type LtdArrayReved<A extends readonly any[]> = A extends readonly [infer S, ...infer AL] ? [...LtdArrayReved<AL>, S] : []
+type ArrayReved<T extends readonly any[]> = ArrayLtdSplited<T> extends readonly [infer T0 extends readonly any[], infer T1 extends readonly any[], infer T2 extends readonly any[]] ? [...LtdArrayReved<T2>, ...T1, ...LtdArrayReved<T0>] : []
 declare function revArray<T extends Accur<T>, A extends T[]>(...ele: A): ArrayReved<A>

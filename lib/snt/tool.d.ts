@@ -18,18 +18,14 @@ import {
 // scr
 type SntR<T extends 0 | 9> = T extends 0 ? 9 : 0
 type SntSigT = SigNumber | 's'
-type SntSigVary<T extends 0 | 9, N extends SntSigT> = T extends 0
-	? N extends 0 ? 1 : N extends 1 ? 2 : N extends 2 ? 3 : N extends 3 ? 4 : N extends 4 ? 5 : N extends 5 ? 6 : N extends 6 ? 7 : N extends 7 ? 8 : N extends 8 ? 9 : 's'
-	: N extends 2 ? 1 : N extends 3 ? 2 : N extends 4 ? 3 : N extends 5 ? 4 : N extends 6 ? 5 : N extends 7 ? 6 : N extends 8 ? 7 : N extends 9 ? 8 : N extends 1 ? 0 : 's'
-type SntXcrOri<T extends 0 | 9, N extends string> = N extends `${infer K extends SigNumber
-	}${infer S}` ? S extends '' ? `${SntSigVary<T, K>}` : SntXcrOri<T, S> extends infer E
-	extends string ? `${E extends `s${any}` ? SntSigVary<T, K> : K}${E}` : 'NaN' : 'NaN'
+type SntSigVary<T extends 0 | 9, N extends SntSigT> = N extends SigNumber ? (T extends 0 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 's'] : ['s', 0, 1, 2, 3, 4, 5, 6, 7, 8])[N] : 's'
+type SntXcrOri<T extends 0 | 9, N extends string> = N extends `${infer K extends SigNumber}${infer S}` ? S extends '' ? `${SntSigVary<T, K>}` : SntXcrOri<T, S> extends infer E extends string ? `${E extends `s${any}` ? SntSigVary<T, K> : K}${E}` : 'NaN' : 'NaN'
 
 // opn
 type SntSigInfl<T extends 0 | 9, A extends SntSigT, B extends SntSigT, E extends 1 | 0 = 0> = B extends 0 ? A extends 's' ? [1, T] : [E, A] : A extends SigNumber ? SntSigInfl<T, SntSigVary<T, A>, SntSigVary<9, B>, E> : SntSigInfl<T, T, B, 1>
-type SntSigTrinfl<T extends 0 | 9, A extends SigNumber, B extends SigNumber, C extends 0 | 1> = SntSigInfl<T, A, B> extends infer K extends [0 | 1, SigNumber] ? SntSigInfl<T, K[1], C, K[0]> : [0, 0]
+type SntSigTrinfl<T extends 0 | 9, A extends SigNumber, B extends SigNumber, C extends 0 | 1> = SntSigInfl<T, A, B> extends infer K extends readonly [0 | 1, SigNumber] ? SntSigInfl<T, K[1], C, K[0]> : [0, 0]
 type SntAosOri<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1 = 0> = `${A},${B}` extends `${infer KA extends SigNumber}${infer NA},${infer KB extends SigNumber}${infer NB}`
-	? SntSigTrinfl<T, KA, KB, J> extends infer S extends [1 | 0, SigNumber] ? `${S[1]}${SntAosOri<T, NA, NB, S[0]>}` : '' : ''
+	? SntSigTrinfl<T, KA, KB, J> extends infer S extends readonly [1 | 0, SigNumber] ? `${S[1]}${SntAosOri<T, NA, NB, S[0]>}` : '' : ''
 type SntAosHdl<A extends string, B extends string> = { [P in 'A' | 'B']: `${StringReved<BothPreAligned<A, B, '0'>[P]>}0` }
 type SntAosHal<T extends 0 | 9, A extends string, B extends string> = Leading0less<StringReved<SntAosOri<T, SntAosHdl<A, B>['A'], SntAosHdl<A, B>['B']>>>
 
