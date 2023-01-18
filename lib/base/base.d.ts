@@ -9,7 +9,7 @@ import {
 
 type SigNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
-type ObjectKey = string | number | symbol
+type ObjectKey = keyof any
 
 declare function toTypeNameObj<A extends string[]>(...n: A): A extends (infer K extends string)[] ? { [I in K]: 1 } : {}
 
@@ -18,9 +18,9 @@ type WideNumType = TypeOf<WideNum>
 declare const WIDE_NUM_TYPE: TypeNameObj<WideNumType>
 declare function isWideNum(n: any): n is WideNum
 
-type ArrayAccur<T = any> = [T, ...T[]] | T[]
+type ArrayAccur<T = any> = readonly [T, ...T[]] | readonly T[]
 type ObjectAccur<T = any> = { [n: ObjectKey]: T }
-type FunctionAccur<T = any> = (...args: any[]) => T
+type FunctionAccur<T = any> = (...args: ArrayAccur<T>) => T
 type Accur<T = any> = AllTypeJS | ArrayAccur<T> | ObjectAccur<T> | FunctionAccur<T>
 
 type Tostrable = string | boolean | WideNum | null | undefined
