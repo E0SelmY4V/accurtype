@@ -1,5 +1,6 @@
 import {
 	ArrayLtdSplited,
+	ALRslt,
 	SntXcrNum,
 	SettedAt,
 	FilledWith,
@@ -23,7 +24,7 @@ type SuperedFrom<A extends readonly any[], N extends number, L extends number> =
 type RGetted<I extends RInfo, O extends number, C extends number, R extends readonly any[] = FilledWith<undefined, O>> = I['l'] extends readonly [...infer D, { r: infer E extends number, c: infer K extends number, t: infer T, a: infer Q, m: infer M extends number, l: infer B extends readonly any[] }] ? RGetted<RInfoC<{ l: D }, I>, O, C,
 	[...R, ...FilledWith<undefined, SntAosNum<9, K, O, number>>] extends infer A extends readonly any[] ? IsNotless<C, E> extends true ?
 	T | (M extends 0 ? undefined : Exclude<SuperedFrom<B, SntAosNum<9, C, E, number>, M>, B[0]> | B[0]) extends infer T ? Q extends 0 ? SettedAt<T, K, A> : SplitedAt<K, A> extends readonly [infer AB extends readonly any[], any, (infer Y extends any)[]] ? [...AB, ...T[]] : A : A : A : []> : R
-type TrsedRow<T extends readonly any[], R extends readonly (readonly any[])[] = [], I extends RInfo = RInfoO, O extends number = 0, J extends 0 | 1 = 0> = ArrayLtdSplited<T> extends readonly [infer T0 extends readonly any[], infer T1 extends readonly any[], infer T2 extends readonly any[]] ?
+type TrsedRow<T extends readonly any[], R extends readonly (readonly any[])[] = [], I extends RInfo = RInfoO, O extends number = 0, J extends 0 | 1 = 0> = ArrayLtdSplited<T> extends ALRslt<infer T0, infer T1, infer T2> ?
 	RInfoC<TypeAnd<T1 | T2 extends readonly [] ? true : false> extends true ? { m: UpNum<LtdMaxIn<[LenOfArr<R>, I['m'], LenOfArr<T0>]>, 10, 5> } : { m: UpNum<LtdMaxIn<[LenOfArr<R>, I['m'], LenOfArr<[...T0, ...T2]>]>, 10, 5>, l: [{ r: LenOfArr<T0>, c: O, t: T1 extends readonly (infer S)[] ? S : any, a: J, m: LenOfArr<T2>, l: T2 }, ...I['l']] }, I> extends
 	infer I extends RInfo ? { R: LtdTrsedRow<T0, R, I, O>, I: I } : { R: any, I: any } : { R: R, I: I }
 type LtdTrsed<T extends readonly (readonly any[])[], R extends readonly (readonly any[])[] = [], I extends RInfo = RInfoO, O extends number = 0> = T extends readonly [infer T0 extends readonly any[], ...infer TL extends readonly (readonly any[])[]]
@@ -34,5 +35,5 @@ type Supered<N extends ROriS<0>, K1, O extends number, R extends readonly (reado
 type Salt<R extends readonly any[], I extends RInfo, O extends number> = RGetted<I, O, LenOfArr<R>>
 type PostHdled<K0 extends readonly any[], K1, N extends ROriS, R extends readonly (readonly any[])[] = N['R'], I extends RInfo = N['I'], O extends number = N['O']> = K0 extends readonly (infer K0 extends readonly any[])[]
 	? Supered<TrsedRow<K0, R, I, O>, K1, SntXcrNum<0, O, number>> extends { R: infer R extends any[], I: infer I extends RInfo, O: infer S extends number } ? LastMultied<O, [...R, Salt<R, I, S>]> extends readonly [...infer X, infer D] ? [...X, ...D[]] : R : R : R;
-export type Transposed<T extends readonly (readonly any[])[]> = ArrayLtdSplited<T> extends readonly [infer K2 extends readonly any[], infer K0 extends readonly any[], infer K1 extends readonly any[]] ? TypeAnd<K0 | K1 extends readonly [] ? true : false> extends true
+export type Transposed<T extends readonly (readonly any[])[]> = ArrayLtdSplited<T> extends ALRslt<infer K2, infer K0, infer K1> ? TypeAnd<K0 | K1 extends readonly [] ? true : false> extends true
 	? LtdTrsed<T> extends { R: infer R extends readonly any[], I: infer I extends RInfo, O: infer O extends number } ? [...R, ...Salt<R, I, O>[]] : [] : PostHdled<K0, K1, LtdTrsed<K2>> : []

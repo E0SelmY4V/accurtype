@@ -2,6 +2,7 @@ import {
 	Tostrable,
 	IsWideString,
 	ArrayLtdSplited,
+	ALRslt,
 	IfredArr,
 } from '..'
 
@@ -268,7 +269,7 @@ declare namespace PostVoidLess {
 		P, P, P, P, P, P, P, P, P, P,
 	] ? P2<Z> : P0<A>
 
-	type T<A extends readonly any[]> = ArrayLtdSplited<A> extends [infer A0 extends any[], infer A1 extends any[], infer A2 extends any[]]
+	type T<A extends readonly any[]> = ArrayLtdSplited<A> extends ALRslt<infer A0, infer A1, infer A2>
 		? P2<A2> extends infer K extends any[] ? (K extends []
 			? (A1 extends []
 				? P2<A0>

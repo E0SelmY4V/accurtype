@@ -33,7 +33,9 @@ type IsArray<N, K extends boolean = true> = TypeAnd<N extends readonly any[] ? K
 type IsWideArray<N> = TypeAnd<N extends readonly (infer T)[] ? T[] extends N ? true : false : false>
 type IsLongArray<N> = N extends readonly any[] ? number extends N['length'] ? true : false : false
 type ArrayLtdSplited<A> = ArrayLtdSplited.S<A>
-type ArrayLtdCombed<A extends readonly any[]> = ArrayLtdSplited<A> extends [infer A0 extends any[], infer A1, infer A2 extends any[]] ? [...A0, ...(A1 extends [] ? [] : [IfredArr<A1>]), ...A2] : []
+type ArrayLtdCombed<A extends readonly any[]> = ArrayLtdSplited<A> extends ALRslt<infer A0, infer A1, infer A2> ? [...A0, ...(A1 extends [] ? [] : [IfredArr<A1>]), ...A2] : []
+type ALRslt<A extends any[], B extends any[], C extends any[]> = [A, B, C]
+
 
 type IsTostrable<N, K = true> = IsType<N, TostrableType, K>
 type IsWideTostrable<N> = IsTostrable<N,

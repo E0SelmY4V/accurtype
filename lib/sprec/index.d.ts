@@ -3,6 +3,7 @@ import {
 	IsWideArray,
 	Accur,
 	ArrayLtdSplited,
+	ALRslt,
 	IfredArr,
 } from '..'
 import {
@@ -45,11 +46,11 @@ declare function split<N extends string, F extends Tostrable>(str: N, separator:
 type Joined<A extends readonly Tostrable[], F extends Tostrable> = Joined.P2<A, F, ''>
 declare function join<A extends B[], B extends string, F extends Tostrable>(array: readonly [...A], separator: F): Joined<A, F>
 
-type Concated<A extends readonly (readonly any[])[]> = ArrayLtdSplited<A> extends readonly [infer A0 extends readonly any[], infer A1 extends readonly any[], infer A2 extends readonly any[]] ? [...Concated.P2<A0, []>, ...(A1 extends [] ? [] : IfredArr<IfredArr<A1>>[]), ...Concated.P2<A2, []>] : []
+type Concated<A extends readonly (readonly any[])[]> = ArrayLtdSplited<A> extends ALRslt<infer A0, infer A1, infer A2> ? [...Concated.P2<A0, []>, ...(A1 extends [] ? [] : IfredArr<IfredArr<A1>>[]), ...Concated.P2<A2, []>] : []
 declare function concat<T extends Accur<T>, S extends (readonly T[])[]>(...arr: readonly [...S]): Concated<S>
 
 type PostVoidLess<A extends readonly any[]> = PostVoidLess.T<A>
 
 type LtdArrayReved<A extends readonly any[]> = LtdArrayReved.P2<A, []>
-type ArrayReved<T extends readonly any[]> = ArrayLtdSplited<T> extends readonly [infer T0 extends readonly any[], infer T1 extends readonly any[], infer T2 extends readonly any[]] ? [...LtdArrayReved<T2>, ...T1, ...LtdArrayReved<T0>] : []
+type ArrayReved<T extends readonly any[]> = ArrayLtdSplited<T> extends ALRslt<infer T0, infer T1, infer T2> ? [...LtdArrayReved<T2>, ...T1, ...LtdArrayReved<T0>] : []
 declare function revArray<T extends Accur<T>, A extends T[]>(...ele: A): ArrayReved<A>
