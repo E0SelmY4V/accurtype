@@ -1,6 +1,8 @@
 import {
 	Tostrable,
 	IsWideString,
+	ArrayLtdSplited,
+	IfredArr,
 } from '..'
 
 declare namespace Leading0less {
@@ -265,6 +267,18 @@ declare namespace PostVoidLess {
 		P, P, P, P, P, P, P, P, P, P,
 		P, P, P, P, P, P, P, P, P, P,
 	] ? P2<Z> : P0<A>
+
+	type T<A extends readonly any[]> = ArrayLtdSplited<A> extends [infer A0 extends any[], infer A1 extends any[], infer A2 extends any[]]
+		? P2<A2> extends infer K extends any[] ? (K extends []
+			? (A1 extends []
+				? P2<A0>
+				: (IfredArr<A1> extends undefined
+					? P2<A0>
+					: [...A0, ...A1]
+				)
+			)
+			: [...A0, ...A1, ...K]
+		) : [] : []
 }
 
 declare namespace LtdArrayReved {
