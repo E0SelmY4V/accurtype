@@ -8,7 +8,12 @@ import {
 	WideNumType,
 	TypeName,
 	ObjectKey,
+	IfredArr,
 } from '..'
+import {
+	IsWideString,
+	ArrayLtdSplited,
+} from './tool'
 
 type IsType<N, T extends TypeName, K = true> = TypeOf<N> extends T ? K : false
 
@@ -21,17 +26,14 @@ type IsWideBoolean<N> = IsBoolean<N, boolean extends N ? true : false>
 type IsLtdBoolean<N> = IsBoolean<N, boolean extends N ? false : true>
 
 type IsString<N, K = true> = IsType<N, 'string', K>
-type IsWideString<N> = IsString<N, string extends N ? true : N extends `${infer N0}${infer N1}` ? (
-	N0 extends `${infer H extends WideNum}` ? IsWideWideNum<H> extends true ? true : IsWideString<N1> :
-	string extends N0 ? true : IsWideString<N1>
-) : false>
-type IsLtdString<N> = IsString<N, Not<IsWideString<N>>>
+type IsWideString<N> = IsString<N, IsWideString.P2<N>>
+type IsLtdString<N> = IsString<N, Not<IsWideString.P2<N>>>
 
 type IsArray<N, K extends boolean = true> = TypeAnd<N extends readonly any[] ? K : false>
 type IsWideArray<N> = TypeAnd<N extends readonly (infer T)[] ? T[] extends N ? true : false : false>
-type IsLongArray<N> = IsArray<N, IsWideArray<N> extends true ? true : N extends readonly [any, ...infer K] ? IsLongArray<K> : N extends readonly [] ? false : true>
-type ArrayLtdSplited<A extends readonly any[], R extends [any[], any[]] = [[], []]> = A extends readonly [infer K, ...infer L] ? ArrayLtdSplited<L, [[...R[0], K], R[1]]> : A extends readonly [...infer L, infer K] ? ArrayLtdSplited<L, [R[0], [K, ...R[1]]]> : [R[0], [...A], R[1]]
-type ArrayLtdCombed<A extends readonly any[]> = ArrayLtdSplited<A> extends readonly [infer A0 extends readonly any[], infer A1, infer A2 extends readonly any[]] ? [...A0, ...(A1 extends readonly [] ? [] : [A1 extends readonly (infer S)[] ? S : any]), ...A2] : []
+type IsLongArray<N> = N extends readonly any[] ? number extends N['length'] ? true : false : false
+type ArrayLtdSplited<A> = ArrayLtdSplited.S<A>
+type ArrayLtdCombed<A extends readonly any[]> = ArrayLtdSplited<A> extends [infer A0 extends any[], infer A1, infer A2 extends any[]] ? [...A0, ...(A1 extends [] ? [] : [IfredArr<A1>]), ...A2] : []
 
 type IsTostrable<N, K = true> = IsType<N, TostrableType, K>
 type IsWideTostrable<N> = IsTostrable<N,
@@ -45,23 +47,24 @@ type IsLtdFunction<N> = IsFunction<N, N extends (...args: infer P) => infer R ? 
 type IsWideFunction<N> = IsFunction<N, Not<IsLtdFunction<N>>>
 
 type IsObject<N, K = true> = IsType<N, 'object', K>
-type IsLtdObject<N> = TypeOf<N> extends 'object' ? And<IsLtd<keyof N>, IsLtd<N[keyof N]>> : false
+type IsLtdObject<N> = TypeOf<N> extends 'object' ? [keyof N] extends [never] ? true : And<IsLtd<keyof N>, IsLtd<N[keyof N]>> : false
 type IsWideObject<N> = IsObject<N, Not<IsLtdObject<N>>>
 type IsDefedObject<N, P = null | void> = { [x: ObjectKey]: false } & { [I in keyof N]-?: N extends { [X in I]-?: N[I] } ? N[I] extends P ? false : true : boolean }
 
 type IsArrayOfLtd<N> = IsLongArray<N> extends true ? N extends readonly (infer K)[] ? IsLtd<K> : false : N extends readonly [infer N0, ...infer N1] ? IsLtd<N0> extends true ? IsArrayOfLtd<N1> : false : true
 
-type IsLtd<N> = TypeAnd<{
-	never: true,
-	null: true,
-	undefined: true,
-	void: true,
-	unknown: false,
-	boolean: true,
-	symbol: IsLtdObject<N>,
-	string: IsLtdString<N>,
-	object: IsLtdObject<N>,
-	number: IsLtdWideNum<N>,
-	bigint: IsLtdWideNum<N>,
-	function: IsLtdFunction<N>,
-}[TypeOf<N>]>
+type IsLtd<N, T = TypeOf<N>> = TypeAnd<
+	T extends 'never' ? true :
+	T extends 'null' ? true :
+	T extends 'undefined' ? true :
+	T extends 'void' ? true :
+	T extends 'unknown' ? false :
+	T extends 'boolean' ? true :
+	T extends 'symbol' ? IsLtdObject<N> :
+	T extends 'string' ? IsLtdString<N> :
+	T extends 'object' ? IsLtdObject<N> :
+	T extends 'number' ? IsLtdWideNum<N> :
+	T extends 'bigint' ? IsLtdWideNum<N> :
+	T extends 'function' ? IsLtdFunction<N> :
+	false
+>
