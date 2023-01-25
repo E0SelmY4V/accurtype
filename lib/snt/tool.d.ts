@@ -17,9 +17,51 @@ import {
 
 declare namespace xcr {
 	type R<T extends 0 | 9> = T extends 0 ? 9 : 0
+
 	type SigT = SigNumber | 's'
+
 	type SigVary<T extends 0 | 9, N extends SigT> = N extends SigNumber ? (T extends 0 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 's'] : ['s', 0, 1, 2, 3, 4, 5, 6, 7, 8])[N] : 's'
-	type Ori<T extends 0 | 9, N extends string> = N extends `${infer K extends SigNumber}${infer S}` ? S extends '' ? `${SigVary<T, K>}` : Ori<T, S> extends infer E extends string ? `${E extends `s${any}` ? SigVary<T, K> : K}${E}` : 'NaN' : 'NaN'
+
+	type P0<T extends 0 | 9, N extends string, B extends string, E extends 0 | 9 = R<T>> = N extends (
+		`${E
+		}${infer N}`
+	) ? P0<T, N, `${B
+		}${T}`
+	> : N extends `${infer S extends SigNumber}${infer N}` ? `${B}${SigVary<T, S>}${N}` : `${B}${N}`
+
+	type P1<T extends 0 | 9, N extends string, B extends string, E extends 0 | 9 = R<T>> = N extends (
+		`${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${infer S}`
+	) ? P1<T, S, `${B
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T}`
+	> : P0<T, N, B>
+
+	type P2<T extends 0 | 9, N extends string, B extends string, E extends 0 | 9 = R<T>> = N extends (
+		`${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
+		}${infer S}`
+	) ? P2<T, S, `${B
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
+		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T}`
+	> : P1<T, N, B>
+
+	type Ori<T extends 0 | 9, N extends string> = Leading0less<StringReved<P2<T, StringReved<`0${N}`>, ''>>>
 }
 
 declare namespace opn {
