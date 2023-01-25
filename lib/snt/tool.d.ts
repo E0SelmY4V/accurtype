@@ -1,7 +1,7 @@
 import {
 	SigNumber,
 	StringReved,
-	BothPreAligned,
+	PreAligned,
 	Or,
 	IsWideString,
 	WideNum,
@@ -10,33 +10,37 @@ import {
 	TypeOr,
 	IsLess,
 	IsNotless,
+	Tostrable,
 } from '..'
 import {
 	SntCmpNum,
 } from './cmp'
+import {
+	JP
+} from '../sprec/tool'
 
 declare namespace xcr {
-	type R<T extends 0 | 9> = T extends 0 ? 9 : 0
+	type R<T> = T extends 0 ? 9 : 0
 
 	type SigT = SigNumber | 's'
 
-	type SigVary<T extends 0 | 9, N extends SigT> = N extends SigNumber ? (T extends 0 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 's'] : ['s', 0, 1, 2, 3, 4, 5, 6, 7, 8])[N] : 's'
+	type SigVary<T, N> = N extends SigNumber ? (T extends 0 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 's'] : ['s', 0, 1, 2, 3, 4, 5, 6, 7, 8])[N] : 's'
 
-	type P0<T extends 0 | 9, N extends string, B extends string, E extends 0 | 9 = R<T>> = N extends (
+	type P0<T extends 0 | 9, N, B, E extends 0 | 9 = R<T>> = N extends (
 		`${E
 		}${infer N}`
-	) ? P0<T, N, `${B
+	) ? P0<T, N, `${JP<B>
 		}${T}`
-	> : N extends `${infer S extends SigNumber}${infer N}` ? `${B}${SigVary<T, S>}${N}` : `${B}${N}`
+	> : N extends `${infer S extends SigNumber}${infer N}` ? `${JP<B>}${SigVary<T, S>}${N}` : `${JP<B>}${JP<N>}`
 
-	type P1<T extends 0 | 9, N extends string, B extends string, E extends 0 | 9 = R<T>> = N extends (
+	type P1<T extends 0 | 9, N, B, E extends 0 | 9 = R<T>> = N extends (
 		`${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
 		}${infer S}`
-	) ? P1<T, S, `${B
+	) ? P1<T, S, `${JP<B>
 		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T}`
 	> : P0<T, N, B>
 
-	type P2<T extends 0 | 9, N extends string, B extends string, E extends 0 | 9 = R<T>> = N extends (
+	type P2<T extends 0 | 9, N, B, E extends 0 | 9 = R<T>> = N extends (
 		`${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
 		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
 		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
@@ -48,7 +52,7 @@ declare namespace xcr {
 		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
 		}${E}${E}${E}${E}${E}${E}${E}${E}${E}${E
 		}${infer S}`
-	) ? P2<T, S, `${B
+	) ? P2<T, S, `${JP<B>
 		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
 		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
 		}${T}${T}${T}${T}${T}${T}${T}${T}${T}${T
@@ -65,12 +69,86 @@ declare namespace xcr {
 }
 
 declare namespace opn {
-	type SigInfl<T extends 0 | 9, A extends xcr.SigT, B extends xcr.SigT, E extends 1 | 0 = 0> = B extends 0 ? A extends 's' ? [1, T] : [E, A] : A extends SigNumber ? SigInfl<T, xcr.SigVary<T, A>, xcr.SigVary<9, B>, E> : SigInfl<T, T, B, 1>
-	type SigTrinfl<T extends 0 | 9, A extends SigNumber, B extends SigNumber, C extends 0 | 1> = SigInfl<T, A, B> extends infer K extends readonly [0 | 1, SigNumber] ? SigInfl<T, K[1], C, K[0]> : [0, 0]
-	type AosOri<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1 = 0> = `${A},${B}` extends `${infer KA extends SigNumber}${infer NA},${infer KB extends SigNumber}${infer NB}`
-		? SigTrinfl<T, KA, KB, J> extends infer S extends readonly [1 | 0, SigNumber] ? `${S[1]}${AosOri<T, NA, NB, S[0]>}` : '' : ''
-	type AosHdl<A extends string, B extends string> = { [P in 'A' | 'B']: `${StringReved<BothPreAligned<A, B, '0'>[P]>}0` }
-	type AosHal<T extends 0 | 9, A extends string, B extends string> = Leading0less<StringReved<AosOri<T, AosHdl<A, B>['A'], AosHdl<A, B>['B']>>>
+	type EH<A extends SigNumber, B extends SigNumber> = `${A},${B}`
+
+	type EQ<A, B> = A extends Tostrable ? B extends Tostrable ? `${A},${B}` : '0,0' : '0,0'
+
+	type QH<Q = any, H = any> = { q: Q, h: H }
+
+	type SigInfl<T extends 0 | 9, A, B, E extends 1 | 0> = B extends 0 ? A extends 's' ? QH<1, T> : QH<E, A> : A extends SigNumber ? SigInfl<T, xcr.SigVary<T, A>, xcr.SigVary<9, B>, E> : SigInfl<T, T, B, 1>
+
+	type SigTrinfl<T extends 0 | 9, A, B, C extends 0 | 1> = EQ<A, B> extends EH<infer A, infer B> ? SigInfl<T, A, B, 0> extends infer K extends QH ? SigInfl<T, K['h'], C, K['q']> : QH<0, 0> : QH<0, 0>
+
+	type G0<T extends 0 | 9, L, J extends 0 | 1, R extends string> = L extends { a: [infer A, ...infer LA], b: [infer B, ...infer LB] } ? SigTrinfl<T, A, B, J> extends infer S extends QH ? G0<T, { a: LA, b: LB }, S['q'], `${R}${S['h']}`> : QH : QH<J, R>;
+
+	type P0<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1, R extends string> = `${A},${B}` extends (
+		`${infer A0
+		}${infer A}${','
+		}${infer B0
+		}${infer B}`
+	) ? SigTrinfl<T, A0, B0, J> extends infer S extends QH ? P0<T, A, B, S['q'], `${R}${S['h']}`> : R : R
+
+	type P1<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1, R extends string> = `${A},${B}` extends (
+		`${infer A0}${infer A1}${infer A2}${infer A3}${infer A4}${infer A5}${infer A6}${infer A7}${infer A8}${infer A9
+		}${infer A}${','
+		}${infer B0}${infer B1}${infer B2}${infer B3}${infer B4}${infer B5}${infer B6}${infer B7}${infer B8}${infer B9
+		}${infer B}`
+	) ? G0<T, {
+		a: [A0, A1, A2, A3, A4, A5, A6, A7, A8, A9],
+		b: [B0, B1, B2, B3, B4, B5, B6, B7, B8, B9],
+	}, J, ''> extends infer S extends QH ? P1<T, A, B, S['q'], `${R}${S['h']}`> : R : P0<T, A, B, J, R>
+
+	type P2<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1, R extends string> = `${A},${B}` extends (
+		`${infer A00}${infer A01}${infer A02}${infer A03}${infer A04}${infer A05}${infer A06}${infer A07}${infer A08}${infer A09
+		}${infer A10}${infer A11}${infer A12}${infer A13}${infer A14}${infer A15}${infer A16}${infer A17}${infer A18}${infer A19
+		}${infer A20}${infer A21}${infer A22}${infer A23}${infer A24}${infer A25}${infer A26}${infer A27}${infer A28}${infer A29
+		}${infer A30}${infer A31}${infer A32}${infer A33}${infer A34}${infer A35}${infer A36}${infer A37}${infer A38}${infer A39
+		}${infer A40}${infer A41}${infer A42}${infer A43}${infer A44}${infer A45}${infer A46}${infer A47}${infer A48}${infer A49
+		}${infer A50}${infer A51}${infer A52}${infer A53}${infer A54}${infer A55}${infer A56}${infer A57}${infer A58}${infer A59
+		}${infer A60}${infer A61}${infer A62}${infer A63}${infer A64}${infer A65}${infer A66}${infer A67}${infer A68}${infer A69
+		}${infer A70}${infer A71}${infer A72}${infer A73}${infer A74}${infer A75}${infer A76}${infer A77}${infer A78}${infer A79
+		}${infer A80}${infer A81}${infer A82}${infer A83}${infer A84}${infer A85}${infer A86}${infer A87}${infer A88}${infer A89
+		}${infer A90}${infer A91}${infer A92}${infer A93}${infer A94}${infer A95}${infer A96}${infer A97}${infer A98}${infer A99
+		}${infer A}${','
+		}${infer B00}${infer B01}${infer B02}${infer B03}${infer B04}${infer B05}${infer B06}${infer B07}${infer B08}${infer B09
+		}${infer B10}${infer B11}${infer B12}${infer B13}${infer B14}${infer B15}${infer B16}${infer B17}${infer B18}${infer B19
+		}${infer B20}${infer B21}${infer B22}${infer B23}${infer B24}${infer B25}${infer B26}${infer B27}${infer B28}${infer B29
+		}${infer B30}${infer B31}${infer B32}${infer B33}${infer B34}${infer B35}${infer B36}${infer B37}${infer B38}${infer B39
+		}${infer B40}${infer B41}${infer B42}${infer B43}${infer B44}${infer B45}${infer B46}${infer B47}${infer B48}${infer B49
+		}${infer B50}${infer B51}${infer B52}${infer B53}${infer B54}${infer B55}${infer B56}${infer B57}${infer B58}${infer B59
+		}${infer B60}${infer B61}${infer B62}${infer B63}${infer B64}${infer B65}${infer B66}${infer B67}${infer B68}${infer B69
+		}${infer B70}${infer B71}${infer B72}${infer B73}${infer B74}${infer B75}${infer B76}${infer B77}${infer B78}${infer B79
+		}${infer B80}${infer B81}${infer B82}${infer B83}${infer B84}${infer B85}${infer B86}${infer B87}${infer B88}${infer B89
+		}${infer B90}${infer B91}${infer B92}${infer B93}${infer B94}${infer B95}${infer B96}${infer B97}${infer B98}${infer B99
+		}${infer B}`
+	) ? G0<T, {
+		a: [
+			A00, A01, A02, A03, A04, A05, A06, A07, A08, A09,
+			A10, A11, A12, A13, A14, A15, A16, A17, A18, A19,
+			A20, A21, A22, A23, A24, A25, A26, A27, A28, A29,
+			A30, A31, A32, A33, A34, A35, A36, A37, A38, A39,
+			A40, A41, A42, A43, A44, A45, A46, A47, A48, A49,
+			A50, A51, A52, A53, A54, A55, A56, A57, A58, A59,
+			A60, A61, A62, A63, A64, A65, A66, A67, A68, A69,
+			A70, A71, A72, A73, A74, A75, A76, A77, A78, A79,
+			A80, A81, A82, A83, A84, A85, A86, A87, A88, A89,
+			A90, A91, A92, A93, A94, A95, A96, A97, A98, A99,
+		],
+		b: [
+			B00, B01, B02, B03, B04, B05, B06, B07, B08, B09,
+			B10, B11, B12, B13, B14, B15, B16, B17, B18, B19,
+			B20, B21, B22, B23, B24, B25, B26, B27, B28, B29,
+			B30, B31, B32, B33, B34, B35, B36, B37, B38, B39,
+			B40, B41, B42, B43, B44, B45, B46, B47, B48, B49,
+			B50, B51, B52, B53, B54, B55, B56, B57, B58, B59,
+			B60, B61, B62, B63, B64, B65, B66, B67, B68, B69,
+			B70, B71, B72, B73, B74, B75, B76, B77, B78, B79,
+			B80, B81, B82, B83, B84, B85, B86, B87, B88, B89,
+			B90, B91, B92, B93, B94, B95, B96, B97, B98, B99,
+		],
+	}, J, ''> extends infer S extends QH ? P2<T, A, B, S['q'], `${R}${S['h']}`> : R : P1<T, A, B, J, R>
+
+	type AosHal<T extends 0 | 9, A extends string, B extends string> = Leading0less<StringReved<P2<T, `${StringReved<PreAligned<A, B, 0>>}0`, `${StringReved<PreAligned<B, A, 0>>}0`, 0, ''>>>
 }
 
 declare module cmp {

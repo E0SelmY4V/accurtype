@@ -6,6 +6,8 @@ import {
 	IfredArr,
 } from '..'
 
+type JP<N> = N extends Tostrable ? `${N}` : string
+
 declare namespace Leading0less {
 	type P0<N extends string> = N extends `0${infer K}` ? K extends '' ? N : P0<K> : N
 
@@ -220,13 +222,11 @@ declare namespace Splited {
 }
 
 declare namespace Joined {
-	type P<N> = N extends Tostrable ? `${N}` : string
-
 	type P0<S extends readonly any[], F extends Tostrable, R extends string> = S extends readonly [
 		infer I,
 		...infer S extends [any, ...any[]]
 	] ? P0<S, F,
-		`${R}${P<I>}${F}`
+		`${R}${JP<I>}${F}`
 	> : `${R}${S[0]}`
 
 	type P2<S extends readonly any[], F extends Tostrable, R extends string> = S extends readonly [
@@ -234,8 +234,8 @@ declare namespace Joined {
 		infer I09, infer I08, infer I07, infer I06, infer I05, infer I04, infer I03, infer I02, infer I01, infer I00,
 		...infer S extends [any, ...any[]]
 	] ? P2<S, F, `${R
-		}${P<I19>}${P<I18>}${P<I17>}${P<I16>}${P<I15>}${P<I14>}${P<I13>}${P<I12>}${P<I11>}${P<I10>
-		}${P<I09>}${P<I08>}${P<I07>}${P<I06>}${P<I05>}${P<I04>}${P<I03>}${P<I02>}${P<I01>}${P<I00>}`
+		}${JP<I19>}${JP<I18>}${JP<I17>}${JP<I16>}${JP<I15>}${JP<I14>}${JP<I13>}${JP<I12>}${JP<I11>}${JP<I10>
+		}${JP<I09>}${JP<I08>}${JP<I07>}${JP<I06>}${JP<I05>}${JP<I04>}${JP<I03>}${JP<I02>}${JP<I01>}${JP<I00>}`
 	> : P0<S, F, R>
 }
 
