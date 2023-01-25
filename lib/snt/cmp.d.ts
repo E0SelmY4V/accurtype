@@ -9,12 +9,13 @@ import {
 	TypeAnd,
 	SntXcrNum,
 	SntAosNum,
+	IsWideString,
 } from '..'
 import {
 	cmp,
 } from './tool'
 
-type SntCmpUns<A extends string, B extends string> = cmp.LenCmp<A, B> extends infer K extends -1 | 1 ? K : cmp.Ori<A, B>
+type SntCmpUns<A extends string, B extends string> = IsWideString<`${A}${B}`> extends true ? 1 | -1 | 0 : cmp.LenCmp<A, B> extends infer K extends -1 | 1 ? K : cmp.P2<A, B>
 
 type SntCmp<A extends string, B extends string> = A extends `-${infer A}` ? B extends `-${infer B}` ? SntCmpUns<B, A> : 1 : B extends `-${any}` ? -1 : SntCmpUns<A, B>
 
