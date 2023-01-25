@@ -77,16 +77,16 @@ declare namespace opn {
 
 	type SigInfl<T extends 0 | 9, A, B, E extends 1 | 0> = B extends 0 ? A extends 's' ? QH<1, T> : QH<E, A> : A extends SigNumber ? SigInfl<T, xcr.SigVary<T, A>, xcr.SigVary<9, B>, E> : SigInfl<T, T, B, 1>
 
-	type SigTrinfl<T extends 0 | 9, A, B, C extends 0 | 1> = EQ<A, B> extends EH<infer A, infer B> ? SigInfl<T, A, B, 0> extends infer K extends QH ? SigInfl<T, K['h'], C, K['q']> : QH<0, 0> : QH<0, 0>
+	type SigTrinfl<T extends 0 | 9, A, B, C extends 0 | 1> = SigInfl<T, A, B, 0> extends infer K extends QH ? SigInfl<T, K['h'], C, K['q']> : QH<0, 0>
 
-	type G0<T extends 0 | 9, L, J extends 0 | 1, R extends string> = L extends { a: [infer A, ...infer LA], b: [infer B, ...infer LB] } ? SigTrinfl<T, A, B, J> extends infer S extends QH ? G0<T, { a: LA, b: LB }, S['q'], `${R}${S['h']}`> : QH : QH<J, R>;
+	type G0<T extends 0 | 9, L, J extends 0 | 1, R extends string> = L extends { a: [`${infer A extends SigNumber}`, ...infer LA], b: [`${infer B extends SigNumber}`, ...infer LB] } ? SigTrinfl<T, A, B, J> extends infer S extends QH ? G0<T, { a: LA, b: LB }, S['q'], `${R}${S['h']}`> : QH : QH<J, R>;
 
 	type P0<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1, R extends string> = `${A},${B}` extends (
 		`${infer A0
 		}${infer A}${','
 		}${infer B0
 		}${infer B}`
-	) ? SigTrinfl<T, A0, B0, J> extends infer S extends QH ? P0<T, A, B, S['q'], `${R}${S['h']}`> : R : R
+	) ? G0<T, { a: [A0], b: [B0] }, J, ''> extends infer S extends QH ? P0<T, A, B, S['q'], `${R}${S['h']}`> : R : R
 
 	type P1<T extends 0 | 9, A extends string, B extends string, J extends 0 | 1, R extends string> = `${A},${B}` extends (
 		`${infer A0}${infer A1}${infer A2}${infer A3}${infer A4}${infer A5}${infer A6}${infer A7}${infer A8}${infer A9
