@@ -8,9 +8,9 @@ This project has not only various simple types but also many generic type expres
 
 ## All Utilities
 
-### base: 103
+### base: 104
 
-base: 39
+base: 40
 
 1. type `SigNumber`
 2. type `ObjectKey`
@@ -51,6 +51,7 @@ base: 39
 37. type `InterOfUnion`
 38. type `OneOfUnion`
 39. type `EachOfUnion`
+40. type `MayNum`
 
 bool: 20
 

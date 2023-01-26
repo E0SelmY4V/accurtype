@@ -213,7 +213,8 @@ declare namespace cmp {
 		}${B90}${B91}${B92}${B93}${B94}${B95}${B96}${B97}${B98}${B99}`
 	> extends infer K extends -1 | 1 ? K : P2<A, B> : P1<A, B>
 
-	type Obj<L, E, G, A extends WideNum, B extends WideNum> = { '-1': L, '0': E, '1': G }[`${SntCmpNum<A, B>}`]
+	type N2B<N> = N extends 1 ? true : false
+	type Obj<L, E, G> = { '-1': N2B<L>, '0': N2B<E>, '1': N2B<G> }
 	type MayUpNumUp<T extends number, S extends number, C extends number> = TypeOr<IsLess<C, T>> extends true ? MayUpNumUp<T, S, SntAosNum<0, C, S, number>> : C
 	type MayUpNumDn<T extends number, S extends number, C extends number> = IsNotless<C, T> extends true ? MayUpNumDn<T, S, SntAosNum<9, C, S, number>> : SntAosNum<0, C, S, number>
 	type PowerList = [1, 10, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13, 1e14, 1e15]
