@@ -60,3 +60,7 @@ type SemiPartial<T, K extends ObjectKey> = { [I in K & keyof T]?: T[I] } & Omit<
 type SemiUnpartial<T, K extends ObjectKey> = SemiPartial<T, Exclude<keyof T, K>>
 
 type EqualTo<A, B> = (<F>() => F extends A ? 1 : 0) extends <F>() => F extends B ? 1 : 0 ? true : false
+
+type InterOfUnion<N> = (N extends N ? (n: N) => 0 : 0) extends (n: infer K) => 0 ? K : 0
+type OneOfUnion<N> = InterOfUnion<N extends N ? () => N : 0> extends () => infer K ? K : N
+type EachOfUnion<N, R extends any[] = []> = [N] extends [never] ? R : OneOfUnion<N> extends infer K ? EachOfUnion<Exclude<N, K>, [...R, K]> : 0

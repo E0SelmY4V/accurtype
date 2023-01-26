@@ -67,10 +67,6 @@ declare namespace xcr {
 }
 
 declare namespace opn {
-	type EH<A extends SigNumber, B extends SigNumber> = `${A},${B}`
-
-	type EQ<A, B> = A extends Tostrable ? B extends Tostrable ? `${A},${B}` : '0,0' : '0,0'
-
 	type QH<Q = any, H = any> = { q: Q, h: H }
 
 	type SigInfl<T extends 0 | 9, A, B, E extends 1 | 0> = B extends 0 ? A extends 's' ? QH<1, T> : QH<E, A> : A extends SigNumber ? SigInfl<T, xcr.SigVary<T, A>, xcr.SigVary<9, B>, E> : SigInfl<T, T, B, 1>
