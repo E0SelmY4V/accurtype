@@ -169,7 +169,7 @@ declare namespace cmp {
 	) ? P0<
 		`${A0}${A1}${A2}${A3}${A4}${A5}${A6}${A7}${A8}${A9}`,
 		`${B0}${B1}${B2}${B3}${B4}${B5}${B6}${B7}${B8}${B9}`
-	> extends infer K extends -1 | 1 ? K : P1<A, B> : 0
+	> extends infer K extends -1 | 1 ? K : P1<A, B> : P0<A, B>
 
 	type P2<A extends string, B extends string> = `${A},${B}` extends (
 		`${infer A00}${infer A01}${infer A02}${infer A03}${infer A04}${infer A05}${infer A06}${infer A07}${infer A08}${infer A09
@@ -215,7 +215,7 @@ declare namespace cmp {
 		}${B70}${B71}${B72}${B73}${B74}${B75}${B76}${B77}${B78}${B79
 		}${B80}${B81}${B82}${B83}${B84}${B85}${B86}${B87}${B88}${B89
 		}${B90}${B91}${B92}${B93}${B94}${B95}${B96}${B97}${B98}${B99}`
-	> extends infer K extends -1 | 1 ? K : P2<A, B> : 0
+	> extends infer K extends -1 | 1 ? K : P2<A, B> : P1<A, B>
 
 	type Obj<L, E, G, A extends WideNum, B extends WideNum> = { '-1': L, '0': E, '1': G }[`${SntCmpNum<A, B>}`]
 	type MayUpNumUp<T extends number, S extends number, C extends number> = TypeOr<IsLess<C, T>> extends true ? MayUpNumUp<T, S, SntAosNum<0, C, S, number>> : C
