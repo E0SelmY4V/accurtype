@@ -90,8 +90,8 @@ export type SemiUnpartial<T, K extends ObjectKey> = SemiPartial<T, Exclude<keyof
 
 export type EqualTo<A, B> = (<F>() => F extends A ? 1 : 0) extends <F>() => F extends B ? 1 : 0 ? true : false
 
-export type InterOfUnion<N> = (N extends N ? (n: N) => 0 : 0) extends (n: infer K) => 0 ? K : 0
+export type InterOfUnion<N> = (N extends N ? (n: N) => 0 : 0) extends (n: infer K) => 0 ? K : never
 export type OneOfUnion<N> = InterOfUnion<N extends N ? () => N : 0> extends () => infer K ? K : N
-export type EachOfUnion<N, R extends any[] = []> = [N] extends [never] ? R : OneOfUnion<N> extends infer K ? EachOfUnion<Exclude<N, K>, [...R, K]> : 0
+export type EachOfUnion<N, R extends any[] = []> = [N] extends [never] ? R : OneOfUnion<N> extends infer K ? EachOfUnion<Exclude<N, K>, [...R, K]> : []
 
 export type MayNum = WideNum | string
