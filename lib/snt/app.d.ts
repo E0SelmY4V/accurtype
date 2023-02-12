@@ -3,19 +3,25 @@ import {
 	SntXcrUns,
 	SntXcrNum,
 	Tostrable,
-	ArrayAccur,
 	ArrayLtdSplited,
 	Accur,
 	IsGreater,
 	SntAosNum,
 	Shifted,
 	UpNum,
+	MayNum,
+	IsWideString,
+	ALRslt,
 } from '../..'
+import {
+	LenOfStr,
+	Repeated,
+} from './tool'
 
-type LenOfStr<N extends string, L extends number = 0> = N extends '' ? L : N extends `${any}${infer K}` ? LenOfStr<K, NumOfStr<SntXcrUns<0, `${L}`>, number>> : N extends string ? number : L
+type LenOfStr<N extends string> = IsWideString<N> extends true ? number : NumOfStr<LenOfStr.P2<N, '0'>>
 declare function strlen<N extends string>(str: N): LenOfStr<N>
 
-type LenOfArr<N extends readonly any[], L extends number = 0> = N extends readonly [] ? L : N extends readonly [any, ...infer S] ? LenOfArr<S, NumOfStr<SntXcrUns<0, `${L}`>, number>> : N extends readonly any[] ? number : L
+type LenOfArr<N extends readonly any[]> = N['length'] extends number ? N['length'] : number
 declare function arrlen<T extends Accur<T>, N extends T[]>(arr: readonly [...N]): LenOfArr<N>
 
 type LenOf<N> = N extends string ? LenOfStr<N> : N extends readonly any[] ? LenOfArr<N> : -1
@@ -35,6 +41,8 @@ type FilledWith<N, L extends number> = IsGreater<L, 0> extends true ? [N, ...Fil
 
 type SplitedAt<I extends number, A extends readonly any[], C extends number = 0, H extends readonly any[] = [], L extends readonly any[] = A, M extends number = LenOfArr<A>> = C extends M ? [[...A, ...FilledWith<never, SntAosNum<9, I, M, number>>], never, []] : C extends I ? [H, A[C], Shifted<L>] : SplitedAt<I, A, SntXcrNum<0, C, number>, [...H, A[C]], Shifted<L>, M>
 type SettedAt<N, I extends number, A extends readonly any[]> = SplitedAt<I, A> extends readonly [infer P extends readonly any[], any, infer L extends readonly any[]] ? [...P, N, ...L] : [N]
+
+type LtdMaxIn<A extends readonly MayNum[], M extends false | MayNum = false> = A extends readonly [infer K extends MayNum, ...infer E extends readonly MayNum[]] ? LtdMaxIn<E, M extends MayNum ? IsGreater<K, M> extends true ? K : M : K> : M
 
 // type SpedUnionNumObj<K extends { F: any, U: any }, U0 extends any[] = K['U'], N extends number = K['F'], U extends number = UpNum<N>, S extends { F: any, U: any } = SpedUnionHal<N, U, number>> = {F: S['F'], U: [...U0, ...S['U']]}
 // type SpedUnionHal<N, U extends S, S> = N extends U | infer F extends Exclude<N, U> ? { F: F, U: [U] } : { F: never, U: [] }

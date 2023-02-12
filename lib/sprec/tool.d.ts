@@ -8,6 +8,8 @@ import {
 
 type JP<N> = N extends Tostrable ? `${N}` : string
 
+type Ad<A extends string, B extends string> = `${A}${B}`
+
 declare namespace Leading0less {
 	type P0<N extends string> = N extends `0${infer K}` ? K extends '' ? N : P0<K> : N
 
@@ -192,8 +194,6 @@ declare namespace Aligned {
 		}${F}${F}${F}${F}${F}${F}${F}${F}${F}${F
 		}${F}${F}${F}${F}${F}${F}${F}${F}${F}${F}`
 	> : F1<B, F, R>
-
-	type Ad<A extends string, B extends string> = `${A}${B}`
 
 	type S<T, A extends string, B, F extends Tostrable> = De<A, B> extends infer C extends string ? T extends 0 ? Ad<A, F2<C, F, ''>> : Ad<F2<C, F, ''>, A> : A
 	type Z<T, A extends string, B extends string, F extends Tostrable> =
