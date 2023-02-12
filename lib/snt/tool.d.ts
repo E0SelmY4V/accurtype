@@ -15,7 +15,7 @@ import {
 } from './cmp'
 import {
 	JP,
-} from '../sprec/tool'
+} from '../tool'
 
 declare namespace xcr {
 	type R<T> = T extends 0 ? 9 : 0
@@ -218,32 +218,4 @@ declare namespace cmp {
 	type MayUpNumUp<T extends number, S extends number, C extends number> = TypeOr<IsLess<C, T>> extends true ? MayUpNumUp<T, S, SntAosNum<0, C, S, number>> : C
 	type MayUpNumDn<T extends number, S extends number, C extends number> = IsNotless<C, T> extends true ? MayUpNumDn<T, S, SntAosNum<9, C, S, number>> : SntAosNum<0, C, S, number>
 	type PowerList = [1, 10, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13, 1e14, 1e15]
-}
-
-declare namespace LenOfStr {
-	type P0<N extends string, L extends string> = N extends `${any}${infer N}` ? P0<N, xcr.Ori<0, `${L}`>> : L
-
-	type P1<N extends string, L extends string> = N extends (
-		`${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${infer N}`
-	) ? P1<N, opn.AosHal<0, `${L}`, '10'>> : P0<N, L>
-
-	type P2<N extends string, L extends string> = N extends (
-		`${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${any}${any}${any}${any}${any}${any}${any}${any}${any}${any
-		}${infer N}`
-	) ? P2<N, opn.AosHal<0, `${L}`, '100'>> : P1<N, L>
-}
-
-declare namespace Repeated {
-	// type Repeated<F extends Tostrable, B extends string, R extends string> = B extends '0' ? R : Repeated<F, SntXcrUns<9, `${B}`>, `${R}${F}`>
-
 }

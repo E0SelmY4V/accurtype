@@ -18,6 +18,7 @@ export type LenCmp<A extends string, B extends string> = PreAligned<A, B, 0> ext
 export type SigT = SigNumber | 's'
 export type SigVary<T extends 0 | 9, N extends SigT> = N extends SigNumber ? (T extends 0 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 's'] : ['s', 0, 1, 2, 3, 4, 5, 6, 7, 8])[N] : 's'
 export type Rev<T> = T extends 0 ? 9 : 0
+export type Zo = '0'
 
 namespace Xcr {
 	type P0<T extends 0 | 9, N, B, E extends 0 | 9 = Rev<T>> = N extends `${E}${infer N}` ? P0<T, N, `${JP<B>}${T}`> : N extends `${infer S extends SigNumber}${infer N}` ? `${JP<B>}${SigVary<T, S>}${N}` : `${JP<B>}${JP<N>}`
@@ -57,10 +58,10 @@ export namespace Cmp {
 }
 export type Cmp<A extends string, W extends Cmp.Obj, B extends string> = W[Cmp.Main<`${A}`, `${B}`>]
 
-namespace GotLv {
+namespace LvGot {
 	type PMb<Q extends number, H extends '' | '0' | '00'> = `${Q}${H}`
 	type PBody<Q extends number = number, H extends string = string> = { h: H, q: Q }
-	type PSplited = `${typeof TypeOptions.Iteration.P}` extends PMb<infer Q, infer H> ? PBody<Q, H> : PBody
+	type PSplited = LvStep extends PMb<infer Q, infer H> ? PBody<Q, H> : PBody
 	type Times<N extends string, C extends number = PSplited['q']> =
 		C extends 2 ? Added<N, N> :
 		C extends 3 ? Added<Times<N, 2>, N> :
@@ -74,6 +75,8 @@ namespace GotLv {
 	export type Main<A extends string, R0 extends string = '1', R1 extends string = ''> = Cmp<A, Cmp.Notless, '1'> extends true ? Main<Subed<A, '1'>, Times<R0>, `${R1}${PSplited['h']}`> : `${R0}${R1}`
 }
 
-export type GotLv<A extends string> = GotLv.Main<A>
+export type LvStep= `${typeof TypeOptions.Iteration.P}`
+export type LvGot<A extends string> = LvGot.Main<A>
 
-export type MaxLv = `${typeof TypeOptions.Iteration.L}`
+export type LvMax = `${typeof TypeOptions.Iteration.L}`
+export type LvMaxArr = Cmp<LvStep, Cmp.Notless, '20'> extends true ? '1' : '2'

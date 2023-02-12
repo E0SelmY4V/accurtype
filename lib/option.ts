@@ -19,7 +19,7 @@ declare namespace TypeOptions {
 		 * 本常量只用于 TS 的类型推断
 		 * @see {@link https://github.com/E0SelmY4V/accurtype/blob/master/doc/options/README.md#单层栈空间内尾递归最大次数 查看在线说明}
 		 */
-		export const P = 20
+		export const P = 10
 
 		/**
 		 * 最大尾递归栈数。属于 `bigint | number` 类型
@@ -27,7 +27,7 @@ declare namespace TypeOptions {
 		 * 本常量只用于 TS 的类型推断
 		 * @see {@link https://github.com/E0SelmY4V/accurtype/blob/master/doc/options/README.md#最大尾递归栈数 查看在线说明}
 		 */
-		export const L = 5
+		export const L = 3
 
 	}
 

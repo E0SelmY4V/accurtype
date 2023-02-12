@@ -1,4 +1,4 @@
-import {
+import type {
 	NumOfStr,
 	SntXcrUns,
 	SntXcrNum,
@@ -13,12 +13,13 @@ import {
 	IsWideString,
 	ALRslt,
 } from '..'
-import {
+import type {
 	LenOfStr,
 	Repeated,
-} from './tool'
+	FilledWith,
+} from '../tool'
 
-export type LenOfStr<N extends string> = IsWideString<N> extends true ? number : NumOfStr<LenOfStr.P2<N, '0'>>
+export type LenOfStr<N extends string> = IsWideString<N> extends true ? number : NumOfStr<LenOfStr.Main<N>>
 export function strlen<N extends string>(str: N) {
 	return str.length as LenOfStr<N>
 }
@@ -33,7 +34,7 @@ export function len<T extends Accur<T>, N extends T[], S extends string>(n: read
 	return n.length as LenOf<N>
 }
 
-export type Repeated<F extends Tostrable, B extends number | string> = `${B}` extends '0' ? '' : `${F}${Repeated<F, SntXcrUns<9, `${B}`>>}`
+export type Repeated<F extends Tostrable, B extends MayNum> = IsWideString<`${B}`> extends true ? string : Repeated.Main<F, `${B}`>
 export function repeat<F extends Tostrable, B extends number | string>(str: F, num: B) {
 	return `${str}`.repeat(Number(num)) as Repeated<F, B>
 }
@@ -49,7 +50,7 @@ export function indexOf<W, A extends any[]>(search: W, array: readonly [...A]) {
 	return array.indexOf(search) as LtdIndexOf<W, A>
 }
 
-export type FilledWith<N, L extends number> = IsGreater<L, 0> extends true ? [N, ...FilledWith<N, SntXcrNum<9, L, number>>] : []
+export type FilledWith<N, L extends MayNum> = IsWideString<`${L}`> extends true ? N[] : FilledWith.Main<N, `${L}`>
 
 export type SplitedAt<I extends number, A extends readonly any[], C extends number = 0, H extends readonly any[] = [], L extends readonly any[] = A, M extends number = LenOfArr<A>> = C extends M ? [[...A, ...FilledWith<never, SntAosNum<9, I, M, number>>], never, []] : C extends I ? [H, A[C], Shifted<L>] : SplitedAt<I, A, SntXcrNum<0, C, number>, [...H, A[C]], Shifted<L>, M>
 export type SettedAt<N, I extends number, A extends readonly any[]> = SplitedAt<I, A> extends readonly [infer P extends readonly any[], any, infer L extends readonly any[]] ? [...P, N, ...L] : [N]
