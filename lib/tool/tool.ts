@@ -1,4 +1,5 @@
-import {
+import type TypeOptions from '../option'
+import type {
 	Tostrable,
 	SigNumber,
 } from '..'
@@ -12,6 +13,7 @@ export type PreAligned<A extends string, B extends string, F extends Tostrable> 
 export type PostAligned<A extends string, B extends string, F extends Tostrable> = `${A}${Filled<F, StrSubed<A, B>>}`
 export type LeadingLess<F extends Tostrable, N extends string> = N extends `${F}${infer K}` ? K extends '' ? N : LeadingLess<F, K> : N
 export type StringReved<N, R extends string = ''> = N extends `${infer I}${infer S}` ? StringReved<S, `${I}${R}`> : R
+export type LenCmp<A extends string, B extends string> = PreAligned<A, B, 0> extends A ? PreAligned<B, A, 0> extends B ? 0 : -1 : 1
 
 export type SigT = SigNumber | 's'
 export type SigVary<T extends 0 | 9, N extends SigT> = N extends SigNumber ? (T extends 0 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 's'] : ['s', 0, 1, 2, 3, 4, 5, 6, 7, 8])[N] : 's'
@@ -23,8 +25,8 @@ namespace Xcr {
 	export type Main<T extends 0 | 9, N extends string> = `${T},${N}` extends '0,-1' ? '0' : `${T},${N}` extends '9,0' ? '-1' : N extends `-${infer K}` ? `-${Uns<Rev<T>, K>}` : Uns<T, N>
 }
 export type Xcr<T extends 0 | 9, N extends string> = Xcr.Main<T, N>
-export type Increased<N extends string> = Xcr<0, N>
-export type Decreased<N extends string> = Xcr<9, N>
+export type Inced<N extends string> = Xcr<0, N>
+export type Deced<N extends string> = Xcr<9, N>
 
 namespace Aos {
 	type GotQH<Q = any, H = any> = { q: Q, h: H }
@@ -39,11 +41,10 @@ export type Aos<T extends 0 | 9, A extends string, B extends string> = Aos.Main<
 export type Added<A extends string, B extends string> = Aos<0, A, B>
 export type Subed<A extends string, B extends string> = Aos<9, A, B>
 
-namespace Cmp {
-	type Len<A extends string, B extends string> = PreAligned<A, B, 0> extends A ? PreAligned<B, A, 0> extends B ? 0 : -1 : 1
+export namespace Cmp {
 	type Sig<A extends SigT, B extends SigT> = A extends B ? 0 : A extends 's' ? -1 : B extends 's' ? 1 : Sig<SigVary<0, A>, SigVary<0, B>>
 	type P0<A extends string, B extends string> = `${A},${B}` extends `${infer A0 extends SigNumber}${infer A},${infer B0 extends SigNumber}${infer B}` ? Sig<A0, B0> extends infer K extends -1 | 1 ? K : P0<A, B> : 0
-	type Uns<A extends string, B extends string> = string extends A | B ? 1 | -1 | 0 : Len<A, B> extends infer K extends -1 | 1 ? K : P0<A, B>
+	type Uns<A extends string, B extends string> = string extends A | B ? 1 | -1 | 0 : LenCmp<A, B> extends infer K extends -1 | 1 ? K : P0<A, B>
 	export type Main<A extends string, B extends string> = A extends `-${infer A}` ? B extends `-${infer B}` ? Uns<B, A> : 1 : B extends `-${any}` ? -1 : Uns<A, B>
 	type N2B<N> = N extends 1 ? true : false
 	export type Obj<L = 0 | 1, E = 0 | 1, G = 0 | 1> = { [-1]: N2B<L>, 0: N2B<E>, 1: N2B<G> }
@@ -56,5 +57,23 @@ namespace Cmp {
 }
 export type Cmp<A extends string, W extends Cmp.Obj, B extends string> = W[Cmp.Main<`${A}`, `${B}`>]
 
-export type GotLv<A extends string, R0 extends string = '1', R1 extends string = ''> = Cmp<A, Cmp.Notless, '1'> extends true ? GotLv<Subed<A, '1'>, Subed<`${R0}0`, R0>, `${R1}00`> : `${R0}${R1}`
-export type MaxLv = '2'
+namespace GotLv {
+	type PMb<Q extends number, H extends '' | '0' | '00'> = `${Q}${H}`
+	type PBody<Q extends number = number, H extends string = string> = { h: H, q: Q }
+	type PSplited = `${typeof TypeOptions.Iteration.P}` extends PMb<infer Q, infer H> ? PBody<Q, H> : PBody
+	type Times<N extends string, C extends number = PSplited['q']> =
+		C extends 2 ? Added<N, N> :
+		C extends 3 ? Added<Times<N, 2>, N> :
+		C extends 4 ? Added<Times<N, 2>, Times<N, 2>> :
+		C extends 5 ? Added<Times<N, 3>, Times<N, 2>> :
+		C extends 6 ? Subed<Times<N, 8>, Times<N, 2>> :
+		C extends 7 ? Subed<Times<N, 9>, Times<N, 2>> :
+		C extends 8 ? Subed<Times<N, 9>, N> :
+		C extends 9 ? Subed<`${N}0`, N> :
+		N
+	export type Main<A extends string, R0 extends string = '1', R1 extends string = ''> = Cmp<A, Cmp.Notless, '1'> extends true ? Main<Subed<A, '1'>, Times<R0>, `${R1}${PSplited['h']}`> : `${R0}${R1}`
+}
+
+export type GotLv<A extends string> = GotLv.Main<A>
+
+export type MaxLv = `${typeof TypeOptions.Iteration.L}`

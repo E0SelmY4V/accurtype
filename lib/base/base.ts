@@ -7,7 +7,8 @@ import {
 	AllTypeJS,
 } from '..'
 
-export type SigNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+import { SigNumber } from '../tool/check'
+export { SigNumber }
 
 export type ObjectKey = keyof any
 
@@ -15,7 +16,8 @@ export function toTypeNameObj<T extends string>(...n: T[]) {
 	return ((n as any[]).push({}), (n as any[]).reduceRight((p, n) => (p[n] = 1, p))) as { [I in T]: 1 }
 }
 
-export type WideNum = number | bigint
+import { WideNum } from '../tool/check'
+export { WideNum }
 export type WideNumType = TypeOf<WideNum>
 export const WIDE_NUM_TYPE = toTypeNameObj('bigint', 'number')
 export function isWideNum(n: any): n is WideNum {
@@ -27,7 +29,8 @@ export type ObjectAccur<T = any> = { [n: ObjectKey]: T }
 export type FunctionAccur<T = any> = (...args: ArrayAccur<T>) => T
 export type Accur<T = any> = AllTypeJS | ArrayAccur<T> | ObjectAccur<T> | FunctionAccur<T>
 
-export type Tostrable = string | boolean | WideNum | null | undefined
+import { Tostrable } from '../tool/check'
+export { Tostrable }
 export type TostrableType = TypeOf<Tostrable>
 export const TOSTRABLE_TYPE = toTypeNameObj('string', 'boolean', 'bigint', 'number', 'null', 'undefined')
 export function isTostrable(n: any): n is Tostrable {
@@ -38,7 +41,8 @@ export function isTostrable(n: any): n is Tostrable {
 	}
 }
 
-export type NumOfStr<N extends string, T extends Tostrable = WideNum> = N extends `${infer K extends T}` ? K : T
+import { NumOfStr } from '../tool/check'
+export { NumOfStr }
 export function str2num<N extends string, T extends TostrableType = 'number'>(str: N, to: T | TostrableType = 'number') {
 	return (() => {
 		switch (to) {
