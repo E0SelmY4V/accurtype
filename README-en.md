@@ -1,6 +1,6 @@
 # Accurate Type
 
-[简体中文](./readme-zh.md) | **English**
+[简体中文](./README.md) | **English**
 
 The *Accurate Type* is a collection of TypeScript types, which can make your programming more accurate and easir.
 
