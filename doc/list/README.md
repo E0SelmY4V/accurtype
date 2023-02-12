@@ -1,16 +1,8 @@
-# Accurate Type
+# All Utilities
 
-[简体中文](./readme-zh.md) | **English**
+## base: 104
 
-The *Accurate Type* is a collection of TypeScript type declare, which can make your programming more accurate and easir.
-
-This project has not only various simple types but also many generic type expressions like counter. The wide type world is waiting for your exploration!
-
-## All Utilities
-
-### base: 104
-
-base: 40
+### base: 40
 
 1. type `SigNumber`
 2. type `ObjectKey`
@@ -53,7 +45,7 @@ base: 40
 39. type `EachOfUnion`
 40. type `MayNum`
 
-bool: 20
+### bool: 20
 
 1. type `Not`
 2. function `not`
@@ -76,7 +68,7 @@ bool: 20
 19. type `TypeXnor`
 20. function `xnor`
 
-is: 28
+### is: 28
 
 1. type `IsType`
 2. type `IsWideNum`
@@ -107,7 +99,7 @@ is: 28
 27. type `IsArrayOfLtd`
 28. type `IsLtd`
 
-type-name: 16
+### type-name: 16
 
 1. interface `TypeMapJS`
 2. type `TypeNameJS`
@@ -126,23 +118,23 @@ type-name: 16
 15. type `IsTypeName`
 16. function `isTypeName`
 
-### json: 6
+## json: 6
 
-base: 3
+### base: 3
 
 1. type `MinItems`
 2. type `LtdUniqueItems`
 3. type `UniqueItems`
 
-sch: 3
+### sch: 3
 
 1. interface `SchemaObj`
 2. type `Schema`
 3. type `OfSchema`
 
-### snt: 47
+## snt: 47
 
-app: 16
+### app: 16
 
 1. type `LenOfStr`
 2. function `strlen`
@@ -161,7 +153,7 @@ app: 16
 15. type `SplitedAt`
 16. type `SettedAt`
 
-xcr: 7
+### xcr: 7
 
 1. type `SntXcrUns`
 2. type `SntXcr`
@@ -171,7 +163,7 @@ xcr: 7
 6. type `Decrease`
 7. function `decrease`
 
-cmp: 17
+### cmp: 17
 
 1. type `SntCmpUns`
 2. type `SntCmp`
@@ -191,7 +183,7 @@ cmp: 17
 16. type `MayUpNum`
 17. type `UpNum`
 
-opn: 7
+### opn: 7
 
 1. type `SntAosUns`
 2. type `SntAos`
@@ -201,7 +193,7 @@ opn: 7
 6. type `Subed`
 7. function `sub`
 
-### sprec: 24
+## sprec: 24
 
 1. type `Spaceless`
 2. function `removeSpace`
@@ -228,13 +220,13 @@ opn: 7
 23. type `ArrayReved`
 24. function `revArray`
 
-### matrix: 4
+## matrix: 4
 
-trsed: 1
+### trsed: 1
 
 1. type `Transposed`
 
-flip: 3
+### flip: 3
 
 1. type `FlipedUD`
 2. type `LtdFlipedLR`
