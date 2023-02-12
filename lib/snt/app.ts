@@ -12,7 +12,7 @@ import {
 	MayNum,
 	IsWideString,
 	ALRslt,
-} from '../..'
+} from '..'
 import {
 	LenOfStr,
 	Repeated,

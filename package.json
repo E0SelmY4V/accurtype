@@ -2,7 +2,8 @@
   "name": "accurtype",
   "version": "2.5.180",
   "description": "Some TS type tool that can may make your programming easier.",
-  "main": "lib/index.js",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "scripts": {
     "test-nd-js": "node test/testj.js",
     "test-nd-ts": "tsc test/testt.ts & node test/testt.js",

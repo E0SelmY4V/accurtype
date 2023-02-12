@@ -3,21 +3,20 @@
 		"module": "CommonJS",
 		"moduleResolution": "Node",
 		"target": "ESNext",
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"allowSyntheticDefaultImports": true,
-		"esModuleInterop": true,
-		"incremental": true,
 		"noImplicitAny": true,
+		"noImplicitReturns": true,
 		"strict": true,
-		"alwaysStrict": true,
-		"strictPropertyInitialization": true,
 		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"alwaysStrict": true,
 		"noImplicitThis": true,
+		"declaration": true,
+		"declarationDir": "./build",
+		"outDir": "./build"
 	},
-	"exclude": [
-		"node_modules",
-		"_",
-		"**/node_modules/*"
+	"include": [
+		"lib"
 	],
 }

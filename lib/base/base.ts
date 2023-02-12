@@ -47,7 +47,7 @@ export function str2num<N extends string, T extends TostrableType = 'number'>(st
 			case 'bigint': return BigInt(str)
 			case 'boolean': return str === 'true' ? true : false
 			case 'undefined': return void 0
-			case 'null': return null
+			default: return null
 		}
 	})() as NumOfStr<N, TypeMap[T]>
 }

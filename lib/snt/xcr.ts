@@ -1,7 +1,7 @@
 import {
 	NumOfStr,
 	MayNum,
-} from '../..'
+} from '..'
 import {
 	xcr,
 } from './tool'
