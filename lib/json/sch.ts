@@ -5,7 +5,7 @@ import {
 	SchOf,
 } from './tool'
 
-interface SchemaObj {
+export interface SchemaObj {
 	$id?: string
 	$schema?: string
 	$ref?: string
@@ -53,5 +53,5 @@ interface SchemaObj {
 	oneOf?: readonly Schema[]
 	not?: Schema
 }
-type Schema = SchemaObj | boolean
-type OfSchema<T> = T extends Schema ? SchOf<T> : any
+export type Schema = SchemaObj | boolean
+export type OfSchema<T> = T extends Schema ? SchOf<T> : any
