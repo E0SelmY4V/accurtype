@@ -74,23 +74,7 @@ type Times<N extends string, C extends number = PSplited['q']> =
 	C extends 8 ? Subed<Times<N, 9>, N> :
 	C extends 9 ? Subed<`${N}0`, N> :
 	N
-export type LvGot<
-	A extends string,
-	R0 extends string = '1',
-	R1 extends string = '',
-> = Cmp<A, Cmp.Notless, '1'> extends true
-	? LvGot<Subed<A, '1'>, Times<R0>, `${R1}${PSplited['h']}`>
-	: `${R0}${R1}`
+export type LvGot<A extends string, R0 extends string = '1', R1 extends string = ''> = Cmp<A, Cmp.Notless, '1'> extends true ? LvGot<Subed<A, '1'>, Times<R0>, `${R1}${PSplited['h']}`> : `${R0}${R1}`
 export type LvArr = Cmp<LvStep, Cmp.Notless, '20'> extends true ? '1' : '2'
-export type LvNum<
-	S extends string,
-	R extends string = Zo,
-> = Cmp<S, Cmp.Notless, LvGot<R>> extends true
-	? R extends LvMax ? R : LvNum<S, Inced<R>>
-	: R extends Zo ? R : Deced<R>
-export type LvStr<
-	S extends string,
-	R extends string = Zo,
-> = S extends `${Repeated.Main<`${any}`, LvGot<R>>}${string}`
-	? R extends LvMax ? R : LvStr<S, Inced<R>>
-	: R extends Zo ? R : Deced<R>
+export type LvNum<S extends string, R extends string = Zo> = Cmp<S, Cmp.Greater, LvGot<R>> extends true ? R extends LvMax ? R : LvNum<S, Inced<R>> : R extends Zo ? R : Deced<R>
+export type LvStr<S extends string, R extends string = Zo> = S extends `${Repeated.Main<`${any}`, LvGot<R>>}${any}${string}` ? R extends LvMax ? R : LvStr<S, Inced<R>> : R extends Zo ? R : Deced<R>
