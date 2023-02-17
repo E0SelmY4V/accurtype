@@ -1,8 +1,7 @@
-import type TypeOptions from '../option'
+/// <reference path="../option.ts" />
 import type {
 	Tostrable,
 	SigNumber,
-	Repeated,
 } from '.'
 
 export type JP<N> = N extends Tostrable ? `${N}` : string

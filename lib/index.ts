@@ -4,7 +4,8 @@
  * @link https://github.com/E0SelmY4V/accurtype
  */
 declare module "."
-import './tool/check'
+import type Check from './tool/check'
+export type OptionsCheckList = typeof Check;
 export * from './base'
 export * from './json'
 export * from './sprec'
