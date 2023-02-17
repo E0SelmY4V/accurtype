@@ -1,5 +1,4 @@
 import {
-	WideNum,
 	TypeOf,
 	TostrableType,
 	Not,
@@ -13,7 +12,7 @@ import {
 import {
 	IsWideString,
 	ArrayLtdSplited,
-} from './tool'
+} from '../tool'
 
 export type IsType<N, T extends TypeName, K = true> = TypeOf<N> extends T ? K : false
 
@@ -26,16 +25,15 @@ export type IsWideBoolean<N> = IsBoolean<N, boolean extends N ? true : false>
 export type IsLtdBoolean<N> = IsBoolean<N, boolean extends N ? false : true>
 
 export type IsString<N, K = true> = IsType<N, 'string', K>
-export type IsWideString<N> = IsString<N, IsWideString.P2<N>>
-export type IsLtdString<N> = IsString<N, Not<IsWideString.P2<N>>>
+export type IsWideString<N> = IsString<N, IsWideString.Main<N>>
+export type IsLtdString<N> = IsString<N, Not<IsWideString.Main<N>>>
 
 export type IsArray<N, K extends boolean = true> = TypeAnd<N extends readonly any[] ? K : false>
 export type IsWideArray<N> = TypeAnd<N extends readonly (infer T)[] ? T[] extends N ? true : false : false>
 export type IsLongArray<N> = N extends readonly any[] ? number extends N['length'] ? true : false : false
-export type ArrayLtdSplited<A> = ArrayLtdSplited.S<A>
+export type ArrayLtdSplited<A> = ArrayLtdSplited.Main<A>
 export type ArrayLtdCombed<A extends readonly any[]> = ArrayLtdSplited<A> extends ALRslt<infer A0, infer A1, infer A2> ? [...A0, ...(A1 extends [] ? [] : [IfredArr<A1>]), ...A2] : []
 export type ALRslt<A extends any[], B extends any[], C extends any[]> = [A, B, C]
-
 
 export type IsTostrable<N, K = true> = IsType<N, TostrableType, K>
 export type IsWideTostrable<N> = IsTostrable<N,

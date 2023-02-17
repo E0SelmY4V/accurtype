@@ -106,29 +106,36 @@ export type LvStr<
 type ISAAny<T extends 0 | 1> = [string, AnyArr][T]
 type ISAIni<T extends 0 | 1, K extends 0 | 1 = 1> = K extends 0 ? ['', []][T] : ISAFmw<T, ISAIni<T, 0>, ISAIni<T, 0>>
 export type ISAFmw<T extends 0 | 1, A extends ISAAny<T> = ISAAny<T>, B extends ISAAny<T> = ISAAny<T>> = { a: A, b: B }
-type ISAFst<T extends 0 | 1, N extends ISAAny<T>>
+type ISAFst<T extends 0 | 1, K extends 0 | 1, N extends ISAAny<T>>
 	= (T extends 0
 		? N extends `${infer N}${infer K}` ? ISAFmw<0, N, K> : ISAFmw<0, '', ''>
-		: N extends readonly [infer N, ...infer K] ? ISAFmw<1, [N], K> : ISAFmw<1, [], []>
+		: N extends (K extends 0
+			? readonly [infer N, ...infer S]
+			: readonly [...infer S, infer N]
+		) ? ISAFmw<1, [N], S> : ISAFmw<1, [], []>
 	)
-type ISAAdd<T extends 0 | 1, N extends ISAFmw<T>, A extends ISAAny<T> = ISAIni<T, 0>, B extends ISAAny<T> = ISAIni<T, 0>>
+type ISAAdd<T extends 0 | 1, K extends 0 | 1, N extends ISAFmw<T>, A extends ISAAny<T> = ISAIni<T, 0>>
 	= (T extends 0
-		? ISAFmw<0, `${Ys<string, N['a']>}${Ys<string, A>}`, `${Ys<string, N['b']>}${Ys<string, B>}`>
-		: ISAFmw<1, [...Ys<AnyArr, N['a']>, ...Ys<AnyArr, A>], [...Ys<AnyArr, N['b']>, ...Ys<AnyArr, B>]>
+		? ISAFmw<0, `${Ys<string, N['a']>}${Ys<string, A>}`, Ys<string, N['b']>>
+		: ISAFmw<1, [...Ys<AnyArr, [N['a'], A][K]>, ...Ys<AnyArr, [A, N['a']][K]>], Ys<AnyArr, N['b']>>
 	) extends ISAFmw<T, infer A, infer B> ? ISAFmw<T, A, B> : ISAIni<T>
 export type ISACut<
 	T extends 0 | 1,
 	S extends ISAAny<T>,
 	W extends string,
+	K extends 0 | 1 = 0,
 	L extends string = T extends 0 ? LvNum<W> : LvArr,
 	R extends ISAFmw<T> = ISAIni<T>>
 	= (Cmp<W, Cmp.Notless, LvGot<L>> extends true
-		? (S extends '' | readonly [] ? {} : L extends Zo
-			? ISAFst<T, S>
-			: ISACut<T, S, LvGot<L>, Deced<L>>
-		) extends ISAFmw<T, infer A, infer S> ? ISACut<T, S, Subed<W, LvGot<L>>, L, ISAAdd<T, R, A>> : {}
+		? (S extends `${any}${string}` | [readonly [any, ...any[]], readonly [...any[], any]][K]
+			? (L extends Zo
+				? ISAFst<T, K, S>
+				: ISACut<T, S, LvGot<L>, K, Deced<L>>
+			)
+			: {}
+		) extends ISAFmw<T, infer A, infer S> ? ISACut<T, S, Subed<W, LvGot<L>>, K, L, ISAAdd<T, K, R, A>> : {}
 		: (L extends Zo
 			? ISAFmw<T, Ys<ISAAny<T>, R['a'], ISAIni<T, 0>>, S>
-			: ISACut<T, S, W, Deced<L>, R>
+			: ISACut<T, S, W, K, Deced<L>, R>
 		)
 	)
