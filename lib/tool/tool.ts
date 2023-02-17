@@ -7,6 +7,9 @@ import type {
 
 export type JP<N> = N extends Tostrable ? `${N}` : string
 export type Ad<A extends Tostrable, B extends Tostrable> = `${A}${B}`
+export type AnyArr = readonly any[]
+export type YsIni<N> = N extends string ? '' : N extends number ? 0 : N extends AnyArr ? [] : N extends bigint ? 0n : N
+export type Ys<N, A, I = YsIni<N>> = A extends N ? A : I
 type StrSubedSub<A extends string, B extends string, R extends string = ''> = B extends `${any}${infer B}` ? A extends `${any}${infer A}` ? StrSubedSub<A, B, R> : StrSubedSub<A, B, `${R}Z`> : { r: R, a: A }
 export type StrSubed<A extends string, B extends string> = StrSubedSub<A, B> extends { r: infer R } ? R extends '' ? 0 : R : never
 export type Filled<F extends Tostrable, B, R extends string = ''> = B extends `${any}${infer B}` ? Filled<F, B, `${R}${F}`> : R
@@ -58,6 +61,8 @@ export namespace Cmp {
 	export type Notequal = Obj<1, 0, 1>
 }
 export type Cmp<A extends string, W extends Cmp.Obj, B extends string> = W[Cmp.Main<`${A}`, `${B}`>]
+export type Max<A extends string, B extends string> = Cmp<A, Cmp.Less, B> extends true ? B : A
+export type Min<A extends string, B extends string> = Cmp<A, Cmp.Less, B> extends true ? A : B
 
 export type LvStep = `${typeof TypeOptions.Iteration.P}`
 export type LvMax = `${typeof TypeOptions.Iteration.L}`
@@ -74,7 +79,56 @@ type Times<N extends string, C extends number = PSplited['q']> =
 	C extends 8 ? Subed<Times<N, 9>, N> :
 	C extends 9 ? Subed<`${N}0`, N> :
 	N
-export type LvGot<A extends string, R0 extends string = '1', R1 extends string = ''> = Cmp<A, Cmp.Notless, '1'> extends true ? LvGot<Subed<A, '1'>, Times<R0>, `${R1}${PSplited['h']}`> : `${R0}${R1}`
+export type LvGot<
+	A extends string,
+	R0 extends string = '1',
+	R1 extends string = ''>
+	= (Cmp<A, Cmp.Notless, '1'> extends true
+		? LvGot<Subed<A, '1'>, Times<R0>, `${R1}${PSplited['h']}`>
+		: `${R0}${R1}`
+	)
 export type LvArr = Cmp<LvStep, Cmp.Notless, '20'> extends true ? '1' : '2'
-export type LvNum<S extends string, R extends string = Zo> = Cmp<S, Cmp.Greater, LvGot<R>> extends true ? R extends LvMax ? R : LvNum<S, Inced<R>> : R extends Zo ? R : Deced<R>
-export type LvStr<S extends string, R extends string = Zo> = S extends `${Repeated.Main<`${any}`, LvGot<R>>}${any}${string}` ? R extends LvMax ? R : LvStr<S, Inced<R>> : R extends Zo ? R : Deced<R>
+export type LvNum<
+	S extends string,
+	R extends string = Zo>
+	= (Cmp<S, Cmp.Greater, LvGot<R>> extends true
+		? R extends LvMax ? R : LvNum<S, Inced<R>>
+		: R extends Zo ? R : Deced<R>
+	)
+export type LvStr<
+	S extends string,
+	R extends string = Zo>
+	= (ISACut<0, S, Inced<LvGot<R>>> extends ISAFmw<0>
+		? R extends LvMax ? R : LvStr<S, Inced<R>>
+		: R extends Zo ? R : Deced<R>
+	)
+
+type ISAAny<T extends 0 | 1> = [string, AnyArr][T]
+type ISAIni<T extends 0 | 1, K extends 0 | 1 = 1> = K extends 0 ? ['', []][T] : ISAFmw<T, ISAIni<T, 0>, ISAIni<T, 0>>
+export type ISAFmw<T extends 0 | 1, A extends ISAAny<T> = ISAAny<T>, B extends ISAAny<T> = ISAAny<T>> = { a: A, b: B }
+type ISAFst<T extends 0 | 1, N extends ISAAny<T>>
+	= (T extends 0
+		? N extends `${infer N}${infer K}` ? ISAFmw<0, N, K> : ISAFmw<0, '', ''>
+		: N extends readonly [infer N, ...infer K] ? ISAFmw<1, [N], K> : ISAFmw<1, [], []>
+	)
+type ISAAdd<T extends 0 | 1, N extends ISAFmw<T>, A extends ISAAny<T> = ISAIni<T, 0>, B extends ISAAny<T> = ISAIni<T, 0>>
+	= (T extends 0
+		? ISAFmw<0, `${Ys<string, N['a']>}${Ys<string, A>}`, `${Ys<string, N['b']>}${Ys<string, B>}`>
+		: ISAFmw<1, [...Ys<AnyArr, N['a']>, ...Ys<AnyArr, A>], [...Ys<AnyArr, N['b']>, ...Ys<AnyArr, B>]>
+	) extends ISAFmw<T, infer A, infer B> ? ISAFmw<T, A, B> : ISAIni<T>
+export type ISACut<
+	T extends 0 | 1,
+	S extends ISAAny<T>,
+	W extends string,
+	L extends string = T extends 0 ? LvNum<W> : LvArr,
+	R extends ISAFmw<T> = ISAIni<T>>
+	= (Cmp<W, Cmp.Notless, LvGot<L>> extends true
+		? (S extends '' | readonly [] ? {} : L extends Zo
+			? ISAFst<T, S>
+			: ISACut<T, S, LvGot<L>, Deced<L>>
+		) extends ISAFmw<T, infer A, infer S> ? ISACut<T, S, Subed<W, LvGot<L>>, L, ISAAdd<T, R, A>> : {}
+		: (L extends Zo
+			? ISAFmw<T, Ys<ISAAny<T>, R['a'], ISAIni<T, 0>>, S>
+			: ISACut<T, S, W, Deced<L>, R>
+		)
+	)
