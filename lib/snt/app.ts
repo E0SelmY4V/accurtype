@@ -8,11 +8,13 @@ import type {
 	LenOfStr,
 	Repeated,
 	FilledWith,
-	Ys,
-	AnyArr,
 	SplitedAt,
 	IndexOf,
-} from '../tool'
+} from '../tool/snt'
+import type {
+	Ys,
+	AnyArr,
+} from '../tool/tool'
 
 export type LenOfStr<N extends string> = LenOfStr.Ex<N>
 export function strlen<N extends string>(str: N) {

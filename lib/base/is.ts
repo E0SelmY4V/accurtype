@@ -12,7 +12,7 @@ import type {
 import type {
 	IsWideString,
 	ArrayLtdSplited,
-} from '../tool'
+} from '../tool/base'
 
 export type IsType<N, T extends TypeName, K = true> = TypeOf<N> extends T ? K : false
 
