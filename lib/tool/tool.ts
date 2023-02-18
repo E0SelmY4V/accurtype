@@ -78,15 +78,25 @@ type Times<N extends string, C extends number = PSplited['q']> =
 	C extends 8 ? Subed<Times<N, 9>, N> :
 	C extends 9 ? Subed<`${N}0`, N> :
 	N
-export type LvGot<
+type LvGened<
 	A extends string,
 	R0 extends string = '1',
-	R1 extends string = ''>
+	R1 extends string = '',>
 	= (Cmp<A, Cmp.Notless, '1'> extends true
-		? LvGot<Subed<A, '1'>, Times<R0>, `${R1}${PSplited['h']}`>
+		? LvGened<Subed<A, '1'>, Times<R0>, `${R1}${PSplited['h']}`>
 		: `${R0}${R1}`
 	)
-export type LvArr = Cmp<LvStep, Cmp.Notless, '20'> extends true ? '1' : '2'
+type LvListGened<
+	A extends string = LvMax,
+	R extends AnyArr<string> = []>
+	= (Cmp<A, Cmp.Notless, Zo> extends true
+		? LvListGened<Deced<A>, [LvGened<A>, ...R]>
+		: R
+	)
+type LvList = LvListGened
+type LvListLast = LvList extends [...any[], infer N] ? N : '1'
+type LvListObj = LvList & { [x: string]: LvListLast }
+export type LvGot<L extends string> = LvListObj[L]
 export type LvNum<
 	S extends string,
 	R extends string = Zo>
@@ -94,6 +104,7 @@ export type LvNum<
 		? R extends LvMax ? R : LvNum<S, Inced<R>>
 		: R extends Zo ? R : Deced<R>
 	)
+export type LvArr = LvNum<'1000'>
 export type LvStr<
 	S extends string,
 	R extends string = Zo>

@@ -31,9 +31,9 @@ export namespace Repeated {
 		L extends string = LvNum<A>,
 		R extends string = ''>
 		= (Cmp<A, Cmp.Notless, LvGot<L>> extends true
-			? Do<F, Subed<A, LvGot<L>>, L, Ad<
-				R,
-				L extends Zo ? F : Do<F, LvGot<L>, Deced<L>>
+			? Do<F, Subed<A, LvGot<L>>, L, Ad<R, L extends Zo
+				? F
+				: Do<F, LvGot<L>, Deced<L>>
 			>>
 			: L extends Zo ? R : Do<F, A, Deced<L>, R>
 		)
