@@ -1,10 +1,8 @@
 /// <reference path="../option.ts" />
-
-export type SigNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-export type WideNum = number | bigint
-export type Tostrable = string | boolean | WideNum | null | undefined
-export type NumOfStr<N extends string, T extends Tostrable = WideNum> = N extends `${infer K extends T}` ? K : T
-export type PType = NumOfStr<`${Exclude<SigNumber, 0>}${'' | '0' | '00'}`>
+import type {
+	PType,
+	WideNum,
+} from '.'
 
 namespace Check {
 	export namespace Iteration {

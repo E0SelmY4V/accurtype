@@ -1,4 +1,4 @@
-import {
+import type {
 	TypeOf,
 	TostrableType,
 	Not,
@@ -9,7 +9,7 @@ import {
 	ObjectKey,
 	IfredArr,
 } from '..'
-import {
+import type {
 	IsWideString,
 	ArrayLtdSplited,
 } from '../tool'
