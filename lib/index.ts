@@ -5,7 +5,7 @@
  */
 declare module "."
 import type Check from './tool/check'
-export type OptionsCheckList = typeof Check;
+export type OptionsCheckList = typeof Check
 export * from './base'
 export * from './json'
 export * from './sprec'
