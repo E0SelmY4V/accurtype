@@ -22,6 +22,9 @@ import type {
 	ISACut,
 	ISAFmw,
 	AnyArr,
+	ISAExt,
+	Ex as Eq,
+	LvMax,
 } from '..'
 
 export namespace Repeated {
@@ -41,15 +44,18 @@ export namespace Repeated {
 }
 
 export namespace LenOfStr {
-	type Do<
+	export type Do<
 		S extends string,
-		L extends string = LvStr<S>,
+		L extends string = LvMax,
 		R extends string = Zo>
-		= (ISACut<0, S, LvGot<L>> extends ISAFmw<0, any, infer S>
+		= (ISAExt<0, S, LvGot<L>> extends Eq<infer S, string>
 			? Do<S, L, Added<R, LvGot<L>>>
 			: L extends Zo ? R : Do<S, Deced<L>, R>
 		)
 	export type Ex<N extends string> = IsWideString<N> extends true ? number : NumOfStr<Do<N>, number>
+	type B = Repeated.Ex<0, '100000'>
+	type A = Do<B>
+	// type C = ISAExt<0, B, '100000'>
 }
 
 export namespace FilledWith {

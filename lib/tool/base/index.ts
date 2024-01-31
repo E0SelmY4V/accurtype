@@ -11,6 +11,11 @@ import type {
 	ISAFmw,
 	LvArr,
 	AnyArr,
+	Ex,
+	ISAExt,
+	LvNum,
+	Cmp,
+	Ys,
 } from '..'
 
 export namespace IsWideString {
@@ -19,6 +24,18 @@ export namespace IsWideString {
 		string extends N ? true :
 		N extends `${infer N extends WideNum}` ? IsWideWideNum<N> :
 		false
+	// type Nu<
+	// 	S extends string,
+	// 	W extends string,
+	// 	L extends string = LvNum<W>>
+	// 	= (Cmp<W, Cmp.Notless, LvGot<L>> extends true
+	// 		? (L extends Zo
+	// 			? Te<S>
+	// 			: Nu<S, LvGot<L>, Deced<L>>
+	// 		) extends true ? true : Nu<Ys<string, ISAExt<0, S, LvGot<L>>>, Subed<W, LvGot<L>>, L>
+	// 		: L extends Zo ? false : Nu<S, W, Deced<L>>
+	// 	)
+	// type A = Nu<`abcdefghijklmnopqrstuvwxyz${any}`, '28'>
 	type Do<
 		S extends string,
 		L extends string = LvStr<S>>
