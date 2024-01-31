@@ -1,0 +1,13 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"definitions": {
+		"asd": {
+			"type": "object",
+			"properties": {}
+		}
+	},
+	"type":"object",
+	"properties": {
+		"asd": { "$ref": "#/definitions/asd" }
+	}
+}
