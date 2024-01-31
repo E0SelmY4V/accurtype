@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "accurtype",
-	"license": "GPL-3.0-or-later",
+	"license": "MIT",
 	"type": "commonjs",
 	"author": "e0selmy4v",
 	"devDependencies": {

@@ -22,7 +22,7 @@
   ],
   "type": "commonjs",
   "author": "e0selmy4v",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/E0SelmY4V/accurtype.git"
