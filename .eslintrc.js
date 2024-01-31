@@ -1,9 +1,19 @@
 /* eslint-env node */
-// @ts-check
-/**@type {import('eslint/lib/shared/types').ConfigData} */
+/**@type {import('eslint').ESLint.ConfigData} */
 module.exports = {
-	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+	extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/strict-type-checked',
+		'plugin:expect-type/recommended',
+	],
 	parser: '@typescript-eslint/parser',
-	plugins: ['@typescript-eslint'],
+	plugins: [
+		'@typescript-eslint',
+		'eslint-plugin-expect-type',
+	],
 	root: true,
+	parserOptions: {
+		project: ['./tsconfig.json', './packages/*/tsconfig.json'],
+		tsconfigRootDir: __dirname,
+	},
 };

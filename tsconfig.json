@@ -14,5 +14,6 @@
 		"noImplicitThis": true,
 		"noEmitOnError": true,
 		"declaration": true,
+		"allowJs": false,
 	},
 }
