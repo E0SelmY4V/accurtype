@@ -26,7 +26,7 @@ type SteppedString<
 			: `${B}${N}`
 		)
 	);
-export type Stepped<D extends Direction, N extends number> = NumberOf<ReversedString<Zeroless<SteppedString<D, ReversedString<`${N}`>>>>>;;
+export type Stepped<D extends Direction, N extends number> = NumberOf<ReversedString<Zeroless<SteppedString<D, ReversedString<`${N}`>>>>>;
 export type Decreased<N extends number> = Stepped<9, N>;
 export type Increased<N extends number> = Stepped<0, N>;
 
