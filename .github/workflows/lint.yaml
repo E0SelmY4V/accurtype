@@ -29,6 +29,6 @@ jobs:
           rm -rf package-lock.json
           pnpm i
           pnpm i
-      - name: lint
+      - name: Lint
         run: |
           pnpm lint
