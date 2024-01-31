@@ -1,0 +1,12 @@
+{
+	"private": true,
+	"name": "accurtype",
+	"license": "GPL-3.0-or-later",
+	"type": "commonjs",
+	"author": "e0selmy4v",
+	"devDependencies": {
+		"typescript": "^4.8.4"
+	},
+	"scripts": {
+	}
+}

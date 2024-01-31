@@ -1,0 +1,9 @@
+temp*
+**/node_modules
+package-lock.json
+pnpm-lock.yaml
+_
+test
+
+lib/json/test*
+build

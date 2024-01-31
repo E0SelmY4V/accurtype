@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/E0SelmY4V/accurtype#readme",
   "devDependencies": {
-    "typescript": "^4.8.4",
     "export-tester": "^1.0.2"
   }
 }

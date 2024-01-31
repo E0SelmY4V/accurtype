@@ -1,18 +1,6 @@
 {
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"module": "CommonJS",
-		"moduleResolution": "Node",
-		"target": "ESNext",
-		"noImplicitAny": true,
-		"noImplicitReturns": true,
-		"strict": true,
-		"strictBindCallApply": true,
-		"strictFunctionTypes": true,
-		"strictNullChecks": true,
-		"strictPropertyInitialization": true,
-		"alwaysStrict": true,
-		"noImplicitThis": true,
-		"declaration": true,
 		"declarationDir": "./build",
 		"outDir": "./build"
 	},
