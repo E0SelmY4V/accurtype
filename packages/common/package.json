@@ -6,6 +6,9 @@
   "module": "./lib",
   "types": "./lib",
   "scripts": {},
+  "dependencies": {
+    "@accurtype/internal": "workspace:^"
+  },
   "keywords": [
     "typescript",
     "types",

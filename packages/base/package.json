@@ -1,6 +1,6 @@
 {
   "name": "@accurtype/base",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "精确类型～基本类型",
   "main": "./lib",
   "module": "./lib",

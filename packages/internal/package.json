@@ -1,11 +1,14 @@
 {
   "name": "@accurtype/internal",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "精确类型～内部工具",
   "main": "./lib",
   "module": "./lib",
   "types": "./lib",
   "scripts": {},
+  "dependencies": {
+    "@accurtype/base": "workspace:^"
+  },
   "keywords": [
     "typescript",
     "types"
