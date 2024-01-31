@@ -5,6 +5,7 @@
 	"type": "commonjs",
 	"author": "e0selmy4v",
 	"devDependencies": {
+		"@type-challenges/utils": "^0.1.1",
 		"@typescript-eslint/eslint-plugin": "^6.20.0",
 		"@typescript-eslint/parser": "^6.20.0",
 		"eslint": "^8.56.0",
