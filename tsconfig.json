@@ -16,4 +16,8 @@
 		"declaration": true,
 		"allowJs": false,
 	},
+	"exclude": [
+		"packages/accurtype",
+		"_",
+	],
 }

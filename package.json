@@ -13,6 +13,7 @@
 		"typescript": "^4.8.4"
 	},
 	"scripts": {
+		"postlint": "tsc --noEmit",
 		"lint": "eslint ."
 	}
 }
