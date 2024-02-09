@@ -19,5 +19,6 @@
 	"exclude": [
 		"packages/accurtype",
 		"_",
+		"test/style.ts",
 	],
 }

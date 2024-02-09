@@ -1,6 +1,6 @@
 /**
  * 比较器
- * @version 0.1.0
+ * @version 0.1.1
  * @license MIT
  */
 declare module './compare';
@@ -11,10 +11,8 @@ import { Stepped } from './step';
 type DigitalCompare<
 	A extends number,
 	B extends number>
-	= A extends B ? 0 :
-	A extends 0 ? 1 :
-	B extends 0 ? -1 :
-	DigitalCompare<Stepped<9, A>, Stepped<9, B>>;
+	= A extends B ? 0 : A extends 0 ? 1 : B extends 0 ? -1 :
+		DigitalCompare<Stepped<9, A>, Stepped<9, B>>;
 namespace Test {
 	// $ExpectType 0
 	export type AS = DigitalCompare<0, 0>;

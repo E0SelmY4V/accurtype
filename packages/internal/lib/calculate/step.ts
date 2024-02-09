@@ -21,8 +21,7 @@ type SteppedString<
 	E extends Direction = Exclude<Direction, D>>
 	= (N extends `${E}${infer N}`
 		? SteppedString<D, N, `${B}${D}`>
-		: (
-			N extends `${infer S extends Digit}${infer N}`
+		: (N extends `${infer S extends Digit}${infer N}`
 			? `${B}${SigVary<D, S>}${N}`
 			: `${B}${N}`
 		)
