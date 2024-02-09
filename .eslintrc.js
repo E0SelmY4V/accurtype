@@ -14,6 +14,7 @@ module.exports = {
 		'@stylistic',
 	],
 	rules: {
+		'no-unused-vars': 'warn',
 		'@stylistic/array-bracket-newline': ['error', 'consistent'],
 		'@stylistic/array-bracket-spacing': ['error', 'never'],
 		'@stylistic/array-element-newline': ['error', 'consistent'],
