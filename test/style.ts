@@ -1,3 +1,4 @@
+const r = Math.random;
 export const cases = {
 	'@stylistic/array-bracket-newline'(n: any) {
 		n = [1, 2, 3];
@@ -56,16 +57,16 @@ export const cases = {
 	},
 	'@stylistic/block-spacing'(n: any) {
 		{ console.log(123); }
-		if (require('')) { console.log(123); }
-		{require('')} // eslint-disable-line @stylistic/block-spacing
-		{ require('')} // eslint-disable-line @stylistic/block-spacing
-		{require('') } // eslint-disable-line @stylistic/block-spacing
-		if (require('')) {console.log(123); } // eslint-disable-line @stylistic/block-spacing
-		if (require('')) { console.log(123);} // eslint-disable-line @stylistic/block-spacing
-		if (require('')) {console.log(123);} // eslint-disable-line @stylistic/block-spacing
+		if (r()) { console.log(123); }
+		{r()} // eslint-disable-line @stylistic/block-spacing
+		{ r()} // eslint-disable-line @stylistic/block-spacing
+		{r() } // eslint-disable-line @stylistic/block-spacing
+		if (r()) {console.log(123); } // eslint-disable-line @stylistic/block-spacing
+		if (r()) { console.log(123);} // eslint-disable-line @stylistic/block-spacing
+		if (r()) {console.log(123);} // eslint-disable-line @stylistic/block-spacing
 	},
 	'@stylistic/brace-style'(n: any) {
-		if (require('')) {
+		if (r()) {
 			console.log(123);
 		} else {
 			console.log(123);
@@ -77,7 +78,7 @@ export const cases = {
 		} finally {
 			3 + 3;
 		}
-		if (require('')) {
+		if (r()) {
 			1 + 1;
 		} // eslint-disable-line @stylistic/brace-style
 		else {

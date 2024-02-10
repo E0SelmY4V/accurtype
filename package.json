@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"postlint": "tsc --noEmit",
-		"test:lint": "eslint test/style.ts --report-unused-disable-directives",
+		"test:lint": "eslint test/style.ts --no-ignore --report-unused-disable-directives",
 		"lint": "eslint ."
 	}
 }
