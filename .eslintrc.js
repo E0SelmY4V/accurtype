@@ -58,6 +58,17 @@ module.exports = {
 			},
 		],
 		'@stylistic/no-multi-spaces': 'error',
+
+		'@stylistic/no-multiple-empty-lines': 'error',
+		'@stylistic/no-trailing-spaces': 'error',
+		'@stylistic/no-whitespace-before-property': 'error',
+		'@stylistic/nonblock-statement-body-position': ['error', 'beside'],
+		'@stylistic/object-curly-newline': ['error', { multiline: true }],
+		'@stylistic/object-curly-spacing': ['error', 'always'],
+		'@stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+		'@stylistic/one-var-declaration-per-line': ['error', 'always'],
+		'@stylistic/operator-linebreak': ['error', 'before'],
+		'@stylistic/padded-blocks': ['error', 'never'],
 	},
 	root: true,
 	parserOptions: {

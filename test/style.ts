@@ -111,10 +111,10 @@ export const cases = {
 		};
 	},
 	'@stylistic/comma-spacing'() {
-		const ad = 3, op = 'asd';
-		const a2 = 3 , o1 = 'asd'; // eslint-disable-line @stylistic/comma-spacing
-		const a3 = 3,o2 = 'asd'; // eslint-disable-line @stylistic/comma-spacing
-		const a4 = 3 ,o5 = 'asd'; // eslint-disable-line @stylistic/comma-spacing
+		const [ad = 3, op = 'asd'] = n;
+		const [a2 = 3 , o1 = 'asd'] = n; // eslint-disable-line @stylistic/comma-spacing
+		const [a3 = 3,o2 = 'asd'] = n; // eslint-disable-line @stylistic/comma-spacing
+		const [a4 = 3 ,o5 = 'asd'] = n; // eslint-disable-line @stylistic/comma-spacing
 	},
 	'@stylistic/comma-style'() {
 		const pa = 123,
@@ -299,6 +299,62 @@ export const cases = {
 	'@stylistic/no-multi-spaces'() {
 		while (n()) 1 + 1;
 		while    (n())   1 + 1; // eslint-disable-line @stylistic/no-multi-spaces
+	},
+	'@stylistic/no-whitespace-before-property'() {
+		n.asd;
+		n .asd; // eslint-disable-line @stylistic/no-whitespace-before-property
+	},
+	'@stylistic/nonblock-statement-body-position'() {
+		if (n()) 123;
+		if (n())
+			n(); // eslint-disable-line @stylistic/nonblock-statement-body-position
+	},
+	'@stylistic/object-curly-newline'() {
+		n = {};
+		n = { a: 1, b: 2 };
+		n = {
+			a: 1,
+			b: 2,
+		};
+		n = { // eslint-disable-line @stylistic/object-curly-newline
+		}; // eslint-disable-line @stylistic/object-curly-newline
+		n = {
+			a: 1,
+			b: 2 }; // eslint-disable-line @stylistic/object-curly-newline
+	},
+	'@stylistic/object-curly-spacing'() {
+		n = { a: 1, b: 2 };
+		n = {a: 1, b: 2 }; // eslint-disable-line @stylistic/object-curly-spacing
+		n = { a: 1, b: 2}; // eslint-disable-line @stylistic/object-curly-spacing
+		n = {a: 1, b: 2}; // eslint-disable-line @stylistic/object-curly-spacing
+	},
+	'@stylistic/object-property-newline'() {
+		n = { a: 1, b: 2 };
+		n = {
+			a: 1,
+			b: 2,
+		};
+		n = {
+			c: 0,
+			a: 1, b: 2, // eslint-disable-line @stylistic/object-property-newline
+		};
+	},
+	'@stylistic/one-var-declaration-per-line'() {
+		let a,
+			b,
+			c;
+		const o = 1,
+			p = 'asd';
+		let d, e, f; // eslint-disable-line @stylistic/one-var-declaration-per-line
+		const q = 1, w = 'asd'; // eslint-disable-line @stylistic/one-var-declaration-per-line
+	},
+	'@stylistic/operator-linebreak'() {
+		n = n()
+			? 2
+			: 3;
+		n = n() ? // eslint-disable-line @stylistic/operator-linebreak
+			2 : // eslint-disable-line @stylistic/operator-linebreak
+			3;
 	},
 } as const;
 // @stylistic/eol-last
