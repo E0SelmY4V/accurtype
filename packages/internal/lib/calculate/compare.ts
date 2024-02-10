@@ -1,6 +1,6 @@
 /**
  * 比较器
- * @version 0.1.1
+ * @version 0.1.2
  * @license MIT
  */
 declare module './compare';
@@ -93,5 +93,6 @@ namespace Test {
 // type N2B<N> = N extends 1 ? true : false;
 // type Obj<L, E, G> = { '-1': N2B<L>, '0': N2B<E>, '1': N2B<G>; };
 // type MayUpNumUp<T extends number, S extends number, C extends number> = TypeOr<IsLess<C, T>> extends true ? MayUpNumUp<T, S, SntAosNum<0, C, S, number>> : C;
-// type MayUpNumDn<T extends number, S extends number, C extends number> = IsNotless<C, T> extends true ? MayUpNumDn<T, S, SntAosNum<9, C, S, number>> : SntAosNum<0, C, S, number>;
+// type MayUpNumDn<T extends number, S extends number, C extends number>
+// = IsNotless<C, T> extends true ? MayUpNumDn<T, S, SntAosNum<9, C, S, number>> : SntAosNum<0, C, S, number>;
 // type PowerList = [1, 10, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9, 1e10, 1e11, 1e12, 1e13, 1e14, 1e15];

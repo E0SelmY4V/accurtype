@@ -1,6 +1,6 @@
 /**
  * 复杂类型
- * @version 1.0.0
+ * @version 1.0.1
  * @license MIT
  */
 declare module './complex';
@@ -14,5 +14,5 @@ namespace Test {
 	// $ExpectType 1
 	export type AS = Digitify<1 | 91 | [1, 2]>;
 	// $ExpectType never
-	export type GS = Digitify<91 | 'asd' | { a: 123; }>;
+	export type GS = Digitify<91 | 'asd' | { a: 123 }>;
 }
