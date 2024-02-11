@@ -120,6 +120,17 @@ module.exports = {
 			},
 		],
 		'@stylistic/space-in-parens': 'error',
+
+		'@stylistic/space-infix-ops': 'error',
+		'@stylistic/space-unary-ops': 'error',
+		'@stylistic/switch-colon-spacing': 'error',
+		'@stylistic/template-curly-spacing': 'error',
+		'@stylistic/template-tag-spacing': 'error',
+		'@stylistic/type-annotation-spacing': 'error',
+		'@stylistic/type-generic-spacing': 'error',
+		'@stylistic/type-named-tuple-spacing': 'error',
+		'@stylistic/wrap-iife': ['error', 'inside', { functionPrototypeMethods: true }],
+		'@stylistic/yield-star-spacing': ['error', 'before'],
 	},
 	root: true,
 	parserOptions: {

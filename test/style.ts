@@ -422,5 +422,91 @@ export const cases = {
 		n( 123 ); // eslint-disable-line @stylistic/space-in-parens
 		n( 1, 2, ( 3 + 1 ) * 3 ); // eslint-disable-line @stylistic/space-in-parens
 	},
+	'@stylistic/space-infix-ops'() {
+		n = 1 + 1;
+		enum A {
+			asd = 123,
+		}
+		n = n | 0;
+		n=1+1; // eslint-disable-line @stylistic/space-infix-ops
+		n= 1+ 1; // eslint-disable-line @stylistic/space-infix-ops
+		n =1 +1; // eslint-disable-line @stylistic/space-infix-ops
+		enum C {
+			asd=123, // eslint-disable-line @stylistic/space-infix-ops
+		}
+		n = n|0; // eslint-disable-line @stylistic/space-infix-ops
+		n = n| 0; // eslint-disable-line @stylistic/space-infix-ops
+		n = n |0; // eslint-disable-line @stylistic/space-infix-ops
+	},
+	'@stylistic/space-unary-ops'() {
+		typeof !n;
+		void { foo: 0 };
+		new [n][0]();
+		++n;
+		n--;
+		-n;
+		+'3';
+		typeof!n; // eslint-disable-line @stylistic/space-unary-ops
+		void{ foo: 0 }; // eslint-disable-line @stylistic/space-unary-ops
+		new[n][0](); // eslint-disable-line @stylistic/space-unary-ops
+		++ n; // eslint-disable-line @stylistic/space-unary-ops
+		n --; // eslint-disable-line @stylistic/space-unary-ops
+		- n; // eslint-disable-line @stylistic/space-unary-ops
+		+ '3'; // eslint-disable-line @stylistic/space-unary-ops
+	},
+	'@stylistic/switch-colon-spacing'() {
+		switch (n) {
+			case 0: break;
+			case 1 :break; // eslint-disable-line @stylistic/switch-colon-spacing
+			case 2:break; // eslint-disable-line @stylistic/switch-colon-spacing
+			case 3 : n(); // eslint-disable-line @stylistic/switch-colon-spacing
+		}
+	},
+	'@stylistic/template-curly-spacing'() {
+		n = `asd ${ n }`; // eslint-disable-line @stylistic/template-curly-spacing
+		n = `asd ${ n.apsd }`; // eslint-disable-line @stylistic/template-curly-spacing
+		n = `asd ${n}`;
+		n = `asd ${n.apsd}`;
+	},
+	'@stylistic/template-tag-spacing'() {
+		n`asd`;
+		n`as${n}`;
+		n `asd`; // eslint-disable-line @stylistic/template-tag-spacing
+		n `as${n}`; // eslint-disable-line @stylistic/template-tag-spacing
+	},
+	'@stylistic/type-annotation-spacing'() {
+		let a: 123;
+		let b:123; // eslint-disable-line @stylistic/type-annotation-spacing
+		let c : 123; // eslint-disable-line @stylistic/type-annotation-spacing
+		let d :123; // eslint-disable-line @stylistic/type-annotation-spacing
+	},
+	'@stylistic/type-generic-spacing'() {
+		type A<T = 'asd'> = 1;
+		type B<N, T = 'asd', K = 13> = 1;
+		// n = function asd<T>() { 1 + 1; };
+		type D<T='asd'> = 1; // eslint-disable-line @stylistic/type-generic-spacing
+		type E<N, T='asd', K=13> = 1; // eslint-disable-line @stylistic/type-generic-spacing
+		// n = function asd< T >(a: T) { 1 + 1; }; // eslint-disable-line @stylistic/type-generic-spacing
+	},
+	'@stylistic/type-named-tuple-spacing'() {
+		type A = [a: 1, b: 2];
+		type B = [a:1, b:2]; // eslint-disable-line @stylistic/type-named-tuple-spacing
+	},
+	'@stylistic/wrap-iife'() {
+		(function () { 1 + 1; }).call(null);
+		(function () { 1 + 1; })();
+		(function () { 1 + 1; }.call(null)); // eslint-disable-line @stylistic/wrap-iife
+		(function () { 1 + 1; }()); // eslint-disable-line @stylistic/wrap-iife
+	},
+	*'@stylistic/yield-star-spacing'() {
+		yield *[1, 2, 3];
+		yield *n();
+		yield * [1, 2, 3]; // eslint-disable-line @stylistic/yield-star-spacing
+		yield * n(); // eslint-disable-line @stylistic/yield-star-spacing
+		yield*[1, 2, 3]; // eslint-disable-line @stylistic/yield-star-spacing
+		yield*n(); // eslint-disable-line @stylistic/yield-star-spacing
+		yield* [1, 2, 3]; // eslint-disable-line @stylistic/yield-star-spacing
+		yield* n(); // eslint-disable-line @stylistic/yield-star-spacing
+	},
 } as const;
 // @stylistic/eol-last
