@@ -14,10 +14,7 @@
 		"noImplicitThis": true,
 		"noEmitOnError": true,
 		"declaration": true,
-		"allowJs": false,
+		"allowJs": false
 	},
-	"exclude": [
-		"packages/accurtype",
-		"_",
-	],
+	"exclude": ["packages/accurtype", "_"]
 }

@@ -11,9 +11,12 @@
 		"@typescript-eslint/parser": "^6.20.0",
 		"eslint": "^8.56.0",
 		"eslint-plugin-expect-type": "^0.3.0",
+		"prettier": "^3.2.5",
 		"typescript": "^4.8.4"
 	},
 	"scripts": {
+		"prefmt": "prettier -w .",
+		"fmt": "eslint .",
 		"postlint": "tsc --noEmit",
 		"test:lint": "eslint test/style.ts --no-ignore --report-unused-disable-directives",
 		"lint": "eslint ."

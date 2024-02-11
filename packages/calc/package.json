@@ -1,28 +1,28 @@
 {
-  "name": "@accurtype/calc",
-  "version": "0.0.1",
-  "description": "精确类型～运算相关",
-  "main": "./lib",
-  "module": "./lib",
-  "types": "./lib",
-  "scripts": {},
-  "keywords": [
-    "typescript",
-    "types",
-    "util",
-    "calculate",
-    "calculator",
-    "counter"
-  ],
-  "type": "commonjs",
-  "author": "e0selmy4v",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/E0SelmY4V/accurtype.git"
-  },
-  "bugs": {
-    "url": "https://github.com/E0SelmY4V/accurtype/issues"
-  },
-  "homepage": "https://github.com/E0SelmY4V/accurtype/blob/HEAD/packages/calc#readme"
+	"name": "@accurtype/calc",
+	"version": "0.0.1",
+	"description": "精确类型～运算相关",
+	"main": "./lib",
+	"module": "./lib",
+	"types": "./lib",
+	"scripts": {},
+	"keywords": [
+		"typescript",
+		"types",
+		"util",
+		"calculate",
+		"calculator",
+		"counter"
+	],
+	"type": "commonjs",
+	"author": "e0selmy4v",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/E0SelmY4V/accurtype.git"
+	},
+	"bugs": {
+		"url": "https://github.com/E0SelmY4V/accurtype/issues"
+	},
+	"homepage": "https://github.com/E0SelmY4V/accurtype/blob/HEAD/packages/calc#readme"
 }
