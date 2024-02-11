@@ -59,9 +59,9 @@ export const cases = {
 	'@stylistic/block-spacing'() {
 		{ console.log(123); }
 		if (n()) { console.log(123); }
-		{n()} // eslint-disable-line @stylistic/block-spacing
-		{ n()} // eslint-disable-line @stylistic/block-spacing
-		{n() } // eslint-disable-line @stylistic/block-spacing
+		{n();} // eslint-disable-line @stylistic/block-spacing
+		{ n();} // eslint-disable-line @stylistic/block-spacing
+		{n(); } // eslint-disable-line @stylistic/block-spacing
 		if (n()) {console.log(123); } // eslint-disable-line @stylistic/block-spacing
 		if (n()) { console.log(123);} // eslint-disable-line @stylistic/block-spacing
 		if (n()) {console.log(123);} // eslint-disable-line @stylistic/block-spacing
@@ -123,16 +123,16 @@ export const cases = {
 			, kn = 'asd'; // eslint-disable-line @stylistic/comma-style
 	},
 	'@stylistic/computed-property-spacing'() {
-		n[n]
-		n['foo'.split('s').join('')]
-		n = { [n]: n }
-		n[n[n]]
+		n[n];
+		n['foo'.split('s').join('')];
+		n = { [n]: n };
+		n[n[n]];
 		const { [n]: as } = n;
 		({ [n]: n } = n);
-		n[n ] // eslint-disable-line @stylistic/computed-property-spacing
-		n[ 'foo'.split('s').join('')] // eslint-disable-line @stylistic/computed-property-spacing
-		n = { [ n ]: n } // eslint-disable-line @stylistic/computed-property-spacing
-		n[n[ n ]] // eslint-disable-line @stylistic/computed-property-spacing
+		n[n ]; // eslint-disable-line @stylistic/computed-property-spacing
+		n[ 'foo'.split('s').join('')]; // eslint-disable-line @stylistic/computed-property-spacing
+		n = { [ n ]: n }; // eslint-disable-line @stylistic/computed-property-spacing
+		n[n[ n ]]; // eslint-disable-line @stylistic/computed-property-spacing
 		const { [ n ]: someProp } = n; // eslint-disable-line @stylistic/computed-property-spacing
 		({ [ n ]: n } = n); // eslint-disable-line @stylistic/computed-property-spacing
 	},
@@ -171,11 +171,11 @@ export const cases = {
 			2); // eslint-disable-line @stylistic/function-paren-newline
 	},
 	'@stylistic/generator-star-spacing'() {
-		n = function *a() { yield 1 + 1; }
+		n = function *a() { yield 1 + 1; };
 		n = { *asd() { yield 2 + 2; } };
-		n = function* b() { yield 1 + 1; } // eslint-disable-line @stylistic/generator-star-spacing
-		n = function * c() { yield 1 + 1; } // eslint-disable-line @stylistic/generator-star-spacing
-		n = function*d() { yield 1 + 1; } // eslint-disable-line @stylistic/generator-star-spacing
+		n = function* b() { yield 1 + 1; }; // eslint-disable-line @stylistic/generator-star-spacing
+		n = function * c() { yield 1 + 1; }; // eslint-disable-line @stylistic/generator-star-spacing
+		n = function*d() { yield 1 + 1; }; // eslint-disable-line @stylistic/generator-star-spacing
 		n = { * asd() { yield 2 + 2; } }; // eslint-disable-line @stylistic/generator-star-spacing
 	},
 	'@stylistic/implicit-arrow-linebreak'() {
@@ -205,7 +205,7 @@ export const cases = {
 			constructon() { 1 + 1; }
 			protected asdlk() { return this.lkls; }
 			protected po = 'asd'; // eslint-disable-line @stylistic/lines-between-class-members
-		}
+		};
 		n = class {
 			static asd = 123;
 
@@ -216,7 +216,7 @@ export const cases = {
 			protected asdlk() { return this.lkls; }
 
 			protected po = 'asd';
-		}
+		};
 	},
 	'@stylistic/max-len'() {
 		'||||||||||----------||||||||||----------||||||||||----------||||||||||----------||||||||||----------||||||||||----------||||||||||----------|||||||||';
@@ -259,9 +259,9 @@ export const cases = {
 	},
 	'@stylistic/new-parens'() {
 		n = new n();
-		n = new class n { a = 123 }();
+		n = new class n { a = 123; }();
 		n = new n; // eslint-disable-line @stylistic/new-parens
-		n = new class n { a = 123 }; // eslint-disable-line @stylistic/new-parens
+		n = new class n { a = 123; }; // eslint-disable-line @stylistic/new-parens
 	},
 	'@stylistic/newline-per-chained-call'() {
 		n;
@@ -355,6 +355,72 @@ export const cases = {
 		n = n() ? // eslint-disable-line @stylistic/operator-linebreak
 			2 : // eslint-disable-line @stylistic/operator-linebreak
 			3;
+	},
+	'@stylistic/quote-props'() {
+		n = {
+			a: 123,
+			'asd\n': 123,
+			1: 123,
+			for: 123,
+			'aa': 123, // eslint-disable-line @stylistic/quote-props
+			'2': 123, // eslint-disable-line @stylistic/quote-props
+			'while': 123, // eslint-disable-line @stylistic/quote-props
+		};
+	},
+	'@stylistic/quotes'() {
+		n = 'asd';
+		n = `asd`;
+		n = 'asd\'asd';
+		n = 'asd"asd';
+		n = "asd"; // eslint-disable-line @stylistic/quotes
+		n = "asd'asd"; // eslint-disable-line @stylistic/quotes
+		n = "asd\"asd"; // eslint-disable-line @stylistic/quotes
+	},
+	'@stylistic/rest-spread-spacing'() {
+		n = [n, ...n];
+		n = [n, ... n]; // eslint-disable-line @stylistic/rest-spread-spacing
+	},
+	'@stylistic/semi'() {
+		n = 123;
+		n = 321 // eslint-disable-line @stylistic/semi
+	},
+	'@stylistic/semi-spacing'() {
+		n; n;
+		n ; n; // eslint-disable-line @stylistic/semi-spacing
+		n ;n; // eslint-disable-line @stylistic/semi-spacing
+		n;n; // eslint-disable-line @stylistic/semi-spacing
+	},
+	'@stylistic/semi-style'() {
+		n;
+		n
+		; n // eslint-disable-line @stylistic/semi-style
+		; n; // eslint-disable-line @stylistic/semi-style
+	},
+	'@stylistic/space-before-blocks'() {
+		if (n()) { 1 + 1; }
+		while (n()) { 1 + 1; }
+		if (n()){ 1 + 1; } // eslint-disable-line @stylistic/space-before-blocks
+		while (n()){ 1 + 1; } // eslint-disable-line @stylistic/space-before-blocks
+	},
+	'@stylistic/space-before-function-paren'() {
+		function asd() { n(); }
+		class A {
+			constructor() { 1 + 1; }
+		}
+		n = function () { 1 + 1; };
+		n = async () => 123;
+		function qwe () { n(); } // eslint-disable-line @stylistic/space-before-function-paren
+		class B {
+			constructor () { 1 + 1; } // eslint-disable-line @stylistic/space-before-function-paren
+		}
+		n = function() { 1 + 1; }; // eslint-disable-line @stylistic/space-before-function-paren
+		n = async() => 123; // eslint-disable-line @stylistic/space-before-function-paren
+	},
+	'@stylistic/space-in-parens'() {
+		n(123);
+		n(1, 2, (3 + 1) * 3);
+		n( 123 ); // eslint-disable-line @stylistic/space-in-parens
+		n( 1, 2, ( 3 + 1 ) * 3 ); // eslint-disable-line @stylistic/space-in-parens
 	},
 } as const;
 // @stylistic/eol-last
