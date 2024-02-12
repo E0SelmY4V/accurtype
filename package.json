@@ -4,6 +4,14 @@
 	"license": "MIT",
 	"type": "commonjs",
 	"author": "e0selmy4v",
+	"scripts": {
+		"prepare": "husky",
+		"prefmt": "prettier -w .",
+		"fmt": "eslint . --fix",
+		"test": "tsc --noEmit",
+		"test:lint": "eslint test/style.ts --no-ignore --report-unused-disable-directives",
+		"lint": "eslint ."
+	},
 	"devDependencies": {
 		"@stylistic/eslint-plugin": "^1.6.0",
 		"@type-challenges/utils": "^0.1.1",
@@ -11,14 +19,17 @@
 		"@typescript-eslint/parser": "^6.20.0",
 		"eslint": "^8.56.0",
 		"eslint-plugin-expect-type": "^0.3.0",
+		"husky": "^9.0.10",
 		"prettier": "^3.2.5",
 		"typescript": "^4.8.4"
 	},
-	"scripts": {
-		"prefmt": "prettier -w .",
-		"fmt": "eslint .",
-		"postlint": "tsc --noEmit",
-		"test:lint": "eslint test/style.ts --no-ignore --report-unused-disable-directives",
-		"lint": "eslint ."
+	"prettier": {
+		"printWidth": 200,
+		"tabWidth": 4,
+		"useTabs": true,
+		"semi": true,
+		"singleQuote": true,
+		"jsxSingleQuote": false,
+		"trailingComma": "all"
 	}
 }
